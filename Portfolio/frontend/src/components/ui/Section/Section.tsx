@@ -1,13 +1,21 @@
 import type { ReactNode } from "react";
 
 interface SectionProps {
+    id?: string;
     children: ReactNode;
     className?: string;
 }
 
-const Section = ({ children, className = "" }: SectionProps) => {
+const Section = ({
+    id,
+    children,
+    className = "",
+}: SectionProps) => {
     return (
-        <section className={`py-12 lg:py-20 ${className}`}>
+        <section
+            id={id}
+            className={`scroll-mt-24 py-12 lg:scroll-mt-28 lg:py-20 ${className}`}
+        >
             {children}
         </section>
     );
