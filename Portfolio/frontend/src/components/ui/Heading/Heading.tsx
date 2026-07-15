@@ -14,10 +14,10 @@ const Heading = ({
 }: HeadingProps) => {
 
     const styles = {
-        1: "text-7xl font-extrabold leading-tight text-white",
-        2: "text-4xl font-bold text-white",
-        3: "text-2xl font-semibold text-white",
-    };
+    1: "text-5xl font-extrabold leading-tight text-white sm:text-6xl lg:text-7xl",
+    2: "text-3xl font-bold text-white sm:text-4xl",
+    3: "text-xl font-semibold text-white sm:text-2xl",
+};
 
     switch (level) {
         case 1:

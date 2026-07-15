@@ -9,12 +9,11 @@ import Stat from "../../components/ui/Stat";
 
 const Hero = () => {
     return (
-        <Section>
+        <Section className="pt-8 lg:pt-16">
             <Container>
-                <div className="flex min-h-[calc(100vh-80px)] items-center justify-between">
-
+                <div className="flex min-h-[80vh] flex-col-reverse items-center justify-center gap-10 lg:flex-row lg:justify-center lg:gap-10">
                     {/* Left Side */}
-                    <div className="max-w-2xl">
+                    <div className="max-w-2xl text-center lg:text-left">
 
                         <Badge className="mb-5">
                             Hello, I'm
@@ -26,17 +25,17 @@ const Hero = () => {
                             Kondkari
                         </Heading>
 
-                        <h2 className="mt-6 text-3xl font-semibold text-slate-300">
+                        <h2 className="mt-4 text-xl font-semibold text-slate-300 sm:text-2xl lg:text-3xl">
                             Senior Automation Engineer
                         </h2>
 
-                        <Text className="mt-6 max-w-xl">
+                        <Text className="mt-5 max-w-xl text-base lg:text-lg">
                             Building scalable automation solutions for mission-critical
                             Capital Market and Trading platforms using Java,
                             Microservices and Cloud technologies.
                         </Text>
 
-                        <div className="mt-10 flex gap-5">
+                        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
 
                             <Button>
                                 Download Resume
@@ -48,7 +47,7 @@ const Hero = () => {
 
                         </div>
 
-                        <div className="mt-12 grid grid-cols-3 gap-6">
+                        <div className="mt-10 grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
 
                             <Stat
                                 value="15+"
@@ -71,15 +70,16 @@ const Hero = () => {
 
                     {/* Right Side */}
 
-                    <div className="flex justify-center">
+                    <div className="mb-6 flex justify-center lg:mb-0">
 
                         <div className="relative">
-                            <div className="absolute inset-0 rounded-full bg-blue-500 blur-3xl opacity-20"></div>
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 opacity-30 blur-3xl"></div>
 
+                            <div className="absolute -inset-2 rounded-full border border-blue-400/30"></div>
                             <img
                                 src={profile}
                                 alt="Moshin Kondkari"
-                                className="relative h-96 w-96 rounded-full border-4 border-blue-500 object-cover shadow-2xl"
+                                className="relative h-48 w-48 rounded-full border-4 border-blue-500 object-cover shadow-2xl transition-all duration-500 hover:scale-105 sm:h-64 sm:w-64 lg:h-80 lg:w-80"
                             />
                         </div>
 
