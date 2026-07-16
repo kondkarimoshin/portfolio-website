@@ -2,6 +2,7 @@ import Navbar from "./layouts/Navbar";
 import Hero from "./features/hero/Hero";
 import About from "./features/about/About";
 import Experience from "./features/experience/Experience";
+import Skills from "./features/skills/Skills";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Hero />
         <About />
         <Experience />
+        <Skills />
       </main>
     </>
   );

@@ -1,4 +1,4 @@
-import Badge from "../../../components/ui/Badge";
+
 import Text from "../../../components/ui/Text";
 import BusinessImpact from "./BusinessImpact";
 import Responsibilities from "./Responsibilities";
