@@ -37,13 +37,20 @@ const Hero = () => {
 
                         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
 
-                            <Button>
-                                Download Resume
-                            </Button>
+                            <a
+                                href="/Moshin-Kondkari.pdf"
+                                download
+                            >
+                                <Button>
+                                    Download Resume
+                                </Button>
+                            </a>
 
-                            <Button variant="secondary">
-                                Contact Me
-                            </Button>
+                            <a href="#contact">
+                                <Button variant="secondary">
+                                    Contact Me
+                                </Button>
+                            </a>
 
                         </div>
 

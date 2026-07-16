@@ -3,6 +3,8 @@ import Hero from "./features/hero/Hero";
 import About from "./features/about/About";
 import Experience from "./features/experience/Experience";
 import Skills from "./features/skills/Skills";
+import Contact from "./features/contact/Contact";
+import Footer from "./layouts/Footer";
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
         <About />
         <Experience />
         <Skills />
+        <Contact />
       </main>
+      <Footer />
     </>
   );
 }
