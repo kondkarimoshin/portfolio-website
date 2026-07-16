@@ -1,6 +1,7 @@
 import Navbar from "./layouts/Navbar";
 import Hero from "./features/hero/Hero";
 import About from "./features/about/About";
+import Experience from "./features/experience/Experience";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <main className=" bg-slate-950 pt-20">
         <Hero />
         <About />
+        <Experience />
       </main>
     </>
   );
