@@ -12,7 +12,7 @@ const Footer = () => {
                         © {new Date().getFullYear()} Moshin Kondkari
                     </p>
 
-                    <p className="mt-2 text-sm text-slate-500">
+                    <p className="mt-2 text-sm text-slate-400">
                         Designed & Built by Moshin Kondkari using React, TypeScript & Tailwind CSS
                     </p>
 
@@ -24,18 +24,26 @@ const Footer = () => {
                         href="https://www.linkedin.com/in/moshin-kondkari-79282258/"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Visit my LinkedIn profile"
                         className="text-slate-400 transition hover:text-cyan-400"
                     >
-                        <FaLinkedin className="h-6 w-6" />
+                        <FaLinkedin
+                            aria-hidden="true"
+                            className="h-6 w-6"
+                        />
                     </a>
 
                     <a
                         href="https://github.com/kondkarimoshin"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Visit my GitHub profile"
                         className="text-slate-400 transition hover:text-cyan-400"
                     >
-                        <FaGithub className="h-6 w-6" />
+                        <FaGithub
+                            aria-hidden="true"
+                            className="h-6 w-6"
+                        />
                     </a>
 
                 </div>

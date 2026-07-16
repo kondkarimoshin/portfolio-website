@@ -14,19 +14,21 @@ const CareerJourney = () => {
     return (
         <div className="mt-16">
 
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/40 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-lg hover:shadow-cyan-400/10 transition-allduration-300 cursor-pointer">
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/40 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-lg hover:shadow-cyan-400/10 cursor-pointer">
 
                 {/* Header */}
 
                 <button
                     onClick={() => setExpanded(!expanded)}
+                    aria-expanded={expanded}
+                    aria-controls="career-journey-content"
                     className="flex w-full items-center justify-between p-6 text-left"
                 >
 
                     <div className="flex items-start gap-4">
 
                         <div className="rounded-full bg-cyan-500/10 p-3">
-                            <HiBriefcase className="h-6 w-6 text-cyan-400" />
+                            <HiBriefcase aria-hidden="true" className="h-6 w-6 text-cyan-400" />
                         </div>
 
                         <div>
@@ -60,7 +62,7 @@ const CareerJourney = () => {
                     <div className="text-cyan-400">
 
                         {expanded ? (
-                            <HiChevronUp className="h-7 w-7" />
+                            <HiChevronUp aria-hidden="true" className="h-7 w-7" />
                         ) : (
                             <HiChevronDown className="h-7 w-7" />
                         )}
@@ -73,7 +75,9 @@ const CareerJourney = () => {
 
                 {expanded && (
 
-                    <div className="border-t border-slate-800 p-6">
+                    <div
+                        id="career-journey-content"
+                        className="border-t border-slate-800 p-6">
 
                         <div className="space-y-6">
 

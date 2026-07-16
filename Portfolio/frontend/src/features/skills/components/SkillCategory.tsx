@@ -17,7 +17,9 @@ const SkillCategory = ({
         <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-400/10">
             <div className="mb-6 flex items-center gap-3">
 
-                <Icon className="h-5 w-5 text-cyan-400" />
+                <Icon
+                    aria-hidden="true"
+                    className="h-5 w-5 text-cyan-400" />
 
                 <h3 className="text-lg font-semibold text-white">
                     {title}
@@ -25,15 +27,21 @@ const SkillCategory = ({
 
             </div>
 
-            <div className="flex flex-wrap gap-3">
+            <ul className="flex flex-wrap gap-3">
 
                 {skills.map((skill) => (
-                    <Badge key={skill}>
-                        {skill}
-                    </Badge>
+
+                    <li key={skill}>
+
+                        <Badge>
+                            {skill}
+                        </Badge>
+
+                    </li>
+
                 ))}
 
-            </div>
+            </ul>
 
         </div>
     );

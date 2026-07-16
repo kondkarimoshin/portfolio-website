@@ -4,44 +4,49 @@ import Section from "../../components/ui/Section";
 import Text from "../../components/ui/Text";
 import ExperienceCard from "./components/ExperienceCard";
 import CareerJourney from "./components/CareerJourney";
+import FadeIn from "../../components/ui/FadeIn";
 
 const Experience = () => {
     return (
         <Section
             id="experience"
+            aria-labelledby="experience-heading"
             className="pt-2 lg:pt-4"
         >
             <Container>
+                <FadeIn delay={0.2}>
 
-                <div className="mx-auto max-w-5xl">
+                    <div className="mx-auto max-w-5xl">
 
-                    {/* ============================== */}
-                    {/* Section Heading */}
-                    {/* ============================== */}
+                        {/* ============================== */}
+                        {/* Section Heading */}
+                        {/* ============================== */}
 
-                    <Heading
-                        level={2}
-                        className="text-center"
-                    >
-                        Experience
-                    </Heading>
+                        <Heading
+                            id="experience-heading"
+                            level={2}
+                            className="text-center"
+                        >
+                            Experience
+                        </Heading>
 
-                    <Text className="mx-auto mt-4 max-w-3xl text-center">
-                        A journey of building enterprise-grade automation
-                        solutions, leading automation initiatives, and delivering
-                        high-quality software for mission-critical financial
-                        systems.
-                    </Text>
+                        <Text className="mx-auto mt-4 max-w-3xl text-center">
+                            A journey of building enterprise-grade automation
+                            solutions, leading automation initiatives, and delivering
+                            high-quality software for mission-critical financial
+                            systems.
+                        </Text>
 
-                    {/* ============================== */}
-                    {/* Experience Card */}
-                    {/* ============================== */}
+                        {/* ============================== */}
+                        {/* Experience Card */}
+                        {/* ============================== */}
 
-                    <ExperienceCard />
+                        <ExperienceCard />
 
-                    <CareerJourney />
+                        <CareerJourney />
 
-                </div>
+                    </div>
+                </FadeIn>
 
             </Container>
 

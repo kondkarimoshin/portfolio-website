@@ -5,45 +5,51 @@ import Text from "../../components/ui/Text";
 
 import SkillCategory from "./components/SkillCategory";
 import { skillsData } from "./constants/skillsData";
+import FadeIn from "../../components/ui/FadeIn";
 
 const Skills = () => {
     return (
         <Section
             id="skills"
+            aria-labelledby="skills-heading"
             className="pt-2 lg:pt-4"
         >
             <Container>
 
-                <div className="mx-auto max-w-6xl">
+                <FadeIn delay={0.3}>
 
-                    <Heading
-                        level={2}
-                        className="text-center"
-                    >
-                        Technical Expertise
-                    </Heading>
+                    <div className="mx-auto max-w-6xl">
 
-                    <Text className="mx-auto mt-4 max-w-3xl text-center">
-                        Technologies, tools and platforms I've used to build
-                        scalable automation frameworks, enterprise applications
-                        and cloud-native solutions.
-                    </Text>
+                        <Heading
+                            id="skills-heading"
+                            level={2}
+                            className="text-center"
+                        >
+                            Technical Expertise
+                        </Heading>
 
-                    <div className="mt-12 grid gap-6 md:grid-cols-2">
+                        <Text className="mx-auto mt-4 max-w-3xl text-center">
+                            Technologies, tools and platforms I've used to build
+                            scalable automation frameworks, enterprise applications
+                            and cloud-native solutions.
+                        </Text>
 
-                        {skillsData.map((category) => (
+                        <div className="mt-12 grid gap-6 md:grid-cols-2">
 
-                            <SkillCategory
-                                key={category.title}
-                                title={category.title}
-                                skills={category.skills}
-                            />
+                            {skillsData.map((category) => (
 
-                        ))}
+                                <SkillCategory
+                                    key={category.title}
+                                    title={category.title}
+                                    skills={category.skills}
+                                />
+
+                            ))}
+
+                        </div>
 
                     </div>
-
-                </div>
+                </FadeIn>
 
             </Container>
 

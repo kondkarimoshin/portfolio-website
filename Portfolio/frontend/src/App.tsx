@@ -5,8 +5,11 @@ import Experience from "./features/experience/Experience";
 import Skills from "./features/skills/Skills";
 import Contact from "./features/contact/Contact";
 import Footer from "./layouts/Footer";
+import BackToTop from "./components/ui/BackToTop";
+import useHashScroll from "./hooks/useHashScroll";
 
 function App() {
+  useHashScroll();
   return (
     <>
       <Navbar />
@@ -18,6 +21,7 @@ function App() {
         <Skills />
         <Contact />
       </main>
+      <BackToTop />
       <Footer />
     </>
   );

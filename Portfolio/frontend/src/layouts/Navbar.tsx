@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+
 import Container from "../components/ui/Container";
+import { navigationItems } from "../constants/navigation";
+
+import clsx from "clsx";
+import useActiveSection from "../hooks/useActiveSection";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const activeSection = useActiveSection();
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
@@ -18,59 +23,47 @@ const Navbar = () => {
             {/* Logo */}
 
             <a
-              href="#"
-              className="text-2xl font-bold tracking-wide text-blue-500 transition-colors hover:text-blue-400"
+              href="#hero"
+              aria-label="Go to Home"
+              className="text-2xl font-bold tracking-wide text-cyan-400 transition-colors hover:text-cyan-300"
             >
               MK
             </a>
 
             {/* Desktop Navigation */}
 
-            <nav className="hidden lg:block">
+            <nav
+              className="hidden lg:block"
+              aria-label="Primary Navigation"
+            >
 
               <ul className="flex items-center gap-10 text-sm font-medium text-slate-300">
 
-                <li>
-                  <a href="#" className="transition hover:text-blue-400">
-                    Home
-                  </a>
-                </li>
+                {navigationItems.map((item) => (
 
-                <li>
-                  <a href="#about" className="transition hover:text-blue-400">
-                    About
-                  </a>
-                </li>
+                  <li key={item.href}>
 
-                <li>
-                  <a href="#experience" className="transition hover:text-blue-400">
-                    Experience
-                  </a>
-                </li>
+                    <a
+                      href={item.href}
+                      className={clsx(
+                        "transition-colors duration-300 hover:text-cyan-400",
+                        activeSection === item.href.replace("#", "")
+                          ? "font-semibold text-cyan-400"
+                          : "text-slate-300"
+                      )}
+                    >
+                      {item.label}
+                    </a>
 
-                <li>
-                  <a href="#projects" className="transition hover:text-blue-400">
-                    Projects
-                  </a>
-                </li>
+                  </li>
 
-                <li>
-                  <a href="#skills" className="transition hover:text-blue-400">
-                    Skills
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#contact" className="transition hover:text-blue-400">
-                    Contact
-                  </a>
-                </li>
+                ))}
 
               </ul>
 
             </nav>
 
-            {/* Mobile Button */}
+            {/* Mobile Menu Button */}
 
             <button
               onClick={() => setIsMenuOpen(true)}
@@ -86,9 +79,7 @@ const Navbar = () => {
 
       </header>
 
-      {/* ============================== */}
-      {/* Full Screen Mobile Navigation */}
-      {/* ============================== */}
+      {/* Mobile Navigation */}
 
       {isMenuOpen && (
 
@@ -100,7 +91,7 @@ const Navbar = () => {
 
             <div className="flex h-20 items-center justify-between">
 
-              <span className="text-2xl font-bold text-blue-500">
+              <span className="text-2xl font-bold text-cyan-400">
                 MK
               </span>
 
@@ -116,69 +107,33 @@ const Navbar = () => {
 
             {/* Navigation */}
 
-            <nav className="mt-10">
+            <nav
+              className="mt-10"
+              aria-label="Mobile Navigation"
+            >
 
               <ul className="space-y-6 text-center">
 
-                <li>
-                  <a
-                    href="#"
-                    onClick={closeMenu}
-                    className="block rounded-lg py-2 text-2xl font-medium tracking-wide text-slate-100 transition-all duration-300 hover:text-blue-400 hover:scale-105"
-                  >
-                    Home
-                  </a>
-                </li>
+                {navigationItems.map((item) => (
 
-                <li>
-                  <a
-                    href="#about"
-                    onClick={closeMenu}
-                    className="block rounded-lg py-2 text-2xl font-medium tracking-wide text-slate-100 transition-all duration-300 hover:text-blue-400 hover:scale-105"
-                  >
-                    About
-                  </a>
-                </li>
+                  <li key={item.href}>
 
-                <li>
-                  <a
-                    href="#experience"
-                    onClick={closeMenu}
-                    className="block rounded-lg py-2 text-2xl font-medium tracking-wide text-slate-100 transition-all duration-300 hover:text-blue-400 hover:scale-105"
-                  >
-                    Experience
-                  </a>
-                </li>
+                    <a
+                      href={item.href}
+                      onClick={closeMenu}
+                      className={clsx(
+                        "block rounded-lg py-2 text-2xl font-medium tracking-wide transition-all duration-300 hover:scale-105 hover:text-cyan-400",
+                        activeSection === item.href.replace("#", "")
+                          ? "font-semibold text-cyan-400"
+                          : "text-slate-100"
+                      )}
+                    >
+                      {item.label}
+                    </a>
 
-                <li>
-                  <a
-                    href="#projects"
-                    onClick={closeMenu}
-                    className="block rounded-lg py-2 text-2xl font-medium tracking-wide text-slate-100 transition-all duration-300 hover:text-blue-400 hover:scale-105"
-                  >
-                    Projects
-                  </a>
-                </li>
+                  </li>
 
-                <li>
-                  <a
-                    href="#skills"
-                    onClick={closeMenu}
-                    className="block rounded-lg py-2 text-2xl font-medium tracking-wide text-slate-100 transition-all duration-300 hover:text-blue-400 hover:scale-105"
-                  >
-                    Skills
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#contact"
-                    onClick={closeMenu}
-                    className="block rounded-lg py-2 text-2xl font-medium tracking-wide text-slate-100 transition-all duration-300 hover:text-blue-400 hover:scale-105"
-                  >
-                    Contact
-                  </a>
-                </li>
+                ))}
 
               </ul>
 

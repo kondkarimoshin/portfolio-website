@@ -6,11 +6,13 @@ import Badge from "../../components/ui/Badge";
 
 const About = () => {
     return (
-        <Section id="about">
+        <Section id="about"
+            aria-labelledby="about-heading"
+        >
 
             <Container>
-
                 <Heading
+                    id="about-heading"
                     level={2}
                     className="text-center"
                 >
@@ -99,6 +101,7 @@ const About = () => {
                     </div>
 
                 </div>
+
 
             </Container>
 
