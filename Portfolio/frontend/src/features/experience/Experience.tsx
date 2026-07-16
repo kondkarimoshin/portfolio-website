@@ -3,6 +3,7 @@ import Heading from "../../components/ui/Heading";
 import Section from "../../components/ui/Section";
 import Text from "../../components/ui/Text";
 import ExperienceCard from "./components/ExperienceCard";
+import CareerJourney from "./components/CareerJourney";
 
 const Experience = () => {
     return (
@@ -37,6 +38,8 @@ const Experience = () => {
                     {/* ============================== */}
 
                     <ExperienceCard />
+
+                    <CareerJourney />
 
                 </div>
 
