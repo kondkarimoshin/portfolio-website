@@ -5,6 +5,7 @@ import {
     FaJenkins,
     FaJira,
     FaRobot,
+    FaDatabase,
 } from "react-icons/fa";
 
 import {
@@ -19,6 +20,8 @@ import {
     SiBitbucket,
     SiGithubcopilot,
     SiEclipseide,
+    SiMysql,
+    SiPostgresql,
 } from "react-icons/si";
 
 import { MdPlayCircle } from "react-icons/md";
@@ -44,4 +47,7 @@ export const technologies: Technology[] = [
     { icon: SiTestrail, label: "TestNG" },
     { icon: SiIntellijidea, label: "IntelliJ IDEA" },
     { icon: SiEclipseide, label: "Eclipse IDE" },
+    { icon: FaDatabase, label: "SQL" },
+    { icon: SiMysql, label: "MySQL" },
+    { icon: SiPostgresql, label: "PostgreSQL" },
 ];

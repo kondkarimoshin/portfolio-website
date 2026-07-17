@@ -7,12 +7,13 @@ import Badge from "../../components/ui/Badge";
 import FadeIn from "../../components/ui/FadeIn";
 import TechnologyStack from "./components/TechnologyStack";
 import ExpertiseChips from "./components/ExpertiseChips";
+import { FiDownload, FiMessageSquare } from "react-icons/fi";
 
 const Hero = () => {
     return (
         <Section
             id="hero"
-            className="pt-6 lg:pt-16"
+            className="pt-4 pb-2 lg:pt-8 lg:pb-4"
         >
             <Container>
 
@@ -50,13 +51,15 @@ const Hero = () => {
                                 download
                             >
                                 <Button>
-                                    Download Resume
+                                    <FiDownload size={18} />
+                                    <span>Download Resume</span>
                                 </Button>
                             </a>
 
                             <a href="#contact">
-                                <Button variant="secondary">
-                                    Connect with Me
+                                <Button variant="outline">
+                                    <FiMessageSquare size={18} />
+                                    <span>Let's Connect</span>
                                 </Button>
                             </a>
 
