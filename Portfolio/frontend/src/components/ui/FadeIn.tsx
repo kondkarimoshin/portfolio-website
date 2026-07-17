@@ -14,7 +14,7 @@ const FadeIn = ({
         <motion.div
             initial={{
                 opacity: 0,
-                y: 25,
+                y: 16,
             }}
             whileInView={{
                 opacity: 1,
@@ -25,7 +25,7 @@ const FadeIn = ({
                 amount: 0.2,
             }}
             transition={{
-                duration: 0.6,
+                duration: 0.45,
                 delay,
                 ease: "easeOut",
             }}

@@ -12,7 +12,7 @@ const Hero = () => {
     return (
         <Section id="hero" className="pt-8 lg:pt-16">
             <Container>
-                <FadeIn delay={0.0}>
+                <FadeIn delay={0}>
                     <div className="flex min-h-[70vh] flex-col-reverse items-center justify-center gap-8 lg:flex-row lg:justify-center lg:gap-12">
 
                         {/* Left Side */}
