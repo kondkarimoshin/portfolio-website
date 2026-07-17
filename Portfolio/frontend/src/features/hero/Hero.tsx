@@ -1,109 +1,71 @@
-import profile from "../../assets/images/profile.jpg";
 import Container from "../../components/ui/Container";
 import Button from "../../components/ui/Button";
 import Section from "../../components/ui/Section";
 import Heading from "../../components/ui/Heading";
 import Text from "../../components/ui/Text";
 import Badge from "../../components/ui/Badge";
-import Stat from "../../components/ui/Stat";
 import FadeIn from "../../components/ui/FadeIn";
+import TechnologyStack from "./components/TechnologyStack";
+import ExpertiseChips from "./components/ExpertiseChips";
 
 const Hero = () => {
     return (
-        <Section id="hero" className="pt-8 lg:pt-16">
+        <Section
+            id="hero"
+            className="pt-6 lg:pt-16"
+        >
             <Container>
-                <FadeIn delay={0}>
-                    <div className="flex min-h-[70vh] flex-col-reverse items-center justify-center gap-8 lg:flex-row lg:justify-center lg:gap-12">
 
-                        {/* Left Side */}
-                        <div className="max-w-2xl text-center lg:text-left">
+                <FadeIn>
 
-                            <Badge className="mb-4">
-                                Hello, I'm
-                            </Badge>
+                    <div className="mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-center">
 
-                            <Heading>
-                                Moshin
-                                <br />
-                                Kondkari
-                            </Heading>
+                        <Badge className="mb-4 w-fit self-center lg:self-start">
+                            16+ Years of Automation Excellence
+                        </Badge>
 
-                            <h2 className="mt-3 text-lg font-semibold text-slate-300 sm:text-xl lg:text-2xl">
-                                Senior Automation Engineer
-                            </h2>
+                        <Heading className="text-center lg:text-left">
+                            Moshin Kondkari
+                        </Heading>
 
-                            <Text className="mt-5 max-w-xl">
-                                Building scalable automation solutions for mission-critical
-                                Capital Market and Trading platforms using Java,
-                                Microservices and Cloud technologies.
-                            </Text>
+                        <h2 className="mt-4 text-center text-xl font-semibold text-slate-300 lg:text-left lg:text-3xl">
+                            Senior Automation Engineer
+                        </h2>
 
-                            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+                        <ExpertiseChips />
 
-                                <a
-                                    href="/Moshin-Kondkari.pdf"
-                                    download
-                                    aria-label="Download Moshin Kondkari Resume"
-                                >
-                                    <Button>
-                                        Download Resume
-                                    </Button>
-                                </a>
+                        <Text className="mx-auto mt-8 max-w-3xl text-center lg:mx-0 lg:text-left">
+                            Building scalable automation frameworks and quality
+                            engineering solutions for mission-critical financial
+                            platforms using Java, Microservices, Cloud technologies,
+                            and modern DevOps practices.
+                        </Text>
 
-                                <a
-                                    href="#contact"
-                                    aria-label="Navigate to Contact Section"
-                                >
-                                    <Button variant="secondary">
-                                        Contact Me
-                                    </Button>
-                                </a>
+                        <TechnologyStack />
 
-                            </div>
+                        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
 
-                            <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
+                            <a
+                                href="/Moshin-Kondkari.pdf"
+                                download
+                            >
+                                <Button>
+                                    Download Resume
+                                </Button>
+                            </a>
 
-                                <Stat
-                                    value="15+"
-                                    label="Years Experience"
-                                />
-
-                                <Stat
-                                    value="5000+"
-                                    label="Automation Tests"
-                                />
-
-                                <Stat
-                                    value="Equities"
-                                    label="Trading Domain"
-                                />
-
-                            </div>
-
-                        </div>
-
-                        {/* Right Side */}
-
-                        <div className="mb-6 flex justify-center lg:mb-0">
-
-                            <div className="relative">
-
-                                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 opacity-30 blur-3xl"></div>
-
-                                <div className="absolute -inset-2 rounded-full border border-blue-400/30"></div>
-
-                                <img
-                                    src={profile}
-                                    alt="Portrait of Moshin Kondkari"
-                                    className="relative h-48 w-48 rounded-full border-4 border-blue-500 object-cover shadow-2xl transition-all duration-500 hover:scale-105 sm:h-64 sm:w-64 lg:h-80 lg:w-80"
-                                />
-
-                            </div>
+                            <a href="#contact">
+                                <Button variant="secondary">
+                                    Connect with Me
+                                </Button>
+                            </a>
 
                         </div>
 
                     </div>
+
                 </FadeIn>
+
             </Container>
         </Section>
     );
