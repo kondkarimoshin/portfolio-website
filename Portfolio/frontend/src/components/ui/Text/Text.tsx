@@ -10,7 +10,7 @@ const Text = ({ children, className }: TextProps) => {
     return (
         <p
             className={clsx(
-                "text-lg leading-8 text-slate-400",
+                "text-base leading-7 text-slate-400",
                 className
             )}
         >

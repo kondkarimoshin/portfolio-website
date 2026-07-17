@@ -16,7 +16,7 @@ const Skills = () => {
         >
             <Container>
 
-                <FadeIn delay={0.3}>
+                <FadeIn delay={0}>
 
                     <div className="mx-auto max-w-6xl">
 

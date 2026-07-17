@@ -14,7 +14,7 @@ const Experience = () => {
             className="pt-2 lg:pt-4"
         >
             <Container>
-                <FadeIn delay={0.2}>
+                <FadeIn delay={0}>
 
                     <div className="mx-auto max-w-5xl">
 

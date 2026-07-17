@@ -19,13 +19,13 @@ const About = () => {
                     About Me
                 </Heading>
 
-                <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:items-center">
+                <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:items-center">
 
                     {/* Left Side */}
 
                     <div>
 
-                        <Text className="text-lg leading-8 text-slate-300">
+                        <Text className="text-slate-300 leading-7">
                             I'm a <span className="font-semibold text-white">Senior Automation Engineer </span>
                             with over <span className="font-semibold text-blue-400">15 years of experience </span>
                             designing scalable automation frameworks for enterprise applications,
