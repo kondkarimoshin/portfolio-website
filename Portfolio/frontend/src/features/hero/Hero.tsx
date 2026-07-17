@@ -13,7 +13,7 @@ const Hero = () => {
     return (
         <Section
             id="hero"
-            className="pt-4 pb-2 lg:pt-8 lg:pb-4"
+            variant="hero"
         >
             <Container>
 

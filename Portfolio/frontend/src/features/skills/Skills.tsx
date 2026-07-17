@@ -12,7 +12,6 @@ const Skills = () => {
         <Section
             id="skills"
             aria-labelledby="skills-heading"
-            className="pt-2 lg:pt-4"
         >
             <Container>
 

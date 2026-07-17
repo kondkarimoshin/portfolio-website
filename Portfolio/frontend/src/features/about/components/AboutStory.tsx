@@ -1,5 +1,5 @@
 import Text from "../../../components/ui/Text";
-import SkillsChips from "./SkillsChips";
+// import SkillsChips from "./SkillsChips";
 
 const AboutStory = () => {
     return (
@@ -53,7 +53,7 @@ const AboutStory = () => {
 
             </Text>
 
-            <SkillsChips />
+            {/* <SkillsChips /> */}
         </div>
     );
 };

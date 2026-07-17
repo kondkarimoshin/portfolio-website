@@ -11,7 +11,6 @@ const Experience = () => {
         <Section
             id="experience"
             aria-labelledby="experience-heading"
-            className="pt-2 lg:pt-4"
         >
             <Container>
                 <FadeIn delay={0}>
