@@ -12,11 +12,10 @@ const Skills = () => {
         <Section
             id="skills"
             aria-labelledby="skills-heading"
-            className="pt-2 lg:pt-4"
         >
             <Container>
 
-                <FadeIn delay={0.3}>
+                <FadeIn delay={0}>
 
                     <div className="mx-auto max-w-6xl">
 

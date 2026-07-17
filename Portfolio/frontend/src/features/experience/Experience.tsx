@@ -5,16 +5,16 @@ import Text from "../../components/ui/Text";
 import ExperienceCard from "./components/ExperienceCard";
 import CareerJourney from "./components/CareerJourney";
 import FadeIn from "../../components/ui/FadeIn";
+import { currentExperience } from "./constants/experienceData";
 
 const Experience = () => {
     return (
         <Section
             id="experience"
             aria-labelledby="experience-heading"
-            className="pt-2 lg:pt-4"
         >
             <Container>
-                <FadeIn delay={0.2}>
+                <FadeIn delay={0}>
 
                     <div className="mx-auto max-w-5xl">
 
@@ -41,7 +41,7 @@ const Experience = () => {
                         {/* Experience Card */}
                         {/* ============================== */}
 
-                        <ExperienceCard />
+                        <ExperienceCard experience={currentExperience} />
 
                         <CareerJourney />
 

@@ -59,12 +59,12 @@ const CareerJourney = () => {
 
                     </div>
 
-                    <div className="text-cyan-400">
+                    <div className="rounded-full bg-cyan-500/10 p-2 text-cyan-400 transition-all duration-300">
 
                         {expanded ? (
-                            <HiChevronUp aria-hidden="true" className="h-7 w-7" />
+                            <HiChevronUp aria-hidden="true" className="h-5 w-5" />
                         ) : (
-                            <HiChevronDown className="h-7 w-7" />
+                            <HiChevronDown aria-hidden="true" className="h-5 w-5" />
                         )}
 
                     </div>

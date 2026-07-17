@@ -1,25 +1,28 @@
 import { useState } from "react";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import clsx from "clsx";
 
 import Container from "../components/ui/Container";
 import { navigationItems } from "../constants/navigation";
-
-import clsx from "clsx";
 import useActiveSection from "../hooks/useActiveSection";
 
 import logo from "../assets/branding/logo2.png";
 
+import AvatarButton from "./components/AvatarButton";
+import AvatarModal from "./components/AvatarModal";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAvatarOpen, setIsAvatarOpen] = useState(false);
+
   const activeSection = useActiveSection();
+
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
-
         <Container>
-
           <div className="flex h-20 items-center justify-between">
 
             {/* Logo */}
@@ -27,62 +30,67 @@ const Navbar = () => {
             <a
               href="#hero"
               aria-label="Go to Home"
-              className="text-2xl font-bold tracking-wide text-cyan-400 transition-colors hover:text-cyan-300"
+              className="transition-opacity hover:opacity-90"
             >
               <img
                 src={logo}
                 alt="Moshin Kondkari Logo"
-                className="h-12 w-auto pl-2"
+                className="h-12 w-auto"
               />
             </a>
 
             {/* Desktop Navigation */}
 
-            <nav
-              className="hidden lg:block"
-              aria-label="Primary Navigation"
-            >
+            <div className="hidden items-center gap-6 lg:flex">
 
-              <ul className="flex items-center gap-10 text-sm font-medium text-slate-300">
+              <nav aria-label="Primary Navigation">
+                <ul className="flex items-center gap-10 text-sm font-medium">
 
-                {navigationItems.map((item) => (
+                  {navigationItems.map((item) => (
 
-                  <li key={item.href}>
+                    <li key={item.href}>
 
-                    <a
-                      href={item.href}
-                      className={clsx(
-                        "transition-colors duration-300 hover:text-cyan-400",
-                        activeSection === item.href.replace("#", "")
-                          ? "font-semibold text-cyan-400"
-                          : "text-slate-300"
-                      )}
-                    >
-                      {item.label}
-                    </a>
+                      <a
+                        href={item.href}
+                        className={clsx(
+                          "transition-colors duration-300 hover:text-cyan-400",
+                          activeSection === item.href.replace("#", "")
+                            ? "font-semibold text-cyan-400"
+                            : "text-slate-300"
+                        )}
+                      >
+                        {item.label}
+                      </a>
 
-                  </li>
+                    </li>
 
-                ))}
+                  ))}
 
-              </ul>
+                </ul>
+              </nav>
 
-            </nav>
+              <AvatarButton onClick={() => setIsAvatarOpen(true)} />
 
-            {/* Mobile Menu Button */}
+            </div>
 
-            <button
-              onClick={() => setIsMenuOpen(true)}
-              className="rounded-lg p-2 text-slate-300 transition hover:bg-slate-800 hover:text-white lg:hidden"
-              aria-label="Open Menu"
-            >
-              <HiOutlineMenu size={28} />
-            </button>
+            {/* Mobile Header */}
+
+            <div className="flex items-center gap-3 lg:hidden">
+
+              <AvatarButton onClick={() => setIsAvatarOpen(true)} />
+
+              <button
+                onClick={() => setIsMenuOpen(true)}
+                className="rounded-lg p-2 text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                aria-label="Open Menu"
+              >
+                <HiOutlineMenu size={28} />
+              </button>
+
+            </div>
 
           </div>
-
         </Container>
-
       </header>
 
       {/* Mobile Navigation */}
@@ -93,19 +101,19 @@ const Navbar = () => {
 
           <Container>
 
-            {/* Header */}
+            {/* Mobile Header */}
 
             <div className="flex h-20 items-center justify-between">
 
               <img
                 src={logo}
                 alt="Moshin Kondkari Logo"
-                className="h-12 w-auto pl-2"
+                className="h-12 w-auto"
               />
 
               <button
                 onClick={closeMenu}
-                className="rounded-lg p-2 transition-colors hover:bg-slate-800"
+                className="rounded-lg p-2 text-slate-300 transition hover:bg-slate-800 hover:text-white"
                 aria-label="Close Menu"
               >
                 <HiOutlineX size={30} />
@@ -113,7 +121,7 @@ const Navbar = () => {
 
             </div>
 
-            {/* Navigation */}
+            {/* Mobile Navigation */}
 
             <nav
               className="mt-10"
@@ -153,6 +161,12 @@ const Navbar = () => {
 
       )}
 
+      {/* Avatar Modal */}
+
+      <AvatarModal
+        isOpen={isAvatarOpen}
+        onClose={() => setIsAvatarOpen(false)}
+      />
     </>
   );
 };
