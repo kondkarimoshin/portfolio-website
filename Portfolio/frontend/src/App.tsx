@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./layouts/Navbar";
 import Hero from "./features/hero/Hero";
 import About from "./features/about/About";
@@ -23,6 +24,7 @@ function App() {
       </main>
       <BackToTop />
       <Footer />
+      <Analytics />
     </>
   );
 }
