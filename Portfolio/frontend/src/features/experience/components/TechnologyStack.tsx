@@ -1,24 +1,89 @@
 import Badge from "../../../components/ui/Badge";
 
-const TechnologyStack = () => {
+import {
+    SiApachemaven,
+    SiBitbucket,
+    SiDocker,
+    SiGit,
+    SiJenkins,
+    SiJira,
+    SiLinux,
+    SiRedhatopenshift,
+    SiSelenium,
+    SiCucumber,
+    SiConfluence,
+    SiTeamcity,
+
+} from "react-icons/si";
+
+import {
+    FaJava, 
+    FaBolt,
+    FaCubes,
+    FaDatabase,
+    FaGlobe,
+    FaServer,
+    FaTerminal,
+    FaCodeBranch,
+} from "react-icons/fa6";
+
+interface TechnologyStackProps {
+    technologies: string[];
+}
+
+const technologyIcons = {
+    Java: FaJava,
+    Selenium: SiSelenium,
+    Docker: SiDocker,
+    OpenShift: SiRedhatopenshift,
+    Jenkins: SiJenkins,
+    Git: SiGit,
+    Bitbucket: SiBitbucket,
+    JIRA: SiJira,
+    Linux: SiLinux,
+    Maven: SiApachemaven,
+    Cucumber: SiCucumber,
+    Confluence: SiConfluence,
+    TeamCity: SiTeamcity,
+    "REST Assured": FaGlobe,
+    "QuickFIX/J": FaBolt,
+    SQL: FaDatabase,
+    Oracle: FaServer,
+    Microservices: FaCubes,
+    "Shell Scripting": FaTerminal,
+    "FIX Protocol": FaCodeBranch,
+} as const;
+
+const TechnologyStack = ({
+    technologies,
+}: TechnologyStackProps) => {
     return (
         <div className="mt-4 flex flex-wrap gap-3">
 
-            <Badge>Java</Badge>
+            {technologies.map((technology) => {
 
-            <Badge>Selenium</Badge>
+                const Icon =
+                    technologyIcons[
+                    technology as keyof typeof technologyIcons
+                    ];
 
-            <Badge>Cucumber</Badge>
+                return (
+                    <Badge key={technology}>
 
-            <Badge>FIX Protocol</Badge>
+                        <div className="flex items-center gap-2">
 
-            <Badge>Docker</Badge>
+                            {Icon && (
+                                <Icon className="h-4 w-4 shrink-0" />
+                            )}
 
-            <Badge>OpenShift</Badge>
+                            <span>{technology}</span>
 
-            <Badge>Jenkins</Badge>
+                        </div>
 
-            <Badge>Microservices</Badge>
+                    </Badge>
+                );
+
+            })}
 
         </div>
     );

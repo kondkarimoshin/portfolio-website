@@ -1,56 +1,54 @@
-const KeyProjects = () => {
+import type { Project } from "../types/experience";
+
+interface KeyProjectsProps {
+    projects: Project[];
+}
+
+const KeyProjects = ({ projects }: KeyProjectsProps) => {
     return (
         <div className="mt-6 space-y-5">
 
-            {/* Project 1 */}
+            {projects.map((project) => (
 
-            <div className="rounded-xl border border-slate-800 bg-slate-900/30 p-5">
+                <div
+                    key={project.name}
+                    className="rounded-xl border border-slate-800 bg-slate-900/30 p-5"
+                >
 
-                <h5 className="text-lg font-semibold text-blue-400">
-                    CitiSmart
-                </h5>
+                    <h5 className="text-lg font-semibold text-blue-400">
+                        {project.name}
+                    </h5>
 
-                <p className="mt-2 text-slate-300">
-                    Enterprise algorithmic trading platform supporting
-                    institutional equities trading.
-                </p>
+                    <p className="mt-3 text-slate-300">
+                        {project.overview}
+                    </p>
 
-                <p className="mt-2 text-slate-300">
-                    Designed automation frameworks, backend validation,
-                    API testing and regression automation.
-                </p>
+                    <ul className="mt-4 space-y-3 text-slate-300">
 
-                <p className="mt-2 text-slate-300">
-                    Containerized execution environment using Docker and OpenShift,
-                    reducing regression execution time from 2 weeks to 45 minutes.
-                </p>
+                        {project.keyContributions.map((highlight) => (
 
-            </div>
+                            <li
+                                key={highlight}
+                                className="flex items-start gap-3"
+                            >
 
-            {/* Project 2 */}
+                                <span className="mt-1 text-blue-400">
+                                    ✔
+                                </span>
 
-            <div className="rounded-xl border border-slate-800 bg-slate-900/30 p-5">
+                                <span>
+                                    {highlight}
+                                </span>
 
-                <h5 className="text-lg font-semibold text-blue-400">
-                    XSOR (Smart Order Routing)
-                </h5>
+                            </li>
 
-                <p className="mt-2 text-slate-300">
-                    Automated validation of order routing logic on multiple venues,
-                    FIX messaging and execution workflows.
-                </p>
+                        ))}
 
-                <p className="mt-2 text-slate-300">
-                    Developed dummy market data generators to simulate market
-                    conditions and validate order routing logic.
-                </p>
+                    </ul>
 
-                <p className="mt-2 text-slate-300">
-                    Developed backend automation utilities and integration
-                    testing for distributed microservices.
-                </p>
+                </div>
 
-            </div>
+            ))}
 
         </div>
     );

@@ -5,6 +5,7 @@ import Text from "../../components/ui/Text";
 import ExperienceCard from "./components/ExperienceCard";
 import CareerJourney from "./components/CareerJourney";
 import FadeIn from "../../components/ui/FadeIn";
+import { currentExperience } from "./constants/experienceData";
 
 const Experience = () => {
     return (
@@ -40,7 +41,7 @@ const Experience = () => {
                         {/* Experience Card */}
                         {/* ============================== */}
 
-                        <ExperienceCard />
+                        <ExperienceCard experience={currentExperience} />
 
                         <CareerJourney />
 
