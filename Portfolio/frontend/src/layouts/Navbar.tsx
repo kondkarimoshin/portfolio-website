@@ -7,6 +7,8 @@ import { navigationItems } from "../constants/navigation";
 import clsx from "clsx";
 import useActiveSection from "../hooks/useActiveSection";
 
+import logo from "../assets/branding/logo2.png";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const activeSection = useActiveSection();
@@ -27,7 +29,11 @@ const Navbar = () => {
               aria-label="Go to Home"
               className="text-2xl font-bold tracking-wide text-cyan-400 transition-colors hover:text-cyan-300"
             >
-              MK
+              <img
+                src={logo}
+                alt="Moshin Kondkari Logo"
+                className="h-12 w-auto pl-2"
+              />
             </a>
 
             {/* Desktop Navigation */}
@@ -91,9 +97,11 @@ const Navbar = () => {
 
             <div className="flex h-20 items-center justify-between">
 
-              <span className="text-2xl font-bold text-cyan-400">
-                MK
-              </span>
+              <img
+                src={logo}
+                alt="Moshin Kondkari Logo"
+                className="h-12 w-auto pl-2"
+              />
 
               <button
                 onClick={closeMenu}
