@@ -4,6 +4,9 @@ node_modules/
 # Build
 dist/
 
+# Vite
+.vite/
+
 # Logs
 *.log
 
@@ -11,7 +14,7 @@ dist/
 .env
 .env.*
 
-# Editor
+# IDE
 .vscode/
 .idea/
 
