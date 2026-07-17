@@ -16,9 +16,9 @@ const Heading = ({
 }: HeadingProps) => {
 
     const styles = {
-        1: "text-5xl font-extrabold leading-tight text-white sm:text-6xl lg:text-7xl",
-        2: "text-3xl font-bold text-white sm:text-4xl",
-        3: "text-xl font-semibold text-white sm:text-2xl",
+        1: "text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight",
+        2: "text-3xl sm:text-4xl font-bold tracking-tight",
+        3: "text-xl sm:text-2xl font-semibold tracking-tight",
     };
 
     switch (level) {
@@ -36,7 +36,7 @@ const Heading = ({
             return (
                 <h2
                     id={id}
-                    className={clsx(styles[1], className)}
+                    className={clsx(styles[2], className)}
                 >
                     {children}
                 </h2>
@@ -46,14 +46,14 @@ const Heading = ({
             return (
                 <h3
                     id={id}
-                    className={clsx(styles[1], className)}
+                    className={clsx(styles[3], className)}
                 >
                     {children}
                 </h3>
             );
 
         default:
-            return null;
+            return styles[1];
     }
 };
 

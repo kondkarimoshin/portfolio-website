@@ -14,7 +14,7 @@ const Contact = () => {
 
             <Container>
 
-                <FadeIn delay={0.4}>
+                <FadeIn delay={0}>
                     <div className="mx-auto max-w-5xl text-center">
 
                         <Heading 
@@ -24,7 +24,7 @@ const Contact = () => {
                             Let's Build Something Great Together
                         </Heading>
 
-                        <Text className="mx-auto mt-5 max-w-3xl leading-8">
+                        <Text className="mx-auto mt-5 max-w-3xl">
 
                             Whether you're looking for a Senior Automation Engineer,
                             QA Architect, Test Automation Lead, or simply want to
@@ -32,7 +32,7 @@ const Contact = () => {
 
                         </Text>
 
-                        <Text className="mx-auto mt-5 max-w-3xl leading-8">
+                        <Text className="mx-auto mt-5 max-w-3xl">
 
                             I'm always interested in solving complex engineering
                             challenges, building scalable automation platforms,
