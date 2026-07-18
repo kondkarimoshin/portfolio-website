@@ -10,16 +10,29 @@ import type { ContactItem } from "../types/ContactItem";
 
 export const contactData: ContactItem[] = [
     {
+        title: "Resume",
+        value: "Download Resume",
+        subtitle: "Latest Version (PDF)",
+        href: "/Moshin_Kondkari_Resume.pdf",
+        icon: HiArrowDownTray,
+        download: true,
+    },
+    {
         title: "Email",
         value: "kondkarimoshin@gmail.com",
         href: "mailto:kondkarimoshin@gmail.com",
         icon: HiEnvelope,
+
+        copyable: true,
+        copyValue: "kondkarimoshin@gmail.com",
     },
     {
         title: "Phone",
         value: "+91 90293 26353",
         href: "tel:+919029326353",
         icon: HiPhone,
+        copyable: true,
+        copyValue: "+919029326353",
     },
     {
         title: "LinkedIn",
@@ -27,6 +40,8 @@ export const contactData: ContactItem[] = [
         href: "https://www.linkedin.com/in/moshin-kondkari-79282258/",
         icon: FaLinkedin,
         external: true,
+        copyable: true,
+        copyValue: "https://www.linkedin.com/in/moshin-kondkari-79282258/",
     },
     {
         title: "GitHub",
@@ -39,12 +54,5 @@ export const contactData: ContactItem[] = [
         title: "Location",
         value: "Pune, Maharashtra, India",
         icon: HiMapPin,
-    },
-    {
-        title: "Resume",
-        value: "Download Resume",
-        href: "/Moshin_Kondkari_Resume.pdf",
-        icon: HiArrowDownTray,
-        download: true,
     },
 ];
