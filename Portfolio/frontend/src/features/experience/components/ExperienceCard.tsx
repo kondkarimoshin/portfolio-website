@@ -38,7 +38,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
                         {experience.company}
                     </h3>
 
-                    <p className="mt-2 text-lg font-medium text-blue-400">
+                    <p className="mt-2 text-lg font-medium text-cyan-400">
                         {experience.role}
                     </p>
 
@@ -52,7 +52,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
 
                 <div className="flex items-center gap-3">
 
-                    <div className="rounded-full border border-blue-500/30 bg-blue-500/10 px-5 py-2 text-sm font-medium text-blue-300">
+                    <div className="rounded-full border border-blue-500/30 bg-blue-500/10 px-5 py-2 text-sm font-semibold text-white">
                         {experience.duration}
                     </div>
 
@@ -77,7 +77,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
             <div
                 id="current-experience-content"
                 className={`overflow-hidden transition-all duration-500 ${expanded
-                    ? "max-h-[3000px] opacity-100"
+                    ? "max-h-[6000px] opacity-100"
                     : "max-h-0 opacity-0"
                     }`}
             >
@@ -90,7 +90,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
 
                 <div>
 
-                    <h4 className="text-lg font-semibold text-white">
+                    <h4 className="text-lg font-semibold text-cyan-400">
                         Domain
                     </h4>
 
@@ -104,7 +104,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
 
                 <div className="mt-10">
 
-                    <h4 className="text-lg font-semibold text-white">
+                    <h4 className="text-lg font-semibold text-cyan-400">
                         Professional Summary
                     </h4>
 
@@ -118,7 +118,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
 
                 <div className="mt-10">
 
-                    <h4 className="text-lg font-semibold text-white">
+                    <h4 className="text-lg font-semibold text-cyan-400">
                         Key Responsibilities
                     </h4>
 
@@ -132,7 +132,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
 
                 <div className="mt-10">
 
-                    <h4 className="text-lg font-semibold text-white">
+                    <h4 className="text-lg font-semibold text-cyan-400">
                         Business Impact
                     </h4>
 
@@ -146,8 +146,8 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
 
                 <div className="mt-10">
 
-                    <h4 className="text-lg font-semibold text-white">
-                        Key Projects
+                    <h4 className="text-lg font-semibold text-cyan-400">
+                        Key Enterprise Projects
                     </h4>
 
                     <KeyProjects
@@ -158,9 +158,9 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
 
                 {/* Technologies */}
 
-                <div className="mt-8">
+                <div className="mt-10">
 
-                    <h4 className="text-lg font-semibold text-white">
+                    <h4 className="text-lg font-semibold text-cyan-400">
                         Technologies
                     </h4>
 

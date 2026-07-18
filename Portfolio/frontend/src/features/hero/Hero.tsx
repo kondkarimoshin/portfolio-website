@@ -21,7 +21,7 @@ const Hero = () => {
 
                     <div className="mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-center">
 
-                        <Badge className="mb-4 w-fit self-center lg:self-start">
+                        <Badge className="mb-4 w-fit self-center lg:self-start text-cyan-400">
                             16+ Years of Automation Excellence
                         </Badge>
 

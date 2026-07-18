@@ -5,6 +5,7 @@ export interface BusinessImpact {
 
 export interface Project {
     name: string;
+    category: string;
     overview: string;
     keyContributions: string[];
 }
