@@ -1,5 +1,6 @@
 import Badge from "../../../components/ui/Badge";
-import { skillIcons } from "../constants/skillIcons";
+import { categoryIcons } from "../constants/categoryIcons";
+import { technologyIcons } from "../constants/technologyIcons";
 
 interface SkillCategoryProps {
     title: string;
@@ -11,7 +12,7 @@ const SkillCategory = ({
     skills,
 }: SkillCategoryProps) => {
 
-    const Icon = skillIcons[title as keyof typeof skillIcons];
+    const Icon = categoryIcons[title as keyof typeof categoryIcons];
 
     return (
         <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-400/10">
@@ -29,17 +30,27 @@ const SkillCategory = ({
 
             <ul className="flex flex-wrap gap-3">
 
-                {skills.map((skill) => (
+                {skills.map((skill) => {
+                    const SkillIcon =
+                        technologyIcons[skill as keyof typeof technologyIcons];
 
-                    <li key={skill}>
+                    return (
+                        <li key={skill}>
+                            <Badge className="text-white">
+                                <div className="flex items-center gap-2">
+                                    {SkillIcon && (
+                                        <SkillIcon
+                                            aria-hidden="true"
+                                            className="h-4 w-4 text-cyan-400"
+                                        />
+                                    )}
 
-                        <Badge>
-                            {skill}
-                        </Badge>
-
-                    </li>
-
-                ))}
+                                    <span>{skill}</span>
+                                </div>
+                            </Badge>
+                        </li>
+                    );
+                })}
 
             </ul>
 

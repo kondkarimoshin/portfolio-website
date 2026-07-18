@@ -9,7 +9,7 @@ import {
     HiWrenchScrewdriver,
 } from "react-icons/hi2";
 
-export const skillIcons = {
+export const categoryIcons = {
     Leadership: HiUsers,
     "Capital Markets": HiChartBar,
     "AI Engineering": HiSparkles,
@@ -18,4 +18,4 @@ export const skillIcons = {
     "Backend & Integration": HiCircleStack,
     "DevOps & Cloud": HiCloud,
     "Engineering Tools": HiWrenchScrewdriver,
-};
+} as const;
