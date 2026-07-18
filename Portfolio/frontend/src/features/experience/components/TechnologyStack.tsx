@@ -25,6 +25,15 @@ import {
     FaServer,
     FaTerminal,
     FaCodeBranch,
+    FaRobot,
+    FaCode,
+    FaClipboardCheck,
+    FaBug,
+    FaListCheck,
+    FaCreditCard,
+    FaChartLine,
+    FaGear,
+
 } from "react-icons/fa6";
 
 interface TechnologyStackProps {
@@ -51,7 +60,18 @@ const technologyIcons = {
     Oracle: FaServer,
     Microservices: FaCubes,
     "Shell Scripting": FaTerminal,
-    "FIX Protocol": FaCodeBranch,
+    "FIX Protocol": FaCodeBranch, 
+    "Test Automation": FaRobot,
+    "VBScript": FaCode,
+    "Database Testing": FaDatabase,
+    "Functional Testing": FaClipboardCheck,
+    "Defect Management": FaBug,
+    "Test Planning": FaListCheck,
+    "Credit Cards": FaCreditCard,
+    "GMI": FaChartLine,
+    "UFT (QTP)": FaGear,
+    QA: FaClipboardCheck,
+    "Regression Testing": FaBug,
 } as const;
 
 const TechnologyStack = ({

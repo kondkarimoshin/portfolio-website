@@ -139,15 +139,17 @@ export const previousExperience = [
         duration: "Jul 2013 – Nov 2016",
         location: "Pune, Maharashtra • India",
         summary:
-            "Designed automation frameworks for enterprise financial applications, implemented keyword-driven and data-driven automation, and improved regression testing efficiency.",
+            "Designed and maintained automation frameworks for enterprise financial applications using keyword-driven and data-driven approaches. Collaborated closely with development and QA teams to improve regression efficiency, strengthen test coverage, and support reliable software releases.",
         technologies: [
             "Java",
-            "QTP",
-            "Automation",
+            "UFT (QTP)",
             "SQL",
+            "Functional Testing",
             "Regression Testing",
             "GMI",
-            "Visual Basic",
+            "VBScript",
+            "Defect Management",
+            "Test Planning",
         ],
     },
     {
@@ -156,13 +158,16 @@ export const previousExperience = [
         duration: "Jan 2012 – Jul 2013",
         location: "Pune, Maharashtra • India",
         summary:
-            "Worked on Credit Card applications, Functional Testing, Database Testing, and Collections systems while supporting enterprise banking applications.",
+            "Contributed to enterprise Credit Card and Collections applications through functional, database, and integration testing. Worked with cross-functional teams to ensure application quality, validate business requirements, and support stable production releases.",
         technologies: [
             "Functional Testing",
-            "DB Testing",
+            "Regression Testing",
+            "Database Testing",
+            "Test Planning",
             "Credit Cards",
             "SQL",
-            "Quality Assurance",
+            "QA",
+            "Defect Management",
         ],
     },
     {
@@ -171,9 +176,10 @@ export const previousExperience = [
         duration: "May 2010 – Jan 2012",
         location: "Mumbai, Maharashtra • India",
         summary:
-            "Performed regression testing, defect management, test planning, and quality assurance for Credit Card applications while supporting release cycles.",
+            "Began my software testing career by supporting Credit Card applications through regression testing, defect management, and test planning. Built a strong foundation in software quality assurance, release validation, and structured testing processes.",
         technologies: [
             "Regression Testing",
+            "Functional Testing",
             "QA",
             "Defect Management",
             "Test Planning",
