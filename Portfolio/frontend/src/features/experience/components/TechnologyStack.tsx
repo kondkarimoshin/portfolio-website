@@ -17,7 +17,7 @@ import {
 } from "react-icons/si";
 
 import {
-    FaJava, 
+    FaJava,
     FaBolt,
     FaCubes,
     FaDatabase,
@@ -58,7 +58,7 @@ const TechnologyStack = ({
     technologies,
 }: TechnologyStackProps) => {
     return (
-        <div className="mt-4 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-wrap gap-3">
 
             {technologies.map((technology) => {
 
@@ -68,12 +68,12 @@ const TechnologyStack = ({
                     ];
 
                 return (
-                    <Badge key={technology}>
+                    <Badge key={technology} className="text-white">
 
                         <div className="flex items-center gap-2">
 
                             {Icon && (
-                                <Icon className="h-4 w-4 shrink-0" />
+                                <Icon className="h-4 w-4 shrink-0 text-cyan-400" />
                             )}
 
                             <span>{technology}</span>

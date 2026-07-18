@@ -9,10 +9,13 @@ export const currentExperience: Experience = {
     domain: [
         "Capital Markets",
         "Equities Trading",
+        "Algorithmic Trading",
         "Smart Order Routing",
+        "Order Management Systems",
         "FIX Protocol",
-        "Enterprise Automation",
         "Microservices",
+        "Enterprise Automation",
+        "Banking & Financial Services"
     ],
 
     summary:
@@ -57,17 +60,19 @@ export const currentExperience: Experience = {
     projects: [
         {
             name: "CitiSmart",
+            category: "Algorithmic Trading Platform",
             overview:
-                "Enterprise algorithmic trading platform supporting institutional equities trading.",
+                "Enterprise algorithmic trading platform supporting institutional equities trading across global markets.",
             keyContributions: [
-                "Designed automation frameworks, backend validation, API testing and regression automation.",
-                "Containerized execution using Docker and OpenShift.",
+                "Designed enterprise automation frameworks covering UI, API, backend and regression testing.",
+                "Containerized automation execution using Docker and OpenShift.",
                 "Reduced regression execution time from nearly 2 weeks to just 45 minutes.",
-                "Implemented scalable automation architecture for enterprise trading applications."
+                "Implemented scalable automation architecture supporting global trading applications."
             ]
         },
         {
-            name: "XSOR (Smart Order Routing)",
+            name: "XSOR",
+            category: "Smart Order Routing Platform",
             overview:
                 "Enterprise Smart Order Routing platform responsible for routing equity orders across multiple exchanges and liquidity venues.",
             keyContributions: [
@@ -75,6 +80,30 @@ export const currentExperience: Experience = {
                 "Developed dummy market data generators to simulate real-world trading conditions.",
                 "Built backend automation utilities for distributed microservices.",
                 "Improved release confidence through comprehensive integration and regression testing."
+            ]
+        },
+        {
+            name: "Chaos Engineering Framework",
+            category: "Enterprise Resilience Testing Framework",
+            overview:
+                "Designed and implemented an enterprise chaos engineering framework to validate resilience of distributed microservice-based trading applications.",
+            keyContributions: [
+                "Designed reusable chaos engineering rules for enterprise applications.",
+                "Validated system resiliency under controlled failure scenarios.",
+                "Improved confidence before production deployments.",
+                "Reduced manual effort required for resilience validation."
+            ]
+        },
+        {
+            name: "Enterprise Automation Framework",
+            category: "Automation Platform",
+            overview:
+                "Designed a reusable enterprise automation platform supporting UI, API, backend and integration testing across multiple Capital Markets applications.",
+            keyContributions: [
+                "Built modular and reusable automation libraries.",
+                "Integrated execution with CI/CD pipelines, Docker and OpenShift.",
+                "Standardized automation practices across multiple enterprise applications.",
+                "Improved maintainability and accelerated onboarding of new automation engineers."
             ]
         }
     ],
