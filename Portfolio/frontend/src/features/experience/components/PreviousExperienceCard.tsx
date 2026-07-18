@@ -1,4 +1,4 @@
-import Badge from "../../../components/ui/Badge";
+import TechnologyStack from "./TechnologyStack";
 
 interface PreviousExperienceCardProps {
     company: string;
@@ -30,7 +30,7 @@ const PreviousExperienceCard = ({
                         {company}
                     </h3>
 
-                    <p className="mt-2 text-lg font-medium text-blue-400">
+                    <p className="mt-2 text-lg font-medium text-cyan-400">
                         {role}
                     </p>
 
@@ -40,7 +40,7 @@ const PreviousExperienceCard = ({
 
                 </div>
 
-                <div className="rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-300">
+                <div className="rounded-full border border-blue-500/30 bg-blue-500/10 px-5 py-2 text-sm font-semibold text-white">
                     {duration}
                 </div>
 
@@ -54,17 +54,9 @@ const PreviousExperienceCard = ({
 
             {/* Technology Stack */}
 
-            <div className="mt-6 flex flex-wrap gap-3">
-
-                {technologies.map((technology) => (
-
-                    <Badge key={technology}>
-                        {technology}
-                    </Badge>
-
-                ))}
-
-            </div>
+            <TechnologyStack
+                technologies={technologies}
+            />
 
         </div>
     );

@@ -37,11 +37,11 @@ const CareerJourney = () => {
                                 Career Journey
                             </h3>
 
-                            <p className="mt-2 text-slate-400">
+                            <p className="mt-2 text-slate-350">
                                 My professional journey before joining Citibank.
                             </p>
 
-                            <div className="mt-3 flex flex-wrap gap-2 text-sm text-slate-500">
+                            <div className="mt-3 flex flex-wrap gap-2 text-sm text-slate-350">
 
                                 <span>3 Companies</span>
 
