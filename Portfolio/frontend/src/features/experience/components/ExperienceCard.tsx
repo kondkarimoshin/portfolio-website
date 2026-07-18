@@ -74,105 +74,99 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
             {/* Expandable Content */}
             {/* ============================== */}
 
-            <div
-                id="current-experience-content"
-                className={`overflow-hidden transition-all duration-500 ${expanded
-                    ? "max-h-[6000px] opacity-100"
-                    : "max-h-0 opacity-0"
-                    }`}
-            >
+            {expanded && (
+                <div id="current-experience-content">
 
-                {/* Divider */}
+                    {/* Divider */}
 
-                <div className="mt-4 mb-6 border-t border-slate-800"></div>
+                    <div className="mt-4 mb-6 border-t border-slate-800" />
 
-                {/* Domain */}
+                    {/* Domain */}
 
-                <div>
+                    <div>
+                        <h4 className="text-lg font-semibold text-cyan-400">
+                            Domain
+                        </h4>
 
-                    <h4 className="text-lg font-semibold text-cyan-400">
-                        Domain
-                    </h4>
+                        <p className="mt-3 leading-8 text-slate-400">
+                            {experience.domain.join(" • ")}
+                        </p>
+                    </div>
 
-                    <p className="mt-3 leading-8 text-slate-400">
-                        {experience.domain.join(" • ")}
-                    </p>
+                    {/* Professional Summary */}
 
-                </div>
+                    <div className="mt-10">
 
-                {/* Professional Summary */}
+                        <h4 className="text-lg font-semibold text-cyan-400">
+                            Professional Summary
+                        </h4>
 
-                <div className="mt-10">
+                        <Text className="mt-4 leading-8">
+                            {experience.summary}
+                        </Text>
 
-                    <h4 className="text-lg font-semibold text-cyan-400">
-                        Professional Summary
-                    </h4>
+                    </div>
 
-                    <Text className="mt-4 leading-8">
-                        {experience.summary}
-                    </Text>
+                    {/* Responsibilities */}
 
-                </div>
+                    <div className="mt-10">
 
-                {/* Responsibilities */}
+                        <h4 className="text-lg font-semibold text-cyan-400">
+                            Key Responsibilities
+                        </h4>
 
-                <div className="mt-10">
+                        <Responsibilities
+                            responsibilities={experience.responsibilities}
+                        />
 
-                    <h4 className="text-lg font-semibold text-cyan-400">
-                        Key Responsibilities
-                    </h4>
+                    </div>
 
-                    <Responsibilities
-                        responsibilities={experience.responsibilities}
-                    />
+                    {/* Business Impact */}
 
-                </div>
+                    <div className="mt-10">
 
-                {/* Business Impact */}
+                        <h4 className="text-lg font-semibold text-cyan-400">
+                            Business Impact
+                        </h4>
 
-                <div className="mt-10">
+                        <BusinessImpact
+                            impacts={experience.businessImpacts}
+                        />
 
-                    <h4 className="text-lg font-semibold text-cyan-400">
-                        Business Impact
-                    </h4>
+                    </div>
 
-                    <BusinessImpact
-                        impacts={experience.businessImpacts}
-                    />
+                    {/* Projects */}
 
-                </div>
+                    <div className="mt-10">
 
-                {/* Projects */}
+                        <h4 className="text-lg font-semibold text-cyan-400">
+                            Key Enterprise Projects
+                        </h4>
 
-                <div className="mt-10">
+                        <KeyProjects
+                            projects={experience.projects}
+                        />
 
-                    <h4 className="text-lg font-semibold text-cyan-400">
-                        Key Enterprise Projects
-                    </h4>
+                    </div>
 
-                    <KeyProjects
-                        projects={experience.projects}
-                    />
+                    {/* Technologies */}
 
-                </div>
+                    <div className="mt-10">
 
-                {/* Technologies */}
+                        <h4 className="text-lg font-semibold text-cyan-400">
+                            Technologies
+                        </h4>
 
-                <div className="mt-10">
+                        <TechnologyStack
+                            technologies={experience.technologies}
+                        />
 
-                    <h4 className="text-lg font-semibold text-cyan-400">
-                        Technologies
-                    </h4>
-
-                    <TechnologyStack
-                        technologies={experience.technologies}
-                    />
+                    </div>
 
                 </div>
+            )}
 
-            </div>
-
-        </div>
+        </div >
     );
 };
 
