@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from "./layouts/Navbar";
 import Hero from "./features/hero/Hero";
 import About from "./features/about/About";
@@ -25,6 +26,7 @@ function App() {
       <BackToTop />
       <Footer />
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }
