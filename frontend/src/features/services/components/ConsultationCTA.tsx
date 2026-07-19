@@ -36,7 +36,13 @@ text-center
         </p>
 
         <div className="mt-5">
-          <Button size="lg" className="min-w-[180px]">
+          <Button
+            onClick={() =>
+              alert(
+                "🚧 Coming Soon!\n\nThe consultation booking feature is currently under development and will be available soon."
+              )
+            }
+          >
             Book a Free Consultation
           </Button>
         </div>
