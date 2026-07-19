@@ -1,217 +1,285 @@
-# 💼 Moshin Kondkari - Portfolio Website
+# Enterprise Portfolio Website
 
-A modern, responsive, and scalable portfolio website built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**.
+A modern, scalable portfolio built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**, following enterprise engineering practices.
 
-This project is being developed using an enterprise-style sprint workflow, emphasizing clean architecture, reusable components, responsive design, and maintainable code.
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite) ![Tailwind
+CSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss)
+![Status](https://img.shields.io/badge/Status-Active-success)
+![License](https://img.shields.io/badge/License-MIT-green)
 
----
+------------------------------------------------------------------------
 
-## 🚀 Live Preview
+## 🌐 Live Demo
 
-> Coming Soon
+**Website:** https://mkondkari.vercel.app
 
----
+------------------------------------------------------------------------
 
-## 📖 About the Project
+# 📑 Table of Contents
 
-This portfolio showcases my professional journey as a **Senior Automation Engineer** with over **15 years of experience** in:
+-   [Overview](#overview)
+-   [Project Highlights](#project-highlights)
+-   [Technology Stack](#technology-stack)
+-   [Architecture](#architecture)
+-   [Project Structure](#project-structure)
+-   [Documentation](#documentation)
+-   [Getting Started](#getting-started)
+-   [Development Workflow](#development-workflow)
+-   [Build & Deployment](#build--deployment)
+-   [Roadmap](#roadmap)
+-   [Contributing](#contributing)
+-   [License](#license)
+-   [Author](#author)
 
-- Enterprise Test Automation
-- Capital Markets & Equities Trading
-- Java Development
-- Microservices Testing
-- FIX Protocol
-- OpenShift & Docker
-- DevOps & CI/CD
-- Cloud-Native Automation
+------------------------------------------------------------------------
 
-The goal is not only to present my experience but also to demonstrate modern frontend development practices.
+# 📖 Overview
 
----
+This repository contains the source code for my personal portfolio
+website.
 
-# ✨ Features
+The project is intentionally developed using enterprise software
+engineering principles rather than as a simple landing page. It
+demonstrates modular architecture, reusable UI components, feature-based
+organization, strict TypeScript usage, and comprehensive documentation.
 
-## Completed
+The repository is maintained through sprint-based development, with
+architecture decisions and implementation history documented under the
+`docs/` directory.
 
-- Responsive Navigation
-- Premium Hero Section
-- Professional About Section
-- Reusable Design System
-- Mobile Responsive Layout
-- Feature-Based Folder Structure
+------------------------------------------------------------------------
 
-## Upcoming
+# ✨ Project Highlights
 
-- Experience Timeline
-- Skills Showcase
-- Projects Portfolio
-- Contact Section
-- Resume Download
-- Dark Theme Enhancements
-- Performance Optimization
+-   Modern responsive user interface
+-   Feature-first architecture
+-   Reusable UI component library
+-   Strong TypeScript typing
+-   Modular and scalable folder structure
+-   Professional experience timeline
+-   Technical expertise showcase
+-   Resume download
+-   Mobile-first design
+-   SEO-ready static assets
+-   Comprehensive project documentation
+-   Sprint-based development history
 
----
+------------------------------------------------------------------------
 
-# 🛠 Tech Stack
+## 📌 Project at a Glance
 
-### Frontend
+- 🎯 Purpose: Personal Portfolio
+- 💼 Experience Showcased: 15+ Years
+- 🏗️ Architecture: Feature-Based
+- ⚛️ Frontend: React + TypeScript + Vite
+- 🎨 Styling: Tailwind CSS
+- 🚀 Deployment: Vercel
+- 📚 Documentation: Comprehensive (`docs/`)
+- 🔄 Development Approach: Sprint-Based
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
+------------------------------------------------------------------------
 
-### Libraries
+🛠️ Technology Stack
 
-- React Icons
-- clsx
+## 💻 Frontend
 
-### Development
+-   React
+-   TypeScript
+-   Vite
+-   Tailwind CSS
 
-- Git
-- GitHub
-- VS Code
+## 🔧 Tooling
 
----
+-   ESLint
+-   npm
+-   Git
+-   GitHub
+-   VS Code
 
-# 📂 Project Structure
+## 🚀 Deployment
 
-```text
-src/
+-   Vercel
+
+------------------------------------------------------------------------
+
+# 🏗️ Architecture
+
+``` text
+Portfolio
 │
-├── assets/
+├── docs
+│   ├── Architecture
+│   ├── Standards
+│   ├── Sprint History
+│   └── Roadmap
 │
-├── components/
-│   ├── common/
-│   └── ui/
-│
-├── constants/
-│
-├── features/
-│   ├── hero/
-│   ├── about/
-│   ├── experience/
-│   ├── projects/
-│   ├── skills/
-│   └── contact/
-│
-├── layouts/
-│
-├── hooks/
-│
-├── services/
-│
-├── styles/
-│
-└── utils/
+└── frontend
+    ├── Assets
+    ├── Components
+    ├── Constants
+    ├── Features
+    ├── Hooks
+    ├── Layouts
+    └── Public
 ```
 
----
+------------------------------------------------------------------------
 
-# 🏗 Architecture
+# 📁 Project Structure
 
-This project follows a **Feature-Based Architecture**.
-
-Each feature is isolated into its own module:
-
-```
-feature
-│
-├── components
-├── hooks
-├── types
-├── constants
-└── Feature.tsx
-```
-
-Reusable UI components are shared through:
-
-```
-components/ui
+``` text
+Portfolio/
+├── docs/
+├── frontend/
+│   ├── public/
+│   └── src/
+│       ├── assets/
+│       ├── components/
+│       ├── constants/
+│       ├── features/
+│       ├── hooks/
+│       ├── layouts/
+│       └── main.tsx
+├── .gitignore
+└── README.md
 ```
 
----
+------------------------------------------------------------------------
 
-# 📱 Responsive Design
+# 📚 Documentation
 
-The website is designed for:
+| Document | Description |
+|----------|-------------|
+| [📐 Architecture](docs/architecture.md) | System architecture and design decisions |
+| [📁 Folder Structure](docs/folder-structure.md) | Repository organition |
+| [📝 Coding Standards](docs/coding-standards.md) | Coding conventions and best practices |
+| [🌿 Git Workflow](docs/git-workflow.md) | Branching strategy and development workflow |
+| [🚀 Deployment](docs/deployment.md) | Build and deployment guide |
+| [🎯 Project Context](docs/project-context.md) | Project vision andza objectives |
+| [🛣️ Project Roadmap](docs/project-roadmap.md) | Future enhancements |
+| [🎨 UI Guidelines](docs/standards/portfolio-ui-guidelines.md) | Design standards |
+| [📅 Sprint History](docs/sprint/) | Sprint implementation history |
 
-- Mobile
-- Tablet
-- Desktop
-
-using a mobile-first approach with Tailwind CSS.
-
----
-
-# 🗂 Sprint Roadmap
-
-| Sprint | Status |
-|---------|--------|
-| Sprint 1 – Foundation | ✅ |
-| Sprint 2 – Design System | ✅ |
-| Sprint 3 – Hero & Navigation | ✅ |
-| Sprint 4 – About Section | ✅ |
-| Sprint 5 – Experience | 🚧 |
-| Sprint 6 – Skills | ⏳ |
-| Sprint 7 – Projects | ⏳ |
-| Sprint 8 – Contact | ⏳ |
-| Sprint 9 – Refactoring & Polish | ⏳ |
-
----
+------------------------------------------------------------------------
 
 # 🚀 Getting Started
 
-Clone the repository:
+## Clone
 
-```bash
-git clone <repository-url>
+``` bash
+git clone https://github.com/mkondkari/portfolio-website.git
 ```
 
-Install dependencies:
+## Navigate
 
-```bash
+``` bash
+cd portfolio-website/frontend
+```
+
+## Install
+
+``` bash
 npm install
 ```
 
-Start the development server:
+## Run
 
-```bash
+``` bash
 npm run dev
 ```
 
-Build for production:
+The application will be available at:
 
-```bash
+    http://localhost:5173
+
+------------------------------------------------------------------------
+
+# 🔄 Development Workflow
+
+1.  Create a feature branch.
+2.  Implement changes.
+3.  Validate the application locally.
+4.  Commit using meaningful commit messages.
+5.  Open a Pull Request.
+6.  Review and merge into the main branch.
+
+For additional details, refer to `docs/git-workflow.md`.
+
+------------------------------------------------------------------------
+
+# ⚙️ Build & Deployment
+
+Create a production build:
+
+``` bash
 npm run build
 ```
 
----
+Preview the production build:
 
-# 🎯 Project Goals
+``` bash
+npm run preview
+```
 
-- Clean Architecture
-- Reusable Components
-- Responsive Design
-- Maintainable Code
-- Enterprise Development Practices
-- Performance Optimized
-- Recruiter-Friendly Portfolio
+The application is deployed using **Vercel**.
 
----
+------------------------------------------------------------------------
 
-# 📄 License
+# 🔜 What's Next
 
-This project is intended for personal portfolio and learning purposes.
+The project continues to evolve through iterative sprint-based development.
 
----
+Upcoming focus areas include:
 
-## 👨‍💻 Author
+- 🎨 UI and UX refinements
+- 📱 Mobile experience improvements
+- ⚡ Performance optimization
+- 🧪 Automated testing
+- 🔐 Authentication
+- 🌐 Backend integration
+- 📊 Project analytics
+- 🐳 Docker support
+- ☁️ Cloud-native deployment
 
-**Moshin Kondkari**
+For the complete roadmap, see `docs/project-roadmap.md`.
+
+See `docs/project-roadmap.md` for details.
+
+------------------------------------------------------------------------
+
+🤝 Contributing
+
+Contributions, ideas, and constructive feedback are welcome. Please
+follow the documented coding standards and Git workflow before
+submitting a Pull Request.
+
+------------------------------------------------------------------------
+
+# 💬 Feedback
+
+Have suggestions, found a bug, or want to share an idea?
+
+Your feedback is always welcome.
+
+📧 **Email:** kondkarimoshin@gmail.com
+
+Please include as much detail as possible so the issue or suggestion can be reviewed effectively.
+
+------------------------------------------------------------------------
+
+📄 License
+
+This project is licensed under the MIT License.
+
+------------------------------------------------------------------------
+
+# 👨‍💻 Author
+
+**Moshin Hilal Kondkari**
 
 Senior Automation Engineer
 
-15+ Years Experience
-
-Capital Markets | Enterprise Automation | Java | DevOps | Cloud
+Specializing in enterprise automation, quality engineering, scalable
+test architecture, and modern web development.

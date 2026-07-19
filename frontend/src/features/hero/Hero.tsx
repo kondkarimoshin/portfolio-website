@@ -4,7 +4,7 @@ import Section from "../../components/ui/Section";
 import Heading from "../../components/ui/Heading";
 import Text from "../../components/ui/Text";
 import Badge from "../../components/ui/Badge";
-import FadeIn from "../../components/ui/FadeIn";
+import FadeIn from "../../components/animations/FadeIn";
 import TechnologyStack from "./components/TechnologyStack";
 import ExpertiseChips from "./components/ExpertiseChips";
 import { FiDownload, FiMessageSquare } from "react-icons/fi";

@@ -5,7 +5,7 @@ import Text from "../../components/ui/Text";
 
 import SkillCategory from "./components/SkillCategory";
 import { SKILL_DATA } from "./constants/skills.data";
-import FadeIn from "../../components/ui/FadeIn";
+import FadeIn from "../../components/animations/FadeIn";
 
 const Skills = () => {
     return (

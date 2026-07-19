@@ -1,5 +1,5 @@
 import Text from "../../../components/ui/Text";
-import Reveal from "../../../components/ui/Reveal";
+import Reveal from "../../../components/animations/Reveal";
 import ContactItem from "./ContactItem";
 import { contactData } from "../constants/contact.data";
 import {

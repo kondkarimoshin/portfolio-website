@@ -4,7 +4,7 @@ import Section from "../../components/ui/Section";
 import Text from "../../components/ui/Text";
 import ExperienceCard from "./components/ExperienceCard";
 import CareerJourney from "./components/CareerJourney";
-import FadeIn from "../../components/ui/FadeIn";
+import FadeIn from "../../components/animations/FadeIn";
 import { EXPERIENCE_DATA } from "./constants/experience.data";
 
 const Experience = () => {
