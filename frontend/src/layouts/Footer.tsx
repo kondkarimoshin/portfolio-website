@@ -4,46 +4,46 @@ const Footer = () => {
     return (
         <footer className="border-t border-slate-800 bg-slate-950">
 
-            <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 py-8 text-center md:flex-row">
+            <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 py-5 text-center md:flex-row md:justify-between">
 
-                <div>
+                {/* Left */}
 
-                    <p className="font-medium text-slate-300">
+                <div className="md:w-1/3 md:text-left">
+                    <p className="text-sm text-slate-300">
                         © {new Date().getFullYear()} Moshin Kondkari
                     </p>
-
-                    <p className="mt-2 text-sm text-slate-400">
-                        Designed & Built by Moshin Kondkari using React, TypeScript & Tailwind CSS
-                    </p>
-
                 </div>
 
-                <div className="flex items-center gap-5">
+                {/* Center */}
+
+                <div className="md:w-1/2 md:text-center">
+                    <p className="text-[15px] font-semibold text-white">
+                        Enterprise Automation Architect & Career Mentorship Coach
+                    </p>
+                </div>
+
+                {/* Right */}
+
+                <div className="flex items-center gap-5 md:w-1/3 md:justify-end">
 
                     <a
                         href="https://www.linkedin.com/in/moshin-kondkari-79282258/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Visit my LinkedIn profile"
+                        aria-label="LinkedIn"
                         className="text-slate-400 transition hover:text-cyan-400"
                     >
-                        <FaLinkedin
-                            aria-hidden="true"
-                            className="h-6 w-6"
-                        />
+                        <FaLinkedin className="h-6 w-6" />
                     </a>
 
                     <a
                         href="https://github.com/kondkarimoshin"
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Visit my GitHub profile"
+                        aria-label="GitHub"
                         className="text-slate-400 transition hover:text-cyan-400"
                     >
-                        <FaGithub
-                            aria-hidden="true"
-                            className="h-6 w-6"
-                        />
+                        <FaGithub className="h-6 w-6" />
                     </a>
 
                 </div>
