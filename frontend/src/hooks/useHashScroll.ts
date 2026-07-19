@@ -1,21 +1,30 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const useHashScroll = () => {
-    useEffect(() => {
-    if (!window.location.hash) return;
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      return;
+    }
+
+    if (!location.hash) {
+      return;
+    }
 
     requestAnimationFrame(() => {
-        const id = window.location.hash.substring(1);
-        const element = document.getElementById(id);
+      const id = location.hash.substring(1);
+      const element = document.getElementById(id);
 
-        if (element) {
-            element.scrollIntoView({
-                behavior: "auto",
-                block: "start",
-            });
-        }
+      if (element) {
+        element.scrollIntoView({
+          behavior: "auto",
+          block: "start",
+        });
+      }
     });
-}, []);
+  }, [location.pathname, location.hash]);
 };
 
 export default useHashScroll;

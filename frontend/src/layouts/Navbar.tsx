@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 
 import Container from "../components/ui/Container";
 import { navigationItems } from "../constants/navigation.config";
-import useActiveSection from "../hooks/useActiveSection";
+import useActiveNavigation from "../hooks/useActiveNavigation";
 
 import logo from "../assets/branding/logo-dark.png";
 
@@ -15,7 +16,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAvatarOpen, setIsAvatarOpen] = useState(false);
 
-  const activeSection = useActiveSection();
+  const { isActive } = useActiveNavigation();
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -27,8 +28,8 @@ const Navbar = () => {
 
             {/* Logo */}
 
-            <a
-              href="#hero"
+            <Link
+              to="/#hero"
               aria-label="Go to Home"
               className="transition-opacity hover:opacity-90"
             >
@@ -37,36 +38,38 @@ const Navbar = () => {
                 alt="Moshin Kondkari Logo"
                 className="h-12 w-auto"
               />
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
 
             <div className="hidden items-center gap-6 lg:flex">
 
               <nav aria-label="Primary Navigation">
+
                 <ul className="flex items-center gap-10 text-sm font-medium">
 
                   {navigationItems.map((item) => (
 
                     <li key={item.href}>
 
-                      <a
-                        href={item.href}
+                      <Link
+                        to={item.href}
                         className={clsx(
                           "transition-colors duration-300 hover:text-cyan-400",
-                          activeSection === item.href.replace("#", "")
+                          isActive(item)
                             ? "font-semibold text-cyan-400"
                             : "text-slate-300"
                         )}
                       >
                         {item.label}
-                      </a>
+                      </Link>
 
                     </li>
 
                   ))}
 
                 </ul>
+
               </nav>
 
               <AvatarButton onClick={() => setIsAvatarOpen(true)} />
@@ -105,11 +108,16 @@ const Navbar = () => {
 
             <div className="flex h-20 items-center justify-between">
 
-              <img
-                src={logo}
-                alt="Moshin Kondkari Logo"
-                className="h-12 w-auto"
-              />
+              <Link
+                to="/#hero"
+                onClick={closeMenu}
+              >
+                <img
+                  src={logo}
+                  alt="Moshin Kondkari Logo"
+                  className="h-12 w-auto"
+                />
+              </Link>
 
               <button
                 onClick={closeMenu}
@@ -134,18 +142,18 @@ const Navbar = () => {
 
                   <li key={item.href}>
 
-                    <a
-                      href={item.href}
+                    <Link
+                      to={item.href}
                       onClick={closeMenu}
                       className={clsx(
                         "block rounded-lg py-2 text-2xl font-medium tracking-wide transition-all duration-300 hover:scale-105 hover:text-cyan-400",
-                        activeSection === item.href.replace("#", "")
+                        isActive(item)
                           ? "font-semibold text-cyan-400"
                           : "text-slate-100"
                       )}
                     >
                       {item.label}
-                    </a>
+                    </Link>
 
                   </li>
 
@@ -167,6 +175,7 @@ const Navbar = () => {
         isOpen={isAvatarOpen}
         onClose={() => setIsAvatarOpen(false)}
       />
+
     </>
   );
 };

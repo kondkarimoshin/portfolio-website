@@ -1,33 +1,41 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+
 import Navbar from "./layouts/Navbar";
-import Hero from "./features/hero/Hero";
-import About from "./features/about/About";
-import Experience from "./features/experience/Experience";
-import Skills from "./features/skills/Skills";
-import Contact from "./features/contact/Contact";
 import Footer from "./layouts/Footer";
 import BackToTop from "./components/ui/BackToTop";
+
+import HomePage from "./pages/HomePage";
+import ServicesPage from "./pages/ServicesPage";
+
 import useHashScroll from "./hooks/useHashScroll";
 
-function App() {
+function AppContent() {
   useHashScroll();
+
   return (
     <>
       <Navbar />
 
-      <main className=" bg-slate-950 pt-20">
-        <Hero />
-        <About />
-        <Experience />
-        <Skills />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/services" element={<ServicesPage />} />
+      </Routes>
+
       <BackToTop />
       <Footer />
       <Analytics />
       <SpeedInsights />
     </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
