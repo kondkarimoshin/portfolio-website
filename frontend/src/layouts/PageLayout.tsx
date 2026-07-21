@@ -6,21 +6,36 @@ interface PageLayoutProps {
     subtitle?: string;
     children: ReactNode;
     contentClassName?: string;
+    compact?: boolean;
 }
 
 const PageLayout = ({
     title,
     subtitle,
     children,
-    contentClassName = "py-16",
+    compact = false,
+    contentClassName,
 }: PageLayoutProps) => {
+    const heroPadding = compact
+        ? "py-4 md:py-6"
+        : "py-12 md:py-16";
+
+    const contentPadding =
+        contentClassName ??
+        (compact
+            ? "pt-0 pb-16"
+            : "py-16");
+
     return (
         <main className="min-h-screen bg-slate-950 pt-24">
-            {/* Hero Section */}
+
             {(title || subtitle) && (
-                <section className="border-b border-slate-800 bg-slate-950">
-                    <Container className="py-12 md:py-16">
-                        <div className="max-w-4xl">
+                <section className="bg-slate-950">
+
+                    <Container className={heroPadding}>
+
+                        <div className="max-w-6xl">
+
                             {title && (
                                 <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
                                     {title}
@@ -28,21 +43,26 @@ const PageLayout = ({
                             )}
 
                             {subtitle && (
-                                <p className="mt-6 text-lg leading-8 text-slate-400">
+                                <p className="mt-3 max-w-5xl text-base leading-8 text-slate-400 md:text-lg">
                                     {subtitle}
                                 </p>
                             )}
+
                         </div>
+
                     </Container>
+
                 </section>
             )}
 
-            {/* Page Content */}
             <section>
-                <Container className={contentClassName}>
+
+                <Container className={contentPadding}>
                     {children}
                 </Container>
+
             </section>
+
         </main>
     );
 };

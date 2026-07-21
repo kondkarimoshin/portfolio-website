@@ -13,14 +13,13 @@ import {
     FaCodeBranch
 } from "react-icons/fa6";
 
-import { HiUserGroup } from "react-icons/hi2";
-
 import {
     HiCommandLine,
     HiDevicePhoneMobile,
     HiShieldCheck,
     HiServerStack,
     HiArchiveBox,
+    HiUserGroup,
 } from "react-icons/hi2";
 
 import { BiLogoVisualStudio } from "react-icons/bi";
