@@ -6,9 +6,9 @@ import ConsultationForm from "./components/ConsultationForm";
 
 const ConsultationPage = () => {
   return (
-    <main className="flex flex-1 items-start bg-slate-950 pt-24">
+    <section className="bg-slate-950">
 
-      <Container className="max-w-5xl py-8">
+      <Container className="max-w-5xl pt-8 pb-12">
 
         <div className="mb-6">
 
@@ -28,7 +28,7 @@ const ConsultationPage = () => {
 
       </Container>
 
-    </main>
+    </section>
   );
 };
 
