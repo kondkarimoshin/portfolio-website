@@ -7,13 +7,13 @@ const highlights = [
   "1:1 Career Mentorship",
   "US Patent Contributor",
   "Fortune 500 Banking Domain",
-  "Enterprise Framework Architect",  
+  "Enterprise Framework Architect",
   "Practical Industry Learning",
 ];
 
 const ServicesHero = () => {
   return (
-    <section className="grid gap-12 pt-8 pb-6 lg:grid-cols-[1.2fr_0.8fr]">
+    <section className="grid gap-8 pt-4 pb-4 lg:gap-8 lg:grid-cols-[1.3fr_0.7fr]">
 
       {/* Left */}
 
@@ -23,14 +23,17 @@ const ServicesHero = () => {
           Professional Training & Career Development
         </Badge>
 
-        <Heading className="mt-6 max-w-3xl">
+        <Heading
+          level={1}
+          className="mt-4 max-w-2xl text-5xl lg:text-6xl"
+        >
           Accelerate Your Career with
           <span className="block text-cyan-400">
             Industry-Focused Programs
           </span>
         </Heading>
 
-        <Text className="mt-6 max-w-2xl text-lg leading-8">
+        <Text className="mt-3 max-w-2xl text-base leading-7">
           Practical training, interview preparation, enterprise
           automation and career mentoring designed to help
           students and professionals build real-world skills
@@ -41,20 +44,20 @@ const ServicesHero = () => {
       {/* Right */}
 
       <div
-  className="
+        className="
     group
     rounded-3xl
     border
     border-slate-800
     bg-slate-900/50
-    p-8
+    p-6
     transition-all
     duration-300
     hover:-translate-y-1
     hover:border-cyan-400
     hover:bg-slate-900/70
   "
->
+      >
 
         <h3 className="text-2xl font-semibold text-white">
           Why Choose Me
@@ -64,7 +67,7 @@ const ServicesHero = () => {
           Learn directly from real enterprise experience.
         </p>
 
-        <div className="mt-8 space-y-5">
+        <div className="mt-6 space-y-4">
 
           {highlights.map((item) => (
             <div

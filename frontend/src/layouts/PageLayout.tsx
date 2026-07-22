@@ -17,17 +17,17 @@ const PageLayout = ({
     contentClassName,
 }: PageLayoutProps) => {
     const heroPadding = compact
-        ? "py-4 md:py-6"
-        : "py-12 md:py-16";
+        ? "py-3 md:py-4"
+        : "py-8 md:py-10";
 
     const contentPadding =
         contentClassName ??
         (compact
-            ? "pt-0 pb-16"
-            : "py-16");
+            ? "pt-0 pb-12"
+            : "py-12");
 
     return (
-        <main className="min-h-screen bg-slate-950 pt-24">
+        <main className="min-h-screen bg-slate-950 pt-6">
 
             {(title || subtitle) && (
                 <section className="bg-slate-950">
