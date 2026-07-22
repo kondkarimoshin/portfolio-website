@@ -25,7 +25,7 @@ function AppContent() {
 
       <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 pt-20">
 
         <Suspense
           fallback={

@@ -49,6 +49,8 @@ export const contactData: ContactItem[] = [
         href: "https://github.com/kondkarimoshin",
         icon: FaGithub,
         external: true,
+        copyable: true,
+        copyValue: "https://github.com/kondkarimoshin",
     },
     {
         title: "Location",

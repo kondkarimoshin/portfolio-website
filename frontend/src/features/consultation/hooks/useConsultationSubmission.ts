@@ -6,118 +6,149 @@ import { generateConsultationId } from "../utils/consultationId";
 import { mapToConsultationRequest } from "../utils/consultationMapper";
 import { validateConsultation } from "../utils/consultationValidation";
 
-import type { ConsultationCategory,ConsultationFormData } from "../types/consultation.types";
+import type {
+  ConsultationFormData,
+  ConsultationRequest,
+} from "../types/consultation.types";
 
 import type {
-    SubmissionResult,
-    SubmissionState,
+  SubmissionResult,
+  SubmissionState,
 } from "../types/submission.types";
 
 const useConsultationSubmission = () => {
-    const [submissionState, setSubmissionState] =
-        useState<SubmissionState>("editing");
+  const [
+    submissionState,
+    setSubmissionState,
+  ] = useState<SubmissionState>(
+    "editing"
+  );
 
-    const [consultationId, setConsultationId] =
-        useState("");
+  const [
+    consultationId,
+    setConsultationId,
+  ] = useState("");
 
-    const [error, setError] = useState("");
+  const [error, setError] =
+    useState("");
 
-    const submit = async (
-        formData: ConsultationFormData
-    ): Promise<SubmissionResult> => {
-        setSubmissionState("submitting");
-        setError("");
+  const submit = async (
+    formData: ConsultationFormData,
+    existingConsultation?: ConsultationRequest | null
+  ): Promise<SubmissionResult> => {
+    setSubmissionState("submitting");
+    setError("");
 
-        // --------------------------------------------------
-        // Validation
-        // --------------------------------------------------
+    const validation =
+      validateConsultation(formData);
 
-        const validation =
-            validateConsultation(formData);
+    if (!validation.valid) {
+      setSubmissionState("error");
+      setError(
+        validation.error ??
+          "Validation failed."
+      );
 
-        if (!validation.valid) {
-            setSubmissionState("error");
-            setError(validation.error ?? "Validation failed.");
+      return {
+        success: false,
+        error: validation.error,
+      };
+    }
 
-            return {
-                success: false,
-                error: validation.error,
-            };
-        }
+    if (existingConsultation) {
+      const updatedRequest: ConsultationRequest = {
+        ...existingConsultation,
 
-        // --------------------------------------------------
-        // Duplicate Check
-        // --------------------------------------------------
+        firstName:
+          formData.firstName,
+        lastName:
+          formData.lastName,
+        phone: formData.phone,
 
-        const existing =
-            consultationService.findByCategory(
-                formData.email,
-                formData.category as ConsultationCategory
-            );
+        consultationServices:
+          formData.consultationServices,
 
-        if (existing) {
-            const message =
-                "You already have an active consultation for this category.";
+        additionalDetails:
+          formData.additionalDetails,
 
-            setSubmissionState("error");
-            setError(message);
+        updatedAt:
+          new Date().toISOString(),
+      };
 
-            return {
-                success: false,
-                error: message,
-            };
-        }
+      consultationService.update(
+        updatedRequest
+      );
 
-        // --------------------------------------------------
-        // Generate Consultation ID
-        // --------------------------------------------------
+      setConsultationId(
+        updatedRequest.id
+      );
 
-        const id = generateConsultationId();
+      setSubmissionState("success");
 
-        // --------------------------------------------------
-        // Create Request
-        // --------------------------------------------------
+      return {
+        success: true,
+        consultationId:
+          updatedRequest.id,
+      };
+    }
 
-        const request =
-            mapToConsultationRequest(
-                id,
-                formData
-            );
+    for (const service of formData.consultationServices) {
+      const existing =
+        consultationService.findByCategory(
+          formData.email,
+          service.category
+        );
 
-        // --------------------------------------------------
-        // Save
-        // --------------------------------------------------
+      if (existing) {
+        const message = `You already have an active consultation for "${service.category}".`;
 
-        consultationService.create(request);
-
-        // --------------------------------------------------
-        // Success
-        // --------------------------------------------------
-
-        setConsultationId(id);
-        setSubmissionState("success");
+        setSubmissionState("error");
+        setError(message);
 
         return {
-            success: true,
-            consultationId: id,
+          success: false,
+          error: message,
         };
-    };
+      }
+    }
 
-    const reset = () => {
-        setSubmissionState("editing");
-        setConsultationId("");
-        setError("");
-    };
+    const id =
+      generateConsultationId();
+
+    const request =
+      mapToConsultationRequest(
+        id,
+        formData
+      );
+
+    consultationService.create(
+      request
+    );
+
+    setConsultationId(id);
+    setSubmissionState("success");
 
     return {
-        submit,
-
-        submissionState,
-        consultationId,
-        error,
-
-        reset,
+      success: true,
+      consultationId: id,
     };
+  };
+
+  const reset = () => {
+    setSubmissionState("editing");
+    setConsultationId("");
+    setError("");
+  };
+
+  return {
+    submit,
+
+    submissionState,
+    consultationId,
+    error,
+
+    reset,
+  };
 };
 
 export default useConsultationSubmission;

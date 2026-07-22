@@ -1,5 +1,4 @@
 import type {
-  ConsultationCategory,
   ConsultationFormData,
   ConsultationRequest,
 } from "../types/consultation.types";
@@ -13,17 +12,19 @@ export const mapToConsultationRequest = (
   return {
     id,
 
-    email: formData.email.trim(),
+    email: formData.email.trim().toLowerCase(),
 
     firstName: formData.firstName.trim(),
     lastName: formData.lastName.trim(),
     phone: formData.phone.trim(),
 
-    category: formData.category as ConsultationCategory,
+    consultationServices:
+      formData.consultationServices,
 
-    topics: formData.topics,
+    additionalDetails:
+      formData.additionalDetails.trim(),
 
-    additionalDetails: formData.additionalDetails.trim(),
+    status: "pending",
 
     createdAt: now,
     updatedAt: now,

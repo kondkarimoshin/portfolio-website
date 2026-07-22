@@ -6,7 +6,7 @@ import Text from "../../components/ui/Text";
 import Badge from "../../components/ui/Badge";
 import FadeIn from "../../components/animations/FadeIn";
 import TechnologyStack from "./components/TechnologyStack";
-import ExpertiseChips from "./components/ExpertiseChips";
+import HeroHighlights from "./components/HeroHighlights";
 import { FiDownload, FiMessageSquare } from "react-icons/fi";
 
 const Hero = () => {
@@ -16,59 +16,68 @@ const Hero = () => {
             variant="hero"
         >
             <Container>
-
                 <FadeIn>
+                    <div className="mx-auto flex min-h-[60vh] max-w-6xl flex-col justify-center">
 
-                    <div className="mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-center">
-
-                        <Badge className="mb-4 w-fit self-center lg:self-start text-cyan-400">
+                        <Badge className="mb-4 w-fit self-center text-cyan-400 lg:self-start">
                             16+ Years of Automation Excellence
                         </Badge>
 
-                        <Heading className="text-center lg:text-left">
-                            Moshin Kondkari
-                        </Heading>
+                        <div className="grid items-start gap-20 lg:grid-cols-[minmax(0,1fr)_320px]">
 
-                        <h2 className="mt-4 text-center text-xl font-semibold text-slate-300 lg:text-left lg:text-3xl">
-                            Senior Automation Engineer
-                        </h2>
+                            {/* Left */}
 
-                        <ExpertiseChips />
+                            <div>
 
-                        <Text className="mx-auto mt-8 max-w-3xl text-center lg:mx-0 lg:text-left">
-                            Building scalable automation frameworks and quality
-                            engineering solutions for mission-critical financial
-                            platforms using Java, Microservices, Cloud technologies,
-                            and modern DevOps practices.
-                        </Text>
+                                <Heading className="text-center lg:text-left">
+                                    Moshin Kondkari
+                                </Heading>
 
-                        <TechnologyStack />
+                                <h2 className="mt-4 text-center text-xl font-semibold text-slate-300 lg:text-left lg:text-2xl">
+                                    Senior Automation Engineer
+                                </h2>
 
-                        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+                                <Text className="mx-auto mt-6 max-w-1xl text-center lg:mx-0 lg:text-justify">
+                                    With over 16 years of experience in software quality engineering, I specialize in designing scalable automation solutions for complex enterprise applications. My career has been built around delivering reliable, high-quality platforms in the Banking and Capital Markets domain, where performance, stability, and precision are critical.
 
-                            <a
-                                href="/moshin-kondkari-resume.pdf"
-                                download
-                            >
-                                <Button>
-                                    <FiDownload size={18} />
-                                    <span>Download Resume</span>
-                                </Button>
-                            </a>
+                                    Beyond writing automation, I enjoy solving engineering problems, mentoring teams, improving development workflows, and driving quality throughout the software delivery lifecycle. I believe great automation is not just about increasing test coverage—it is about enabling teams to deliver software faster, with greater confidence.
+                                </Text>
 
-                            <a href="#contact">
-                                <Button variant="outline">
-                                    <FiMessageSquare size={18} />
-                                    <span>Let's Connect</span>
-                                </Button>
-                            </a>
+                                <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:items-start lg:justify-start">
+
+                                    <a
+                                        href="/moshin-kondkari-resume.pdf"
+                                        download
+                                    >
+                                        <Button>
+                                            <FiDownload size={18} />
+                                            <span>Download Resume</span>
+                                        </Button>
+                                    </a>
+
+                                    <a href="#contact">
+                                        <Button variant="outline">
+                                            <FiMessageSquare size={18} />
+                                            <span>Let's Connect</span>
+                                        </Button>
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                            {/* Right */}
+
+                            <div className="self-start lg:-mt-12">
+                                <HeroHighlights />
+                            </div>
 
                         </div>
 
+                        <TechnologyStack />
+
                     </div>
-
                 </FadeIn>
-
             </Container>
         </Section>
     );

@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from "framer-motion";
+
 import EmailStep from "./workflow/EmailStep";
 import PersonalInformationStep from "./workflow/PersonalInformationStep";
 import CategoryStep from "./workflow/CategoryStep";
@@ -5,13 +7,24 @@ import TopicStep from "./workflow/TopicStep";
 import AdditionalDetailsStep from "./workflow/AdditionalDetailsStep";
 import ReviewStep from "./workflow/ReviewStep";
 
-import type { ConsultationFormData } from "../types/consultation.types";
+import { validateEmail } from "../utils/consultationValidation";
+
+import type {
+  ConsultationFormData,
+  ConsultationRequest,
+  PersonalInformationErrors,
+} from "../types/consultation.types";
 import type { SubmissionState } from "../types/submission.types";
 
 interface ConsultationStepSwitcherProps {
   currentStep: number;
 
   formData: ConsultationFormData;
+
+  personalInformationErrors: PersonalInformationErrors;
+
+  existingConsultation: ConsultationRequest | null;
+  isEditing: boolean;
 
   updateFormData: (
     values: Partial<ConsultationFormData>
@@ -25,89 +38,153 @@ interface ConsultationStepSwitcherProps {
   onSubmit(): Promise<void>;
 }
 
+const stepAnimation = {
+  initial: {
+    opacity: 0,
+    x: 24,
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+  },
+  exit: {
+    opacity: 0,
+    x: -24,
+  },
+};
+
 const ConsultationStepSwitcher = ({
   currentStep,
   formData,
+  personalInformationErrors,
+  existingConsultation,
+  isEditing,
   updateFormData,
   nextStep,
   previousStep,
   submissionState,
   onSubmit,
 }: ConsultationStepSwitcherProps) => {
+  const emailValidation = validateEmail(formData.email);
+
+  let content: React.ReactNode = null;
+
   switch (currentStep) {
     case 1:
-      return (
+      content = (
         <EmailStep
           email={formData.email}
+          error={emailValidation.error}
+          canContinue={emailValidation.valid}
+          existingConsultation={existingConsultation}
           onEmailChange={(email) =>
             updateFormData({ email })
           }
           onContinue={nextStep}
         />
       );
+      break;
 
     case 2:
-      return (
+      content = (
         <PersonalInformationStep
           firstName={formData.firstName}
           lastName={formData.lastName}
           phone={formData.phone}
+          errors={personalInformationErrors}
           onChange={updateFormData}
           onPrevious={previousStep}
           onContinue={nextStep}
         />
       );
+      break;
 
     case 3:
-      return (
+      content = (
         <CategoryStep
-          category={formData.category}
-          onChange={(category) =>
-            updateFormData({ category })
+          consultationServices={
+            formData.consultationServices
+          }
+          onChange={(consultationServices) =>
+            updateFormData({
+              consultationServices,
+            })
           }
           onPrevious={previousStep}
           onContinue={nextStep}
         />
       );
+      break;
 
     case 4:
-      return (
+      content = (
         <TopicStep
-          category={formData.category}
-          topics={formData.topics}
-          onChange={(topics) =>
-            updateFormData({ topics })
+          consultationServices={
+            formData.consultationServices
+          }
+          onChange={(consultationServices) =>
+            updateFormData({
+              consultationServices,
+            })
           }
           onPrevious={previousStep}
           onContinue={nextStep}
         />
       );
+      break;
 
     case 5:
-      return (
+      content = (
         <AdditionalDetailsStep
-          additionalDetails={formData.additionalDetails}
+          additionalDetails={
+            formData.additionalDetails
+          }
           onChange={(additionalDetails) =>
-            updateFormData({ additionalDetails })
+            updateFormData({
+              additionalDetails,
+            })
           }
           onPrevious={previousStep}
           onContinue={nextStep}
         />
       );
+      break;
 
     case 6:
-      return (
+      content = (
         <ReviewStep
           formData={formData}
-          isSubmitting={submissionState === "submitting"}
+          isEditing={isEditing}
+          isSubmitting={
+            submissionState === "submitting"
+          }
           onPrevious={previousStep}
           onSubmit={onSubmit}
         />
       );
+      break;
 
     default:
-      return null;
+      content = null;
   }
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={currentStep}
+        variants={stepAnimation}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        transition={{
+          duration: 0.18,
+          ease: "easeOut",
+        }}
+      >
+        {content}
+      </motion.div>
+    </AnimatePresence>
+  );
 };
 
 export default ConsultationStepSwitcher;

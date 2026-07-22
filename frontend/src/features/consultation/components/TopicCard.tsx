@@ -26,23 +26,8 @@ const TopicCard = ({
         }
       `}
     >
-      <div className="flex items-start gap-4">
-
-        <div
-          className={`
-            mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs font-bold
-            ${
-              selected
-                ? "border-cyan-500 bg-cyan-500 text-slate-950"
-                : "border-slate-600"
-            }
-          `}
-        >
-          {selected ? "✓" : ""}
-        </div>
-
+      <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
-
           <Text className="text-lg font-semibold">
             {topic.title}
           </Text>
@@ -51,8 +36,39 @@ const TopicCard = ({
             {topic.description}
           </Text>
 
+          <Text className="mt-4 text-xs uppercase tracking-wide text-slate-500">
+            Click to{" "}
+            {selected
+              ? "remove"
+              : "select"}
+          </Text>
         </div>
 
+        <div
+          className={`
+            flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 transition-all
+            ${
+              selected
+                ? "border-cyan-400 bg-cyan-500 text-slate-950"
+                : "border-slate-500 bg-transparent"
+            }
+          `}
+        >
+          {selected && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="h-4 w-4"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M16.704 5.29a1 1 0 010 1.42l-7.2 7.2a1 1 0 01-1.415 0l-3-3a1 1 0 111.414-1.414l2.293 2.293 6.493-6.493a1 1 0 011.415 0z"
+              />
+            </svg>
+          )}
+        </div>
       </div>
     </button>
   );

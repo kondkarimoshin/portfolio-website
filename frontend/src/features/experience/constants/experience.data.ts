@@ -19,42 +19,41 @@ export const EXPERIENCE_DATA: Experience = {
     ],
 
     summary:
-        "Leading automation initiatives for enterprise-grade Capital Markets and Equities Trading platforms, designing scalable automation frameworks, backend testing solutions, and cloud-native test infrastructure supporting global business operations across APAC and EMEA regions.",
-
+        "Leading enterprise automation strategy for mission-critical Capital Markets and Equities Trading platforms supporting global business operations across APAC and EMEA. Responsible for designing scalable automation architectures, backend validation frameworks, cloud-native testing infrastructure, and engineering best practices that enable faster, more reliable software delivery across multiple high-impact trading applications.",
     responsibilities: [
-        "Design and maintain enterprise automation frameworks using Java, Selenium and Cucumber.",
-        "Develop backend automation solutions for FIX Protocol, Smart Order Routing and Order Management workflows.",
-        "Build cloud-native automation solutions using Docker, OpenShift and CI/CD pipelines.",
-        "Lead end-to-end automation strategy for mission-critical trading applications across APAC and EMEA regions.",
-        "Collaborate with global development, QA, business analysts and product stakeholders to deliver high-quality releases.",
-        "Mentor automation engineers through code reviews, technical guidance and best engineering practices.",
-        "Drive continuous improvement by identifying automation opportunities and reducing manual testing efforts.",
-        "Design scalable, reusable and maintainable automation frameworks following enterprise engineering standards.",
-        "Participate in production issue analysis, root cause investigations and release validation activities.",
-        "Contribute to technical design discussions, sprint planning and quality strategy across multiple agile teams."
+        "Architect and maintain scalable enterprise automation frameworks using Java, Selenium, Cucumber and backend automation technologies.",
+        "Design automation solutions for FIX Protocol, Smart Order Routing and Order Management workflows supporting global trading platforms.",
+        "Build cloud-native automation infrastructure using Docker, OpenShift and modern CI/CD pipelines.",
+        "Drive automation strategy across mission-critical Capital Markets applications operating in APAC and EMEA regions.",
+        "Partner with developers, architects, business analysts and product stakeholders to ensure high-quality software delivery.",
+        "Mentor automation engineers through technical guidance, code reviews and engineering best practices.",
+        "Continuously improve automation coverage, execution efficiency and release confidence by identifying optimization opportunities.",
+        "Design reusable, maintainable and enterprise-grade automation frameworks aligned with long-term engineering goals.",
+        "Support production issue investigations through root cause analysis and release validation.",
+        "Contribute to technical architecture discussions, sprint planning, engineering standards and quality strategy."
     ],
 
     businessImpacts: [
         {
-            title: "Regression Optimization",
+            title: "Automation Architecture",
             description:
-                "Reduced regression execution time from nearly 2 weeks to just 45 minutes by containerizing the execution environment using Docker and OpenShift."
+                "Designed scalable enterprise automation frameworks supporting UI, API, backend and integration testing across multiple business-critical applications."
         },
         {
-            title: "Enterprise Automation Framework",
+            title: "Trading Platform Quality",
             description:
-                "Designed scalable and reusable automation frameworks supporting UI, backend, API and integration testing across multiple enterprise applications."
-        },
-        {
-            title: "Trading Platform Automation",
-            description:
-                "Automated FIX Protocol, Smart Order Routing and Order Management workflows, improving reliability and reducing manual validation effort."
+                "Automated FIX messaging, Smart Order Routing and Order Management workflows, significantly improving release confidence while reducing manual validation effort."
         },
         {
             title: "Technical Leadership",
             description:
-                "Led automation initiatives, mentored engineers, conducted code reviews and collaborated with globally distributed teams across APAC and EMEA."
-        }
+                "Led automation initiatives, mentored engineering teams, established coding standards and collaborated with globally distributed teams across APAC and EMEA."
+        },
+        {
+            title: "Patent Approved Innovation",
+            description:
+                "Contributed to the design and development of a US patent-approved automation solution focused on improving enterprise resilience and engineering efficiency."
+        },
     ],
 
     projects: [
@@ -84,14 +83,15 @@ export const EXPERIENCE_DATA: Experience = {
         },
         {
             name: "Chaos Engineering Framework",
-            category: "Enterprise Resilience Testing Framework",
+            category: "Enterprise Resilience Platform",
             overview:
-                "Designed and implemented an enterprise chaos engineering framework to validate resilience of distributed microservice-based trading applications.",
+                "Designed and developed an enterprise chaos engineering platform to validate the resilience, stability and fault tolerance of distributed microservice-based trading applications.",
+
             keyContributions: [
-                "Designed reusable chaos engineering rules for enterprise applications.",
-                "Validated system resiliency under controlled failure scenarios.",
-                "Improved confidence before production deployments.",
-                "Reduced manual effort required for resilience validation."
+                "Designed reusable chaos engineering modules for enterprise applications.",
+                "Simulated controlled failure scenarios to validate system resilience.",
+                "Improved deployment confidence before production releases.",
+                "Reduced manual effort required for resilience and recovery validation."
             ]
         },
         {
@@ -134,56 +134,53 @@ export const EXPERIENCE_DATA: Experience = {
 
 export const previousExperience = [
     {
-        company: "Sungard (Now FIS)",
+        stage: "Automation Engineering",
+
+        company: "SunGard (Now FIS)",
+
         role: "Senior QA Engineer",
+
         duration: "Jul 2013 – Nov 2016",
+
         location: "Pune, Maharashtra • India",
-        summary:
-            "Designed and maintained automation frameworks for enterprise financial applications using keyword-driven and data-driven approaches. Collaborated closely with development and QA teams to improve regression efficiency, strengthen test coverage, and support reliable software releases.",
-        technologies: [
-            "Java",
-            "UFT (QTP)",
-            "SQL",
-            "Functional Testing",
-            "Regression Testing",
-            "GMI",
-            "VBScript",
-            "Defect Management",
-            "Test Planning",
+
+        highlights: [
+            "Designed and maintained enterprise automation frameworks for mission-critical financial applications.",
+            "Strengthened automation expertise by improving regression efficiency and expanding automation coverage.",
         ],
     },
+
     {
+        stage: "Enterprise Banking",
+
         company: "Barclays Technology Centre India",
+
         role: "Test Analyst",
+
         duration: "Jan 2012 – Jul 2013",
+
         location: "Pune, Maharashtra • India",
-        summary:
-            "Contributed to enterprise Credit Card and Collections applications through functional, database, and integration testing. Worked with cross-functional teams to ensure application quality, validate business requirements, and support stable production releases.",
-        technologies: [
-            "Functional Testing",
-            "Regression Testing",
-            "Database Testing",
-            "Test Planning",
-            "Credit Cards",
-            "SQL",
-            "QA",
-            "Defect Management",
+
+        highlights: [
+            "Delivered functional, database and integration testing for Credit Card and Collections applications.",
+            "Expanded expertise in enterprise banking systems while collaborating with cross-functional teams.",
         ],
     },
+
     {
+        stage: "Software Testing Foundation",
+
         company: "TCS e-Serve",
+
         role: "Junior Software Tester",
+
         duration: "May 2010 – Jan 2012",
+
         location: "Mumbai, Maharashtra • India",
-        summary:
-            "Began my software testing career by supporting Credit Card applications through regression testing, defect management, and test planning. Built a strong foundation in software quality assurance, release validation, and structured testing processes.",
-        technologies: [
-            "Regression Testing",
-            "Functional Testing",
-            "QA",
-            "Defect Management",
-            "Test Planning",
-            "Credit Cards",
+
+        highlights: [
+            "Started my professional journey supporting enterprise banking applications through software testing.",
+            "Built strong fundamentals in quality assurance, defect management and release validation.",
         ],
     },
 ];

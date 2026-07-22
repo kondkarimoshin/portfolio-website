@@ -1,10 +1,10 @@
 import {
-    FaRocket,
-    FaChartLine,
-    FaSitemap,
-    FaUsers,
-    FaLightbulb,
-    FaRobot,
+    FaHandshake,
+    FaBookOpen,
+    FaCompass,
+    FaPeopleArrows,
+    FaShieldAlt,
+    FaBolt,
 } from "react-icons/fa";
 
 import type { IconType } from "react-icons";
@@ -17,39 +17,39 @@ export type AboutHighlight = {
 
 export const ABOUT_HIGHLIGHT: AboutHighlight[] = [
     {
-        title: "16+ Years Experience",
+        title: "Quality First",
         description:
-            "Delivering enterprise automation solutions for global banking and financial platforms.",
-        icon: FaRocket,
+            "Deliver solutions that are reliable, maintainable, and built for long-term success.",
+        icon: FaShieldAlt,
     },
     {
-        title: "Capital Markets",
+        title: "Ownership",
         description:
-            "Deep expertise in Equities Trading, FIX Protocol, Smart Order Routing and OMS.",
-        icon: FaChartLine,
+            "Take responsibility from design to delivery while always focusing on business outcomes.",
+        icon: FaCompass,
     },
     {
-        title: "Automation Architecture",
+        title: "Continuous Learning",
         description:
-            "Designing scalable, reusable and maintainable automation frameworks.",
-        icon: FaSitemap,
+            "Stay curious by embracing new technologies, AI, cloud platforms, and engineering practices.",
+        icon: FaBookOpen,
     },
     {
-        title: "Technical Leadership",
+        title: "Collaboration",
         description:
-            "Mentoring engineers, code reviews, engineering standards and automation strategy.",
-        icon: FaUsers,
+            "Great software is built through teamwork, knowledge sharing, and mutual respect.",
+        icon: FaPeopleArrows,
     },
     {
         title: "Innovation",
         description:
-            "Contributed to automation for patent-approved engineering solutions.",
-        icon: FaLightbulb,
+            "Challenge traditional approaches and continuously improve engineering processes.",
+        icon: FaBolt,
     },
     {
-        title: "AI Assisted Engineering",
+        title: "Integrity",
         description:
-            "Leveraging GitHub Copilot, Devin AI and modern AI workflows.",
-        icon: FaRobot,
+            "Build trust through transparency, accountability, and delivering on commitments.",
+        icon: FaHandshake,
     },
 ];

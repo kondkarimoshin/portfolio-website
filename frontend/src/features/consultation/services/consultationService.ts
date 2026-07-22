@@ -8,50 +8,61 @@ import type {
 } from "../types/consultation.types";
 
 class ConsultationService {
-  // --------------------------------------------------------------------------
-  // Consultation Requests
-  // --------------------------------------------------------------------------
-
-  /**
-   * Returns all consultation requests.
-   */
   getAll(): ConsultationRequest[] {
     return mockConsultations;
   }
 
-  /**
-   * Returns all consultation requests for a given email.
-   */
   findByEmail(email: string): ConsultationRequest[] {
+    const normalizedEmail = email.trim().toLowerCase();
+
     return mockConsultations.filter(
-      (consultation) => consultation.email === email
+      (consultation) =>
+        consultation.email.trim().toLowerCase() === normalizedEmail
     );
   }
 
   /**
-   * Finds a consultation request by email and category.
+   * Checks whether an active consultation already contains
+   * the selected category.
    */
   findByCategory(
     email: string,
     category: ConsultationCategory
   ): ConsultationRequest | undefined {
+    const normalizedEmail = email.trim().toLowerCase();
+
     return mockConsultations.find(
       (consultation) =>
-        consultation.email === email &&
-        consultation.category === category
+        consultation.email.trim().toLowerCase() === normalizedEmail &&
+        consultation.consultationServices.some(
+          (service) => service.category === category
+        )
     );
   }
 
-  /**
-   * Creates a new consultation request.
-   */
+  findActiveByEmail(
+    email: string
+  ): ConsultationRequest | undefined {
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const activeStatuses = [
+      "pending",
+      "in-review",
+      "scheduled",
+      "in-progress",
+    ];
+
+    return mockConsultations.find(
+      (consultation) =>
+        consultation.email.trim().toLowerCase() === normalizedEmail &&
+        activeStatuses.includes(consultation.status)
+    );
+  }
+
   create(request: ConsultationRequest): void {
     mockConsultations.push(request);
   }
 
-  /**
-   * Updates an existing consultation request.
-   */
   update(request: ConsultationRequest): void {
     const index = mockConsultations.findIndex(
       (consultation) => consultation.id === request.id
@@ -62,20 +73,10 @@ class ConsultationService {
     }
   }
 
-  // --------------------------------------------------------------------------
-  // Consultation Topics
-  // --------------------------------------------------------------------------
-
-  /**
-   * Returns all consultation topics.
-   */
   getTopics(): ConsultationTopic[] {
     return consultationTopics;
   }
 
-  /**
-   * Returns all topics for a specific category.
-   */
   getTopicsByCategory(
     category: ConsultationCategory
   ): ConsultationTopic[] {
@@ -84,9 +85,6 @@ class ConsultationService {
     );
   }
 
-  /**
-   * Returns a topic by its id.
-   */
   getTopicById(
     topicId: string
   ): ConsultationTopic | undefined {

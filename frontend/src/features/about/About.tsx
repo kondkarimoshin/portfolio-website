@@ -9,6 +9,7 @@ const About = () => {
     return (
         <Section
             id="about"
+            variant="default"
             aria-labelledby="about-heading"
         >
             <Container>
@@ -17,13 +18,17 @@ const About = () => {
                     level={2}
                     className="text-center"
                 >
-                    About Me
+                    Beyond the Resume
                 </Heading>
 
-                <div className="mt-12 grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-center">
+                <div className="mt-8 grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:items-start">
+
                     <AboutStory />
 
-                    <AboutHighlights />
+                    <div className="lg:sticky lg:top-28 lg:self-start">
+                        <AboutHighlights />
+                    </div>
+
                 </div>
             </Container>
         </Section>

@@ -6,6 +6,14 @@ export type ConsultationCategory =
 export type SelectedConsultationCategory =
   ConsultationCategory | "";
 
+export type ConsultationStatus =
+  | "pending"
+  | "in-review"
+  | "scheduled"
+  | "in-progress"
+  | "completed"
+  | "cancelled";
+
 export interface ConsultationTopic {
   id: string;
   category: ConsultationCategory;
@@ -13,18 +21,25 @@ export interface ConsultationTopic {
   description: string;
 }
 
+export interface ConsultationServiceSelection {
+  category: ConsultationCategory;
+  topics: string[];
+}
+
 export interface ConsultationRequest {
   id: string;
+
   email: string;
 
   firstName: string;
   lastName: string;
   phone: string;
 
-  category: ConsultationCategory;
-  topics: string[];
+  consultationServices: ConsultationServiceSelection[];
 
   additionalDetails?: string;
+
+  status: ConsultationStatus;
 
   createdAt: string;
   updatedAt: string;
@@ -37,10 +52,18 @@ export interface ConsultationFormData {
   lastName: string;
   phone: string;
 
-  category: SelectedConsultationCategory;
-
-  topics: string[];
+  consultationServices: ConsultationServiceSelection[];
 
   additionalDetails: string;
 }
 
+export interface ConsultationSession {
+  consultation: ConsultationRequest | null;
+  isEditing: boolean;
+}
+
+export interface PersonalInformationErrors {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+}
