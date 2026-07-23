@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: backend
+
+  profiles:
+    active: debug
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    enabled: true
+
+server:
+  port: 8080

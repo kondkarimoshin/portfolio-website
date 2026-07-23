@@ -1,4 +1,8 @@
 package com.mkondkari.portfolio.common.exception;
 
-public class BusinessException {
+public abstract class BusinessException extends RuntimeException {
+
+    protected BusinessException(String message) {
+        super(message);
+    }
 }

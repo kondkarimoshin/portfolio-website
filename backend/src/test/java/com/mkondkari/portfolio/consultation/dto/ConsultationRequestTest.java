@@ -1,4 +1,5 @@
-import com.mkondkari.portfolio.consultation.dto.ConsultationRequest;
+package com.mkondkari.portfolio.consultation.dto;
+
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

@@ -1,22 +1,17 @@
 spring:
-  application:
-    name: backend
-
   datasource:
     url: jdbc:postgresql://localhost:5432/portfolio_db?options=-c%20timezone=Asia/Kolkata
     username: portfolio_user
     password: portfolio_password
     driver-class-name: org.postgresql.Driver
 
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    open-in-view: false
-
-  flyway:
-    enabled: true
-
 logging:
   level:
     org.hibernate.SQL: DEBUG
-    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.orm.jdbc.bind: OFF
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
