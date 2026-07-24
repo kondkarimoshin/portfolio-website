@@ -17,3 +17,12 @@ CREATE TABLE consultation (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE INDEX idx_consultation_status
+    ON consultation(status);
+
+CREATE INDEX idx_consultation_created_at
+    ON consultation(created_at);
+
+CREATE INDEX idx_consultation_email
+    ON consultation(email);

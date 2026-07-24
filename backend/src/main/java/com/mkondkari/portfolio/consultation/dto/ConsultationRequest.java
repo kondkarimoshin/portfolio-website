@@ -1,9 +1,6 @@
 package com.mkondkari.portfolio.consultation.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +26,10 @@ public class ConsultationRequest {
     private String email;
 
     @Size(max = 20, message = "Phone number cannot exceed 20 characters")
+    @Pattern(
+            regexp = "^[+0-9()\\-\\s]*$",
+            message = "Phone number contains invalid characters"
+    )
     private String phone;
 
     @Size(max = 150, message = "Company name cannot exceed 150 characters")
@@ -39,6 +40,7 @@ public class ConsultationRequest {
     private String service;
 
     @NotBlank(message = "Message is required")
+    @Size(max = 5000, message = "Message cannot exceed 5000 characters")
     private String message;
 
     @Future(message = "Preferred date must be in the future")

@@ -5,11 +5,15 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class OpenApiConfig {
+
+    private final AppInfoProperties appInfoProperties;
 
     @Bean
     public OpenAPI portfolioOpenAPI() {
@@ -19,14 +23,16 @@ public class OpenApiConfig {
                         .title("Portfolio Backend API")
                         .description("""
                                 Enterprise backend APIs for the Portfolio Website.
-                                
-                                Features:
+
+                                Current Modules:
                                 - Consultation Management
-                                - Contact APIs
-                                - Future Authentication
-                                - Future Admin Dashboard
+
+                                Planned Modules:
+                                - Contact Management
+                                - Authentication & Authorization
+                                - Admin Dashboard
                                 """)
-                        .version("v1.0.0")
+                        .version(appInfoProperties.version())
                         .contact(new Contact()
                                 .name("Moshin Kondkari")
                                 .email("kondkarimoshin@gmail.com")

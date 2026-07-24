@@ -15,7 +15,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "consultation")
+@Table(
+        name = "consultations",
+        indexes = {
+                @Index(name = "idx_consultation_status", columnList = "status"),
+                @Index(name = "idx_consultation_created_at", columnList = "created_at")
+        }
+)
 public class Consultation {
 
     @Id

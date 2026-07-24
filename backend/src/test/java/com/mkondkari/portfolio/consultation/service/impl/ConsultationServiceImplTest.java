@@ -60,7 +60,8 @@ class ConsultationServiceImplTest {
                 .status(ConsultationStatus.NEW)
                 .build();
 
-        when(consultationMapper.toEntity(request)).thenReturn(consultation);
+        when(consultationMapper.toEntity(any(ConsultationRequest.class)))
+                .thenReturn(consultation);
 
         when(consultationRepository.save(consultation))
                 .thenReturn(savedConsultation);
@@ -75,7 +76,7 @@ class ConsultationServiceImplTest {
         assertEquals(1L, result.getId());
         assertEquals(ConsultationStatus.NEW, result.getStatus());
 
-        verify(consultationMapper).toEntity(request);
+        verify(consultationMapper).toEntity(any(ConsultationRequest.class));
         verify(consultationRepository).save(consultation);
         verify(consultationMapper).toResponse(savedConsultation);
     }
