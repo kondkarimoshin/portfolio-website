@@ -12,8 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ConsultationServiceImpl implements ConsultationService {
 
@@ -23,7 +25,9 @@ public class ConsultationServiceImpl implements ConsultationService {
     @Override
     public ConsultationResponse createConsultation(ConsultationRequest request) {
 
-        Consultation consultation = consultationMapper.toEntity(request);
+        ConsultationRequest trimmedRequest = trimRequest(request);
+
+        Consultation consultation = consultationMapper.toEntity(trimmedRequest);
 
         consultation.setStatus(ConsultationStatus.NEW);
 
@@ -33,6 +37,7 @@ public class ConsultationServiceImpl implements ConsultationService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<ConsultationResponse> getAllConsultations(Pageable pageable) {
 
         return consultationRepository
@@ -41,6 +46,7 @@ public class ConsultationServiceImpl implements ConsultationService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ConsultationResponse getConsultationById(Long id) {
 
         Consultation consultation = consultationRepository.findById(id)
@@ -81,5 +87,22 @@ public class ConsultationServiceImpl implements ConsultationService {
                         ));
 
         consultationRepository.delete(consultation);
+    }
+
+    private ConsultationRequest trimRequest(ConsultationRequest request) {
+
+        return ConsultationRequest.builder()
+                .fullName(trim(request.getFullName()))
+                .email(trim(request.getEmail()))
+                .phone(trim(request.getPhone()))
+                .company(trim(request.getCompany()))
+                .service(trim(request.getService()))
+                .message(trim(request.getMessage()))
+                .preferredDate(request.getPreferredDate())
+                .build();
+    }
+
+    private String trim(String value) {
+        return value == null ? null : value.trim();
     }
 }

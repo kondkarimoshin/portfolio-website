@@ -21,7 +21,7 @@
     <!-- ========================================================= -->
     <groupId>com.mkondkari</groupId>
     <artifactId>backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
 
     <name>Portfolio Backend</name>
 
@@ -61,6 +61,9 @@
 
         <!-- Build -->
         <jacoco.version>0.8.13</jacoco.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     </properties>
 

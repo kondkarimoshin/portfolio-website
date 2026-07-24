@@ -34,7 +34,10 @@ public class ConsultationController {
     )
     @ApiResponse(responseCode = "201", description = "Consultation created successfully")
     @ApiResponse(responseCode = "400", description = "Validation failed")
-    @PostMapping
+    @PostMapping(
+            consumes = "application/json",
+            produces = "application/json"
+    )
     public ResponseEntity<ConsultationResponse> createConsultation(
             @Valid @RequestBody ConsultationRequest request) {
 
@@ -52,7 +55,7 @@ public class ConsultationController {
             description = "Returns all consultation requests stored in the system."
     )
     @ApiResponse(responseCode = "200", description = "Consultations retrieved successfully")
-    @GetMapping
+    @GetMapping(produces = "application/json")
     public ResponseEntity<Page<ConsultationResponse>> getAllConsultations(
 
             @PageableDefault(
@@ -73,7 +76,10 @@ public class ConsultationController {
     )
     @ApiResponse(responseCode = "200", description = "Consultation retrieved successfully")
     @ApiResponse(responseCode = "404", description = "Consultation not found")
-    @GetMapping("/{id}")
+    @GetMapping(
+            value = "/{id}",
+            produces = "application/json"
+    )
     public ResponseEntity<ConsultationResponse> getConsultationById(
             @PathVariable Long id) {
 
@@ -88,7 +94,10 @@ public class ConsultationController {
     )
     @ApiResponse(responseCode = "200", description = "Consultation status updated successfully")
     @ApiResponse(responseCode = "404", description = "Consultation not found")
-    @PatchMapping("/{id}/status")
+    @PatchMapping(
+            value = "/{id}/status",
+            produces = "application/json"
+    )
     public ResponseEntity<ConsultationResponse> updateConsultationStatus(
             @PathVariable Long id,
             @RequestParam ConsultationStatus status) {
