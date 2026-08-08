@@ -20,10 +20,8 @@ interface TopicStepProps {
   onContinue: () => void;
 }
 
-const formatCategory = (
-  category: string
-): string =>
-  category
+const toTitleCase = (value: string): string =>
+  value
     .split("-")
     .map(
       (word) =>
@@ -65,12 +63,12 @@ const TopicStep = ({
           return service;
         }
 
-        const exists =
+        const isSelected =
           service.topics.includes(topicId);
 
         return {
           ...service,
-          topics: exists
+          topics: isSelected
             ? service.topics.filter(
                 (id) => id !== topicId
               )
@@ -82,7 +80,7 @@ const TopicStep = ({
 
   const canContinue =
     consultationServices.every(
-      (service) => service.topics.length > 0
+      ({ topics }) => topics.length > 0
     );
 
   return (
@@ -106,6 +104,9 @@ const TopicStep = ({
             service.category
           );
 
+        const selectedCount =
+          service.topics.length;
+
         return (
           <div
             key={service.category}
@@ -113,20 +114,18 @@ const TopicStep = ({
           >
             <div className="mb-5 flex items-center justify-between">
               <Text className="text-lg font-semibold text-white">
-                {formatCategory(
-                  service.category
-                )}
+                {toTitleCase(service.category)}
               </Text>
 
               <span
                 className={`rounded-full px-3 py-1 text-xs font-medium ${
-                  service.topics.length > 0
+                  selectedCount > 0
                     ? "bg-cyan-500/15 text-cyan-300"
                     : "bg-amber-500/15 text-amber-300"
                 }`}
               >
-                {service.topics.length} topic
-                {service.topics.length !== 1
+                {selectedCount} topic
+                {selectedCount !== 1
                   ? "s"
                   : ""}{" "}
                 selected

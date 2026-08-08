@@ -5,6 +5,15 @@ export interface ValidationResult {
   error?: string;
 }
 
+const EMAIL_REGEX =
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const NAME_REGEX =
+  /^[A-Za-z\s'-]+$/;
+
+const PHONE_REGEX =
+  /^\+?[1-9]\d{7,14}$/;
+
 export const validateEmail = (
   email: string
 ): ValidationResult => {
@@ -18,11 +27,10 @@ export const validateEmail = (
     };
   }
 
-  const emailRegex =
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   if (
-    !emailRegex.test(normalizedEmail)
+    !EMAIL_REGEX.test(
+      normalizedEmail
+    )
   ) {
     return {
       valid: false,
@@ -46,23 +54,32 @@ export const validateConsultation = (
     return emailValidation;
   }
 
-  const firstName =
-    formData.firstName.trim();
+  const {
+    firstName,
+    lastName,
+    phone,
+    consultationServices,
+  } = formData;
 
-  const lastName =
-    formData.lastName.trim();
+  const trimmedFirstName =
+    firstName.trim();
 
-  const phone =
-    formData.phone.trim();
+  const trimmedLastName =
+    lastName.trim();
 
-  if (!firstName) {
+  const normalizedPhone =
+    phone.trim().replace(/\s+/g, "");
+
+  if (!trimmedFirstName) {
     return {
       valid: false,
       error: "First name is required.",
     };
   }
 
-  if (firstName.length < 3) {
+  if (
+    trimmedFirstName.length < 3
+  ) {
     return {
       valid: false,
       error:
@@ -71,7 +88,9 @@ export const validateConsultation = (
   }
 
   if (
-    !/^[A-Za-z\s'-]+$/.test(firstName)
+    !NAME_REGEX.test(
+      trimmedFirstName
+    )
   ) {
     return {
       valid: false,
@@ -81,8 +100,10 @@ export const validateConsultation = (
   }
 
   if (
-    lastName &&
-    !/^[A-Za-z\s'-]+$/.test(lastName)
+    trimmedLastName &&
+    !NAME_REGEX.test(
+      trimmedLastName
+    )
   ) {
     return {
       valid: false,
@@ -92,9 +113,9 @@ export const validateConsultation = (
   }
 
   if (
-    phone &&
-    !/^\+?[1-9]\d{7,14}$/.test(
-      phone.replace(/\s+/g, "")
+    normalizedPhone &&
+    !PHONE_REGEX.test(
+      normalizedPhone
     )
   ) {
     return {
@@ -105,7 +126,7 @@ export const validateConsultation = (
   }
 
   if (
-    !formData.consultationServices.length
+    !consultationServices.length
   ) {
     return {
       valid: false,
@@ -114,7 +135,7 @@ export const validateConsultation = (
     };
   }
 
-  for (const service of formData.consultationServices) {
+  for (const service of consultationServices) {
     if (!service.category) {
       return {
         valid: false,

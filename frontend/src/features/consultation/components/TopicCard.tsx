@@ -8,6 +8,24 @@ interface TopicCardProps {
   onSelect: () => void;
 }
 
+const baseCardClass =
+  "w-full rounded-xl border p-5 text-left transition-all duration-200";
+
+const selectedCardClass =
+  "border-cyan-500 bg-cyan-500/10 shadow-lg shadow-cyan-500/10";
+
+const unselectedCardClass =
+  "border-slate-700 bg-slate-900 hover:border-cyan-400 hover:bg-slate-800";
+
+const baseIndicatorClass =
+  "flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 transition-all";
+
+const selectedIndicatorClass =
+  "border-cyan-400 bg-cyan-500 text-slate-950";
+
+const unselectedIndicatorClass =
+  "border-slate-500 bg-transparent";
+
 const TopicCard = ({
   topic,
   selected,
@@ -17,14 +35,11 @@ const TopicCard = ({
     <button
       type="button"
       onClick={onSelect}
-      className={`
-        w-full rounded-xl border p-5 text-left transition-all duration-200
-        ${
-          selected
-            ? "border-cyan-500 bg-cyan-500/10 shadow-lg shadow-cyan-500/10"
-            : "border-slate-700 bg-slate-900 hover:border-cyan-400 hover:bg-slate-800"
-        }
-      `}
+      className={`${baseCardClass} ${
+        selected
+          ? selectedCardClass
+          : unselectedCardClass
+      }`}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
@@ -45,14 +60,11 @@ const TopicCard = ({
         </div>
 
         <div
-          className={`
-            flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 transition-all
-            ${
-              selected
-                ? "border-cyan-400 bg-cyan-500 text-slate-950"
-                : "border-slate-500 bg-transparent"
-            }
-          `}
+          className={`${baseIndicatorClass} ${
+            selected
+              ? selectedIndicatorClass
+              : unselectedIndicatorClass
+          }`}
         >
           {selected && (
             <svg

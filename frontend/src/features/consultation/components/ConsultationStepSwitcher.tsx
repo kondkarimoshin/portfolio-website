@@ -30,8 +30,10 @@ interface ConsultationStepSwitcherProps {
     values: Partial<ConsultationFormData>
   ) => void;
 
-  nextStep: () => void;
+  nextStep: () => void | Promise<void>;
   previousStep: () => void;
+
+  onCancel: () => void;
 
   submissionState: SubmissionState;
 
@@ -62,111 +64,120 @@ const ConsultationStepSwitcher = ({
   updateFormData,
   nextStep,
   previousStep,
+  onCancel,
   submissionState,
   onSubmit,
 }: ConsultationStepSwitcherProps) => {
-  const emailValidation = validateEmail(formData.email);
+  const emailValidation = validateEmail(
+    formData.email
+  );
 
-  let content: React.ReactNode = null;
+  const renderStep = (): React.ReactNode => {
+    switch (currentStep) {
+      case 1:
+        return (
+          <EmailStep
+            email={formData.email}
+            error={emailValidation.error}
+            canContinue={emailValidation.valid}
+            existingConsultation={
+              existingConsultation
+            }
+            onEmailChange={(email) =>
+              updateFormData({ email })
+            }
+            onContinue={nextStep}
+            onCancel={onCancel}
+          />
+        );
 
-  switch (currentStep) {
-    case 1:
-      content = (
-        <EmailStep
-          email={formData.email}
-          error={emailValidation.error}
-          canContinue={emailValidation.valid}
-          existingConsultation={existingConsultation}
-          onEmailChange={(email) =>
-            updateFormData({ email })
-          }
-          onContinue={nextStep}
-        />
-      );
-      break;
+      case 2:
+        return (
+          <PersonalInformationStep
+            firstName={formData.firstName}
+            lastName={formData.lastName}
+            phone={formData.phone}
+            errors={
+              personalInformationErrors
+            }
+            onChange={updateFormData}
+            onPrevious={previousStep}
+            onContinue={nextStep}
+          />
+        );
 
-    case 2:
-      content = (
-        <PersonalInformationStep
-          firstName={formData.firstName}
-          lastName={formData.lastName}
-          phone={formData.phone}
-          errors={personalInformationErrors}
-          onChange={updateFormData}
-          onPrevious={previousStep}
-          onContinue={nextStep}
-        />
-      );
-      break;
+      case 3:
+        return (
+          <CategoryStep
+            consultationServices={
+              formData.consultationServices
+            }
+            onChange={(
+              consultationServices
+            ) =>
+              updateFormData({
+                consultationServices,
+              })
+            }
+            onPrevious={previousStep}
+            onContinue={nextStep}
+          />
+        );
 
-    case 3:
-      content = (
-        <CategoryStep
-          consultationServices={
-            formData.consultationServices
-          }
-          onChange={(consultationServices) =>
-            updateFormData({
-              consultationServices,
-            })
-          }
-          onPrevious={previousStep}
-          onContinue={nextStep}
-        />
-      );
-      break;
+      case 4:
+        return (
+          <TopicStep
+            consultationServices={
+              formData.consultationServices
+            }
+            onChange={(
+              consultationServices
+            ) =>
+              updateFormData({
+                consultationServices,
+              })
+            }
+            onPrevious={previousStep}
+            onContinue={nextStep}
+          />
+        );
 
-    case 4:
-      content = (
-        <TopicStep
-          consultationServices={
-            formData.consultationServices
-          }
-          onChange={(consultationServices) =>
-            updateFormData({
-              consultationServices,
-            })
-          }
-          onPrevious={previousStep}
-          onContinue={nextStep}
-        />
-      );
-      break;
+      case 5:
+        return (
+          <AdditionalDetailsStep
+            additionalDetails={
+              formData.additionalDetails
+            }
+            onChange={(
+              additionalDetails
+            ) =>
+              updateFormData({
+                additionalDetails,
+              })
+            }
+            onPrevious={previousStep}
+            onContinue={nextStep}
+          />
+        );
 
-    case 5:
-      content = (
-        <AdditionalDetailsStep
-          additionalDetails={
-            formData.additionalDetails
-          }
-          onChange={(additionalDetails) =>
-            updateFormData({
-              additionalDetails,
-            })
-          }
-          onPrevious={previousStep}
-          onContinue={nextStep}
-        />
-      );
-      break;
+      case 6:
+        return (
+          <ReviewStep
+            formData={formData}
+            isEditing={isEditing}
+            isSubmitting={
+              submissionState ===
+              "submitting"
+            }
+            onPrevious={previousStep}
+            onSubmit={onSubmit}
+          />
+        );
 
-    case 6:
-      content = (
-        <ReviewStep
-          formData={formData}
-          isEditing={isEditing}
-          isSubmitting={
-            submissionState === "submitting"
-          }
-          onPrevious={previousStep}
-          onSubmit={onSubmit}
-        />
-      );
-      break;
-
-    default:
-      content = null;
-  }
+      default:
+        return null;
+    }
+  };
 
   return (
     <AnimatePresence mode="wait">
@@ -181,7 +192,7 @@ const ConsultationStepSwitcher = ({
           ease: "easeOut",
         }}
       >
-        {content}
+        {renderStep()}
       </motion.div>
     </AnimatePresence>
   );

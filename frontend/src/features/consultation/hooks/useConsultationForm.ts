@@ -1,14 +1,18 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { consultationInitialValues } from "../constants/consultationInitialValues";
 import { consultationSteps } from "../constants/consultationSteps";
-import { consultationService } from "../services/consultationService";
+
+import { consultationApi } from "../../../services/api/consultationApi";
 
 import type {
   ConsultationFormData,
   ConsultationRequest,
   PersonalInformationErrors,
 } from "../types/consultation.types";
+
+const NAME_REGEX = /^[A-Za-z\s'-]+$/;
+const PHONE_REGEX = /^\+?[1-9]\d{7,14}$/;
 
 const useConsultationForm = () => {
   const [currentStep, setCurrentStep] =
@@ -19,15 +23,15 @@ const useConsultationForm = () => {
       consultationInitialValues
     );
 
-  const [personalInformationErrors, setPersonalInformationErrors] =
-    useState<PersonalInformationErrors>({});
+  const [
+    personalInformationErrors,
+    setPersonalInformationErrors,
+  ] = useState<PersonalInformationErrors>({});
 
   const [
     existingConsultation,
     setExistingConsultation,
-  ] = useState<ConsultationRequest | null>(
-    null
-  );
+  ] = useState<ConsultationRequest | null>(null);
 
   const isEditing =
     existingConsultation !== null;
@@ -35,13 +39,10 @@ const useConsultationForm = () => {
   const totalSteps =
     consultationSteps.length;
 
-  const currentStepDetails = useMemo(
-    () =>
-      consultationSteps.find(
-        (step) => step.id === currentStep
-      ),
-    [currentStep]
-  );
+  const currentStepDetails =
+    consultationSteps.find(
+      (step) => step.id === currentStep
+    );
 
   const updateFormData = (
     values: Partial<ConsultationFormData>
@@ -51,127 +52,158 @@ const useConsultationForm = () => {
       ...values,
     }));
 
-    setPersonalInformationErrors((previous) => ({
-      ...previous,
-      ...(values.firstName !== undefined && {
-        firstName: undefined,
-      }),
-      ...(values.lastName !== undefined && {
-        lastName: undefined,
-      }),
-      ...(values.phone !== undefined && {
-        phone: undefined,
-      }),
-    }));
+    setPersonalInformationErrors(
+      (previous) => ({
+        ...previous,
+        ...(values.firstName !== undefined && {
+          firstName: undefined,
+        }),
+        ...(values.lastName !== undefined && {
+          lastName: undefined,
+        }),
+        ...(values.phone !== undefined && {
+          phone: undefined,
+        }),
+      })
+    );
   };
 
-  const validatePersonalInformation = (): boolean => {
-    const errors: PersonalInformationErrors = {};
+  const validatePersonalInformation =
+    (): boolean => {
+      const errors: PersonalInformationErrors =
+        {};
 
-    const firstName =
-      formData.firstName.trim();
+      const {
+        firstName,
+        lastName,
+        phone,
+      } = formData;
 
-    const lastName =
-      formData.lastName.trim();
+      const trimmedFirstName =
+        firstName.trim();
 
-    const phone =
-      formData.phone.trim();
+      const trimmedLastName =
+        lastName.trim();
 
-    if (!firstName) {
-      errors.firstName =
-        "First Name is required.";
-    } else if (firstName.length < 3) {
-      errors.firstName =
-        "First Name must be at least 3 characters.";
-    } else if (
-      !/^[A-Za-z\s'-]+$/.test(firstName)
-    ) {
-      errors.firstName =
-        "First Name can contain letters only.";
-    }
+      const trimmedPhone =
+        phone.trim().replace(/\s+/g, "");
 
-    if (
-      lastName &&
-      !/^[A-Za-z\s'-]+$/.test(lastName)
-    ) {
-      errors.lastName =
-        "Last Name can contain letters only.";
-    }
+      if (!trimmedFirstName) {
+        errors.firstName =
+          "First Name is required.";
+      } else if (
+        trimmedFirstName.length < 3
+      ) {
+        errors.firstName =
+          "First Name must be at least 3 characters.";
+      } else if (
+        !NAME_REGEX.test(
+          trimmedFirstName
+        )
+      ) {
+        errors.firstName =
+          "First Name can contain letters only.";
+      }
 
-    if (
-      phone &&
-      !/^\+?[1-9]\d{7,14}$/.test(
-        phone.replace(/\s+/g, "")
-      )
-    ) {
-      errors.phone =
-        "Please enter a valid international phone number.";
-    }
+      if (
+        trimmedLastName &&
+        !NAME_REGEX.test(
+          trimmedLastName
+        )
+      ) {
+        errors.lastName =
+          "Last Name can contain letters only.";
+      }
 
-    setPersonalInformationErrors(errors);
+      if (
+        trimmedPhone &&
+        !PHONE_REGEX.test(trimmedPhone)
+      ) {
+        errors.phone =
+          "Please enter a valid international phone number.";
+      }
 
-    return Object.keys(errors).length === 0;
-  };
+      setPersonalInformationErrors(
+        errors
+      );
 
-  const canProceedToNextStep = (): boolean => {
-    switch (currentStep) {
-      case 1:
-        return true;
+      return (
+        Object.keys(errors).length === 0
+      );
+    };
 
-      case 2:
-        return validatePersonalInformation();
+  const canProceedToNextStep =
+    (): boolean =>
+      currentStep !== 2 ||
+      validatePersonalInformation();
 
-      case 3:
-        return true;
-
-      case 4:
-        return true;
-
-      case 5:
-        return true;
-
-      default:
-        return true;
-    }
-  };
-
-
-  const nextStep = () => {
+  const nextStep = async () => {
     if (!canProceedToNextStep()) {
       return;
     }
 
-    if (currentStep === 1) {
-      if (!existingConsultation) {
+    if (
+      currentStep === 1 &&
+      !existingConsultation
+    ) {
+      try {
         const consultation =
-          consultationService.findActiveByEmail(
-            formData.email
+          await consultationApi.getByEmail(
+            formData.email.trim()
           );
 
-        if (consultation) {
-          setExistingConsultation(
-            consultation
+        const consultationServices =
+          consultation.consultationServices.map(
+            (service) => ({
+              category:
+                service.category as ConsultationRequest["consultationServices"][number]["category"],
+              topics: service.topics,
+            })
           );
 
-          setFormData({
-            email: consultation.email,
-            firstName:
-              consultation.firstName,
-            lastName:
-              consultation.lastName,
-            phone: consultation.phone,
-            consultationServices:
-              consultation.consultationServices,
-            additionalDetails:
-              consultation.additionalDetails ??
-              "",
-          });
+        const existingRequest: ConsultationRequest =
+        {
+          id: consultation.id.toString(),
+          referenceNumber: consultation.referenceNumber,
+          email: consultation.email,
+          firstName:
+            consultation.firstName,
+          lastName:
+            consultation.lastName,
+          phone: consultation.phone,
+          consultationServices,
+          additionalDetails:
+            consultation.additionalDetails ??
+            "",
+          status:
+            consultation.status as ConsultationRequest["status"],
+          createdAt:
+            consultation.createdAt,
+          updatedAt:
+            consultation.updatedAt,
+        };
 
-          return;
-        }
-      } else {
-        setCurrentStep(2);
+        setExistingConsultation(
+          existingRequest
+        );
+
+        setFormData({
+          email: consultation.email,
+          firstName:
+            consultation.firstName,
+          lastName:
+            consultation.lastName,
+          phone: consultation.phone,
+          consultationServices,
+          additionalDetails:
+            consultation.additionalDetails ??
+            "",
+        });
+
         return;
+      } catch {
+        // No existing consultation found.
+        // Continue with new consultation.
       }
     }
 
@@ -200,6 +232,13 @@ const useConsultationForm = () => {
     }
   };
 
+  const cancelEditing = () => {
+    setCurrentStep(1);
+    setFormData(consultationInitialValues);
+    setPersonalInformationErrors({});
+    setExistingConsultation(null);
+  };
+
   const resetForm = () => {
     setCurrentStep(1);
     setFormData(
@@ -225,6 +264,7 @@ const useConsultationForm = () => {
     nextStep,
     previousStep,
     goToStep,
+    cancelEditing,
 
     resetForm,
   };

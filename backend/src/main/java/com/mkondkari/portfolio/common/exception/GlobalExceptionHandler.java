@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.Clock;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @RestControllerAdvice
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
                 .toList();
 
         ErrorResponse response = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now(clock))
+                .timestamp(OffsetDateTime.now(clock).toLocalDateTime())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .message("Validation failed.")
@@ -51,7 +51,7 @@ public class GlobalExceptionHandler {
             HttpServletRequest request) {
 
         ErrorResponse response = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now(clock))
+                .timestamp(OffsetDateTime.now(clock).toLocalDateTime())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .message("Malformed or missing request body.")
@@ -67,7 +67,7 @@ public class GlobalExceptionHandler {
             HttpServletRequest request) {
 
         ErrorResponse response = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now(clock))
+                .timestamp(OffsetDateTime.now(clock).toLocalDateTime())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .message("Invalid request parameter.")
@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
             HttpServletRequest request) {
 
         ErrorResponse response = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now(clock))
+                .timestamp(OffsetDateTime.now(clock).toLocalDateTime())
                 .status(HttpStatus.NOT_FOUND.value())
                 .error(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .message(exception.getMessage())
@@ -99,7 +99,7 @@ public class GlobalExceptionHandler {
             HttpServletRequest request) {
 
         ErrorResponse response = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now(clock))
+                .timestamp(OffsetDateTime.now(clock).toLocalDateTime())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .message(exception.getMessage())
@@ -115,7 +115,7 @@ public class GlobalExceptionHandler {
             HttpServletRequest request) {
 
         ErrorResponse response = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now(clock))
+                .timestamp(OffsetDateTime.now(clock).toLocalDateTime())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
                 .message("An unexpected error occurred.")

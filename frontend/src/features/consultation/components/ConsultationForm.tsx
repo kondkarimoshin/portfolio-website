@@ -9,6 +9,9 @@ import SuccessStep from "./workflow/SuccessStep";
 import useConsultationForm from "../hooks/useConsultationForm";
 import useConsultationSubmission from "../hooks/useConsultationSubmission";
 
+const containerClass =
+  "w-full rounded-xl border border-slate-800 bg-slate-900 p-8 shadow-lg";
+
 const ConsultationForm = () => {
   const containerRef =
     useRef<HTMLDivElement>(null);
@@ -25,6 +28,7 @@ const ConsultationForm = () => {
 
     nextStep,
     previousStep,
+    cancelEditing,
     resetForm,
   } = useConsultationForm();
 
@@ -57,7 +61,7 @@ const ConsultationForm = () => {
 
   if (submissionState === "success") {
     return (
-      <div className="w-full rounded-xl border border-slate-800 bg-slate-900 p-8 shadow-lg">
+      <div className={containerClass}>
         <SuccessStep
           consultationId={consultationId}
           isEditing={isEditing}
@@ -73,7 +77,7 @@ const ConsultationForm = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full rounded-xl border border-slate-800 bg-slate-900 p-8 shadow-lg"
+      className={containerClass}
     >
       <ConsultationProgress
         currentStep={currentStep}
@@ -99,6 +103,7 @@ const ConsultationForm = () => {
           isEditing={isEditing}
           nextStep={nextStep}
           previousStep={previousStep}
+          onCancel={cancelEditing}
           submissionState={submissionState}
           onSubmit={handleSubmit}
         />

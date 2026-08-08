@@ -26,26 +26,7 @@ export interface ConsultationServiceSelection {
   topics: string[];
 }
 
-export interface ConsultationRequest {
-  id: string;
-
-  email: string;
-
-  firstName: string;
-  lastName: string;
-  phone: string;
-
-  consultationServices: ConsultationServiceSelection[];
-
-  additionalDetails?: string;
-
-  status: ConsultationStatus;
-
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface ConsultationFormData {
+export interface ConsultationBase {
   email: string;
 
   firstName: string;
@@ -55,6 +36,21 @@ export interface ConsultationFormData {
   consultationServices: ConsultationServiceSelection[];
 
   additionalDetails: string;
+}
+
+export interface ConsultationFormData
+  extends ConsultationBase {}
+
+export interface ConsultationRequest
+  extends ConsultationBase {
+  id: string;
+
+  referenceNumber?: string;
+
+  status: ConsultationStatus;
+
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ConsultationSession {

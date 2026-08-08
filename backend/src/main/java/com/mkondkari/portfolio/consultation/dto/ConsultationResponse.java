@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,23 +20,24 @@ public class ConsultationResponse {
 
     private Long id;
 
-    private String fullName;
+    private String referenceNumber;
 
     private String email;
 
+    private String firstName;
+
+    private String lastName;
+
     private String phone;
 
-    private String company;
+    private String additionalDetails;
 
-    private String service;
-
-    private String message;
-
-    private LocalDateTime preferredDate;
+    @Builder.Default
+    private List<ConsultationServiceResponse> consultationServices = new ArrayList<>();
 
     private ConsultationStatus status;
 
-    private LocalDateTime createdAt;
+    private OffsetDateTime createdAt;
 
-    private LocalDateTime updatedAt;
+    private OffsetDateTime updatedAt;
 }

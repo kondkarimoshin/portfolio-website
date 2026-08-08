@@ -30,30 +30,26 @@ const CategoryStep = ({
   const toggleCategory = (
     category: ConsultationCategory
   ) => {
-    const exists =
-      consultationServices.find(
+    const isSelected =
+      consultationServices.some(
         (service) =>
           service.category === category
       );
 
-    if (exists) {
-      onChange(
-        consultationServices.filter(
-          (service) =>
-            service.category !== category
-        )
-      );
-
-      return;
-    }
-
-    onChange([
-      ...consultationServices,
-      {
-        category,
-        topics: [],
-      },
-    ]);
+    onChange(
+      isSelected
+        ? consultationServices.filter(
+            (service) =>
+              service.category !== category
+          )
+        : [
+            ...consultationServices,
+            {
+              category,
+              topics: [],
+            },
+          ]
+    );
   };
 
   return (

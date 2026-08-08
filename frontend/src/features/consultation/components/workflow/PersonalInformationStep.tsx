@@ -10,17 +10,22 @@ interface PersonalInformationStepProps {
 
   errors: PersonalInformationErrors;
 
-  onChange: (
-    values: {
-      firstName?: string;
-      lastName?: string;
-      phone?: string;
-    }
-  ) => void;
+  onChange: (values: {
+    firstName?: string;
+    lastName?: string;
+    phone?: string;
+  }) => void;
 
   onPrevious: () => void;
   onContinue: () => void;
 }
+
+const inputClass = (hasError: boolean): string =>
+  `w-full rounded-lg border bg-slate-900 px-4 py-3 outline-none transition-colors ${
+    hasError
+      ? "border-red-500 focus:border-red-500"
+      : "border-slate-700 focus:border-cyan-500"
+  }`;
 
 const PersonalInformationStep = ({
   firstName,
@@ -40,10 +45,10 @@ const PersonalInformationStep = ({
         </Text>
 
         <input
-          className={`w-full rounded-lg bg-slate-900 px-4 py-3 outline-none transition-colors ${errors.firstName
-            ? "border border-red-500"
-            : "border border-slate-700"
-            }`}
+          type="text"
+          autoComplete="given-name"
+          placeholder="Enter your first name"
+          className={inputClass(!!errors.firstName)}
           value={firstName}
           onChange={(event) =>
             onChange({
@@ -68,10 +73,10 @@ const PersonalInformationStep = ({
         </Text>
 
         <input
-          className={`w-full rounded-lg bg-slate-900 px-4 py-3 outline-none transition-colors ${errors.lastName
-            ? "border border-red-500"
-            : "border border-slate-700"
-            }`}
+          type="text"
+          autoComplete="family-name"
+          placeholder="Enter your last name"
+          className={inputClass(!!errors.lastName)}
           value={lastName}
           onChange={(event) =>
             onChange({
@@ -96,10 +101,10 @@ const PersonalInformationStep = ({
         </Text>
 
         <input
-          className={`w-full rounded-lg bg-slate-900 px-4 py-3 outline-none transition-colors ${errors.phone
-            ? "border border-red-500"
-            : "border border-slate-700"
-            }`}
+          type="tel"
+          autoComplete="tel"
+          placeholder="Enter your phone number"
+          className={inputClass(!!errors.phone)}
           value={phone}
           onChange={(event) =>
             onChange({

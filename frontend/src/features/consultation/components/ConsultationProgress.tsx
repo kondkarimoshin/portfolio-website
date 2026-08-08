@@ -12,31 +12,27 @@ const ConsultationProgress = ({
   const totalSteps =
     consultationSteps.length;
 
+  const currentStepData =
+    consultationSteps[currentStep - 1];
+
   const progress =
     totalSteps > 1
       ? ((currentStep - 1) /
-        (totalSteps - 1)) *
-      100
+          (totalSteps - 1)) *
+        100
       : 100;
 
   return (
     <div className="mx-auto mt-6 max-w-4xl space-y-6">
-      {/* Header */}
-
       <div className="text-center">
         <p className="text-sm font-medium text-slate-400">
           Step {currentStep} of {totalSteps}
         </p>
 
         <h2 className="mt-1 text-xl font-semibold text-white">
-          {
-            consultationSteps[currentStep - 1]
-              ?.title
-          }
+          {currentStepData?.title}
         </h2>
       </div>
-
-      {/* Progress Bar */}
 
       <div>
         <div className="mb-2 flex items-center justify-between text-xs text-slate-400">
@@ -57,8 +53,6 @@ const ConsultationProgress = ({
         </div>
       </div>
 
-      {/* Desktop Stepper */}
-
       <div className="hidden items-center justify-center md:flex">
         {consultationSteps.map(
           (step, index) => {
@@ -78,12 +72,12 @@ const ConsultationProgress = ({
                     className={clsx(
                       "flex h-10 w-10 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300",
                       completed &&
-                      "border-cyan-500 bg-cyan-500 text-slate-950",
+                        "border-cyan-500 bg-cyan-500 text-slate-950",
                       active &&
-                      "border-cyan-500 bg-slate-900 text-cyan-400 shadow-lg shadow-cyan-500/20",
+                        "border-cyan-500 bg-slate-900 text-cyan-400 shadow-lg shadow-cyan-500/20",
                       !completed &&
-                      !active &&
-                      "border-slate-700 bg-slate-900 text-slate-500"
+                        !active &&
+                        "border-slate-700 bg-slate-900 text-slate-500"
                     )}
                   >
                     {completed
@@ -105,22 +99,20 @@ const ConsultationProgress = ({
 
                 {index <
                   totalSteps - 1 && (
-                    <div
-                      className={clsx(
-                        "mx-4 mb-6 h-1 w-20 rounded-full transition-colors duration-300",
-                        completed
-                          ? "bg-cyan-500"
-                          : "bg-slate-700"
-                      )}
-                    />
-                  )}
+                  <div
+                    className={clsx(
+                      "mx-4 mb-6 h-1 w-20 rounded-full transition-colors duration-300",
+                      completed
+                        ? "bg-cyan-500"
+                        : "bg-slate-700"
+                    )}
+                  />
+                )}
               </div>
             );
           }
         )}
       </div>
-
-      {/* Mobile */}
 
       <div className="text-center md:hidden">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border-2 border-cyan-500 bg-slate-900 text-base font-semibold text-cyan-400">
@@ -133,10 +125,7 @@ const ConsultationProgress = ({
         </p>
 
         <p className="mt-1 font-semibold text-cyan-400">
-          {
-            consultationSteps[currentStep - 1]
-              ?.title
-          }
+          {currentStepData?.title}
         </p>
       </div>
     </div>

@@ -20,4 +20,11 @@ public interface ConsultationService {
     );
 
     void deleteConsultation(Long id);
+
+    ConsultationResponse getConsultationByEmail(String email);
+
+    ConsultationResponse updateConsultation(
+            Long id,
+            ConsultationRequest request
+    );
 }
