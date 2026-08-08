@@ -2,99 +2,117 @@ package com.mkondkari.portfolio.consultation.service.email;
 
 import com.mkondkari.portfolio.consultation.dto.ConsultationResponse;
 import com.mkondkari.portfolio.consultation.dto.ConsultationServiceResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import java.util.List;
+import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class ConsultationEmailService {
 
-    private final JavaMailSender mailSender;
+    private static final String RESEND_API_URL =
+            "https://api.resend.com";
 
+    private final RestClient restClient;
+
+    @Value("${resend.api.key}")
+    private String resendApiKey;
+
+    @Value("${resend.from.email}")
+    private String resendFromEmail;
+
+    public ConsultationEmailService() {
+        this.restClient = RestClient.builder()
+                .baseUrl(RESEND_API_URL)
+                .build();
+    }
+
+    /**
+     * Sends confirmation email for a newly created consultation.
+     */
     public void sendConsultationConfirmation(
             ConsultationResponse consultation
     ) {
         sendEmail(consultation, false);
     }
 
+    /**
+     * Sends notification email when an existing consultation is updated.
+     */
     public void sendConsultationUpdate(
             ConsultationResponse consultation
     ) {
         sendEmail(consultation, true);
     }
 
+    /**
+     * Sends the consultation email through Resend.
+     */
     private void sendEmail(
             ConsultationResponse consultation,
             boolean updated
     ) {
 
-        try {
+        String subject = updated
+                ? "Consultation Updated - "
+                + consultation.getReferenceNumber()
+                : "Consultation Request - "
+                + consultation.getReferenceNumber();
 
-            MimeMessage message =
-                    mailSender.createMimeMessage();
-
-            MimeMessageHelper helper = getMimeMessageHelper(consultation, updated, message);
-
-            helper.setText(
-                    buildHtmlEmail(
-                            consultation,
-                            updated
-                    ),
-                    true
-            );
-
-            mailSender.send(message);
-
-        } catch (MessagingException e) {
-
-            throw new RuntimeException(
-                    "Failed to create consultation email",
-                    e
-            );
-        }
-    }
-
-    private static MimeMessageHelper getMimeMessageHelper(ConsultationResponse consultation, boolean updated, MimeMessage message) throws MessagingException {
-        MimeMessageHelper helper =
-                new MimeMessageHelper(
-                        message,
-                        true,
-                        "UTF-8"
-                );
-
-        helper.setTo(
-                consultation.getEmail()
-        );
-
-        helper.setSubject(
+        String html = buildHtmlEmail(
+                consultation,
                 updated
-                        ? "Consultation Updated - "
-                        + consultation.getReferenceNumber()
-                        : "Consultation Request - "
-                        + consultation.getReferenceNumber()
         );
-        return helper;
+
+        restClient
+                .post()
+                .uri("/emails")
+                .contentType(MediaType.APPLICATION_JSON)
+                .header(
+                        "Authorization",
+                        "Bearer " + resendApiKey
+                )
+                .body(
+                        Map.of(
+                                "from",
+                                resendFromEmail,
+
+                                "to",
+                                List.of(
+                                        consultation.getEmail()
+                                ),
+
+                                "subject",
+                                subject,
+
+                                "html",
+                                html
+                        )
+                )
+                .retrieve()
+                .toBodilessEntity();
     }
 
+    /**
+     * Builds the HTML email.
+     */
     private String buildHtmlEmail(
             ConsultationResponse consultation,
             boolean updated
     ) {
 
-        String title =
-                updated
-                        ? "Consultation Updated Successfully"
-                        : "Consultation Submitted Successfully";
+        String title = updated
+                ? "Consultation Updated Successfully"
+                : "Consultation Submitted Successfully";
 
-        String message =
-                updated
-                        ? "Your consultation request has been updated successfully. Your latest requirements are shown below."
-                        : "Thank you for booking a consultation. Your request has been successfully received.";
+        String message = updated
+                ? "Your consultation request has been updated successfully. "
+                + "Your latest requirements are shown below."
+                : "Thank you for booking a consultation. "
+                + "Your request has been successfully received.";
 
         String servicesHtml =
                 buildServicesHtml(consultation);
@@ -126,7 +144,7 @@ public class ConsultationEmailService {
                 ">
 
                     <div style="
-                       background:#0369a1;
+                        background:#0369a1;
                         padding:28px 32px;
                         color:#ffffff;
                     ">
@@ -163,8 +181,6 @@ public class ConsultationEmailService {
                             %s
                         </p>
 
-                        <!-- Reference -->
-
                         <div style="
                             margin:24px 0;
                             padding:20px;
@@ -193,8 +209,6 @@ public class ConsultationEmailService {
 
                         </div>
 
-                        <!-- Status -->
-
                         <div style="
                             margin:20px 0;
                         ">
@@ -212,8 +226,6 @@ public class ConsultationEmailService {
                             </span>
 
                         </div>
-
-                        <!-- Services -->
 
                         <h2 style="
                             font-size:18px;
@@ -290,11 +302,16 @@ public class ConsultationEmailService {
                                 : "Services Selected",
                         servicesHtml,
                         updated
-                                ? "Your updated requirements have been recorded and our team will review them."
-                                : "Your consultation request has been securely recorded and our team will review your requirements."
+                                ? "Your updated requirements have been recorded "
+                                + "and our team will review them."
+                                : "Your consultation request has been securely "
+                                + "recorded and our team will review your requirements."
                 );
     }
 
+    /**
+     * Builds the selected consultation services section.
+     */
     private String buildServicesHtml(
             ConsultationResponse consultation
     ) {
@@ -369,7 +386,9 @@ public class ConsultationEmailService {
                         : service.getTopics()
                 ) {
 
-                    html.append("<li style=\"margin-bottom:5px;\">")
+                    html.append(
+                                    "<li style=\"margin-bottom:5px;\">"
+                            )
                             .append(formatLabel(topic))
                             .append("</li>");
                 }
@@ -383,13 +402,18 @@ public class ConsultationEmailService {
         return html.toString();
     }
 
+    /**
+     * Formats a status such as IN_PROGRESS to In Progress.
+     */
     private String formatStatus(
             String status
     ) {
-
         return formatLabel(status);
     }
 
+    /**
+     * Converts enum/string values into readable labels.
+     */
     private String formatLabel(
             String value
     ) {

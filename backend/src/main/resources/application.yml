@@ -13,17 +13,11 @@ spring:
   flyway:
     enabled: true
 
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ${MAIL_USERNAME:mkondkari.portfolio@gmail.com}
-    password: ${MAIL_PASSWORD}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+resend:
+  api:
+    key: ${RESEND_API_KEY}
+  from:
+    email: ${RESEND_FROM_EMAIL}
 
 info:
   app:
