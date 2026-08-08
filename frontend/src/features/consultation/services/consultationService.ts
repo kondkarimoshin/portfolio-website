@@ -5,19 +5,38 @@ import type {
   ConsultationCategory,
   ConsultationRequest,
   ConsultationTopic,
+  ConsultationStatus,
 } from "../types/consultation.types";
 
+const ACTIVE_STATUSES: ConsultationStatus[] = [
+  "pending",
+  "in-review",
+  "scheduled",
+  "in-progress",
+];
+
 class ConsultationService {
+  private normalizeEmail(
+    email: string
+  ): string {
+    return email.trim().toLowerCase();
+  }
+
   getAll(): ConsultationRequest[] {
     return mockConsultations;
   }
 
-  findByEmail(email: string): ConsultationRequest[] {
-    const normalizedEmail = email.trim().toLowerCase();
+  findByEmail(
+    email: string
+  ): ConsultationRequest[] {
+    const normalizedEmail =
+      this.normalizeEmail(email);
 
     return mockConsultations.filter(
       (consultation) =>
-        consultation.email.trim().toLowerCase() === normalizedEmail
+        this.normalizeEmail(
+          consultation.email
+        ) === normalizedEmail
     );
   }
 
@@ -29,13 +48,17 @@ class ConsultationService {
     email: string,
     category: ConsultationCategory
   ): ConsultationRequest | undefined {
-    const normalizedEmail = email.trim().toLowerCase();
+    const normalizedEmail =
+      this.normalizeEmail(email);
 
     return mockConsultations.find(
       (consultation) =>
-        consultation.email.trim().toLowerCase() === normalizedEmail &&
+        this.normalizeEmail(
+          consultation.email
+        ) === normalizedEmail &&
         consultation.consultationServices.some(
-          (service) => service.category === category
+          (service) =>
+            service.category === category
         )
     );
   }
@@ -43,33 +66,38 @@ class ConsultationService {
   findActiveByEmail(
     email: string
   ): ConsultationRequest | undefined {
-    const normalizedEmail = email.trim().toLowerCase();
-
-    const activeStatuses = [
-      "pending",
-      "in-review",
-      "scheduled",
-      "in-progress",
-    ];
+    const normalizedEmail =
+      this.normalizeEmail(email);
 
     return mockConsultations.find(
       (consultation) =>
-        consultation.email.trim().toLowerCase() === normalizedEmail &&
-        activeStatuses.includes(consultation.status)
+        this.normalizeEmail(
+          consultation.email
+        ) === normalizedEmail &&
+        ACTIVE_STATUSES.includes(
+          consultation.status
+        )
     );
   }
 
-  create(request: ConsultationRequest): void {
+  create(
+    request: ConsultationRequest
+  ): void {
     mockConsultations.push(request);
   }
 
-  update(request: ConsultationRequest): void {
-    const index = mockConsultations.findIndex(
-      (consultation) => consultation.id === request.id
-    );
+  update(
+    request: ConsultationRequest
+  ): void {
+    const index =
+      mockConsultations.findIndex(
+        (consultation) =>
+          consultation.id === request.id
+      );
 
     if (index !== -1) {
-      mockConsultations[index] = request;
+      mockConsultations[index] =
+        request;
     }
   }
 
@@ -81,7 +109,8 @@ class ConsultationService {
     category: ConsultationCategory
   ): ConsultationTopic[] {
     return consultationTopics.filter(
-      (topic) => topic.category === category
+      (topic) =>
+        topic.category === category
     );
   }
 
@@ -89,9 +118,11 @@ class ConsultationService {
     topicId: string
   ): ConsultationTopic | undefined {
     return consultationTopics.find(
-      (topic) => topic.id === topicId
+      (topic) =>
+        topic.id === topicId
     );
   }
 }
 
-export const consultationService = new ConsultationService();
+export const consultationService =
+  new ConsultationService();

@@ -1,5 +1,6 @@
 package com.mkondkari.portfolio.consultation.controller;
 
+import com.mkondkari.portfolio.common.constants.ApiConstants;
 import com.mkondkari.portfolio.consultation.dto.ConsultationRequest;
 import com.mkondkari.portfolio.consultation.dto.ConsultationResponse;
 import com.mkondkari.portfolio.consultation.entity.ConsultationStatus;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
         description = "APIs for managing consultation requests"
 )
 @RestController
-@RequestMapping("/api/v1/consultations")
+@RequestMapping(ApiConstants.API_V1 + "/consultations")
 @RequiredArgsConstructor
 public class ConsultationController {
 
@@ -71,6 +72,24 @@ public class ConsultationController {
     }
 
     @Operation(
+            summary = "Get consultation by email",
+            description = "Returns the existing consultation request for the provided email."
+    )
+    @ApiResponse(responseCode = "200", description = "Consultation found")
+    @ApiResponse(responseCode = "404", description = "Consultation not found")
+    @GetMapping(
+            value = "/by-email",
+            produces = "application/json"
+    )
+    public ResponseEntity<ConsultationResponse> getConsultationByEmail(
+            @RequestParam String email) {
+
+        return ResponseEntity.ok(
+                consultationService.getConsultationByEmail(email)
+        );
+    }
+
+    @Operation(
             summary = "Get consultation by ID",
             description = "Returns a consultation request by its unique identifier."
     )
@@ -85,6 +104,26 @@ public class ConsultationController {
 
         return ResponseEntity.ok(
                 consultationService.getConsultationById(id)
+        );
+    }
+
+    @Operation(
+            summary = "Update consultation",
+            description = "Updates an existing consultation request."
+    )
+    @ApiResponse(responseCode = "200", description = "Consultation updated successfully")
+    @ApiResponse(responseCode = "404", description = "Consultation not found")
+    @PutMapping(
+            value = "/{id}",
+            consumes = "application/json",
+            produces = "application/json"
+    )
+    public ResponseEntity<ConsultationResponse> updateConsultation(
+            @PathVariable Long id,
+            @Valid @RequestBody ConsultationRequest request) {
+
+        return ResponseEntity.ok(
+                consultationService.updateConsultation(id, request)
         );
     }
 

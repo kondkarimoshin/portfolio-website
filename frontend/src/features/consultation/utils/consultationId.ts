@@ -1,19 +1,29 @@
 let sequence = 1;
 
-const pad = (value: number, length: number): string =>
+const pad = (
+  value: number,
+  length: number
+): string =>
   value.toString().padStart(length, "0");
 
-export const generateConsultationId = (): string => {
+const getCurrentDate = (): string => {
   const now = new Date();
 
-  const date =
+  return (
     now.getFullYear().toString() +
     pad(now.getMonth() + 1, 2) +
-    pad(now.getDate(), 2);
-
-  const id = `CONS-${date}-${pad(sequence, 6)}`;
-
-  sequence += 1;
-
-  return id;
+    pad(now.getDate(), 2)
+  );
 };
+
+export const generateConsultationId =
+  (): string => {
+    const id = `CONS-${getCurrentDate()}-${pad(
+      sequence,
+      6
+    )}`;
+
+    sequence += 1;
+
+    return id;
+  };

@@ -9,27 +9,16 @@ interface EmailStepProps {
   email: string;
   error?: string;
   canContinue: boolean;
+  onCancel: () => void;
 
   existingConsultation?: ConsultationRequest | null;
 
   onEmailChange: (email: string) => void;
-  onContinue: () => void;
+  onContinue: () => void | Promise<void>;
 }
 
-const formatStatus = (status: string): string =>
-  status
-    .split("-")
-    .map(
-      (word) =>
-        word.charAt(0).toUpperCase() +
-        word.slice(1)
-    )
-    .join(" ");
-
-const formatCategory = (
-  category: string
-): string =>
-  category
+const toTitleCase = (value: string): string =>
+  value
     .split("-")
     .map(
       (word) =>
@@ -45,12 +34,11 @@ const EmailStep = ({
   existingConsultation,
   onEmailChange,
   onContinue,
+  onCancel,
 }: EmailStepProps) => {
-  const [touched, setTouched] =
-    useState(false);
+  const [touched, setTouched] = useState(false);
 
-  const showError =
-    touched && !!error;
+  const showError = touched && !!error;
 
   return (
     <div className="mt-10">
@@ -64,16 +52,13 @@ const EmailStep = ({
         value={email}
         placeholder="Enter your email address"
         onChange={(event) => {
-          onEmailChange(
-            event.target.value.trimStart()
-          );
+          onEmailChange(event.target.value.trimStart());
         }}
         onBlur={() => setTouched(true)}
-        className={`w-full rounded-lg border bg-slate-900 px-4 py-3 text-white outline-none transition ${
-          showError
+        className={`w-full rounded-lg border bg-slate-900 px-4 py-3 text-white outline-none transition ${showError
             ? "border-red-500 focus:border-red-500"
             : "border-slate-700 focus:border-cyan-500"
-        }`}
+          }`}
       />
 
       {showError && (
@@ -89,10 +74,9 @@ const EmailStep = ({
           </Text>
 
           <Text className="mt-2 text-slate-300">
-            We found an existing consultation
-            linked to this email. Your previous
-            information has been loaded and you
-            can continue updating your request.
+            We found an existing consultation linked to this email.
+            Your previous information has been loaded and you can
+            continue updating your request.
           </Text>
 
           <div className="mt-5 space-y-3 text-sm">
@@ -102,7 +86,7 @@ const EmailStep = ({
               </Text>
 
               <Text className="font-medium">
-                {existingConsultation.id}
+                {existingConsultation.referenceNumber}
               </Text>
             </div>
 
@@ -112,9 +96,7 @@ const EmailStep = ({
               </Text>
 
               <span className="rounded-full bg-cyan-500/15 px-3 py-1 text-xs font-medium text-cyan-300">
-                {formatStatus(
-                  existingConsultation.status
-                )}
+                {toTitleCase(existingConsultation.status)}
               </span>
             </div>
 
@@ -130,9 +112,7 @@ const EmailStep = ({
                       key={service.category}
                       className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-300"
                     >
-                      {formatCategory(
-                        service.category
-                      )}
+                      {toTitleCase(service.category)}
                     </span>
                   )
                 )}
@@ -154,8 +134,18 @@ const EmailStep = ({
         </div>
       )}
 
-      <div className="mt-6 flex justify-end">
+      <div className="mt-6 flex justify-end gap-3">
+        {existingConsultation && (
+          <Button
+            type="button"
+            onClick={onCancel}
+          >
+            Cancel
+          </Button>
+        )}
+
         <Button
+          type="button"
           disabled={!canContinue}
           onClick={onContinue}
         >

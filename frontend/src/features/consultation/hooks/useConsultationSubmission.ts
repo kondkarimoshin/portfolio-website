@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { consultationService } from "../services/consultationService";
+import { consultationApi } from "../../../services/api/consultationApi";
+import { toApiRequest } from "../../../services/api/mappers/consultationApiMapper";
 
 import { generateConsultationId } from "../utils/consultationId";
 import { mapToConsultationRequest } from "../utils/consultationMapper";
@@ -20,22 +21,33 @@ const useConsultationSubmission = () => {
   const [
     submissionState,
     setSubmissionState,
-  ] = useState<SubmissionState>(
-    "editing"
-  );
+  ] = useState<SubmissionState>("editing");
 
   const [
     consultationId,
     setConsultationId,
   ] = useState("");
 
-  const [error, setError] =
-    useState("");
+  const [error, setError] = useState("");
 
   const submit = async (
     formData: ConsultationFormData,
     existingConsultation?: ConsultationRequest | null
   ): Promise<SubmissionResult> => {
+
+    const fail = (
+      message: string
+    ): SubmissionResult => {
+
+      setSubmissionState("error");
+      setError(message);
+
+      return {
+        success: false,
+        error: message,
+      };
+    };
+
     setSubmissionState("submitting");
     setError("");
 
@@ -43,44 +55,74 @@ const useConsultationSubmission = () => {
       validateConsultation(formData);
 
     if (!validation.valid) {
-      setSubmissionState("error");
-      setError(
+      return fail(
         validation.error ??
           "Validation failed."
       );
-
-      return {
-        success: false,
-        error: validation.error,
-      };
     }
 
+    /**
+     * Update existing consultation
+     */
     if (existingConsultation) {
-      const updatedRequest: ConsultationRequest = {
-        ...existingConsultation,
+      try {
+        const updatedRequest: ConsultationRequest = {
+          ...existingConsultation,
+          email: formData.email,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone,
+          consultationServices:
+            formData.consultationServices,
+          additionalDetails:
+            formData.additionalDetails,
+        };
 
-        firstName:
-          formData.firstName,
-        lastName:
-          formData.lastName,
-        phone: formData.phone,
+        const response =
+          await consultationApi.update(
+            Number(existingConsultation.id),
+            toApiRequest(updatedRequest)
+          );
 
-        consultationServices:
-          formData.consultationServices,
+        setConsultationId(
+          response.referenceNumber
+        );
 
-        additionalDetails:
-          formData.additionalDetails,
+        setSubmissionState("success");
 
-        updatedAt:
-          new Date().toISOString(),
-      };
+        return {
+          success: true,
+          consultationId:
+            response.referenceNumber,
+        };
 
-      consultationService.update(
-        updatedRequest
-      );
+      } catch (error) {
+
+        console.error(error);
+
+        return fail(
+          "Unable to update your consultation request. Please try again."
+        );
+      }
+    }
+
+    /**
+     * Create new consultation
+     */
+    try {
+      const request =
+        mapToConsultationRequest(
+          generateConsultationId(),
+          formData
+        );
+
+      const response =
+        await consultationApi.create(
+          toApiRequest(request)
+        );
 
       setConsultationId(
-        updatedRequest.id
+        response.referenceNumber
       );
 
       setSubmissionState("success");
@@ -88,50 +130,17 @@ const useConsultationSubmission = () => {
       return {
         success: true,
         consultationId:
-          updatedRequest.id,
+          response.referenceNumber,
       };
-    }
 
-    for (const service of formData.consultationServices) {
-      const existing =
-        consultationService.findByCategory(
-          formData.email,
-          service.category
-        );
+    } catch (error) {
 
-      if (existing) {
-        const message = `You already have an active consultation for "${service.category}".`;
+      console.error(error);
 
-        setSubmissionState("error");
-        setError(message);
-
-        return {
-          success: false,
-          error: message,
-        };
-      }
-    }
-
-    const id =
-      generateConsultationId();
-
-    const request =
-      mapToConsultationRequest(
-        id,
-        formData
+      return fail(
+        "Unable to submit your consultation request. Please try again."
       );
-
-    consultationService.create(
-      request
-    );
-
-    setConsultationId(id);
-    setSubmissionState("success");
-
-    return {
-      success: true,
-      consultationId: id,
-    };
+    }
   };
 
   const reset = () => {
@@ -142,11 +151,9 @@ const useConsultationSubmission = () => {
 
   return {
     submit,
-
     submissionState,
     consultationId,
     error,
-
     reset,
   };
 };

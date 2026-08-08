@@ -15,10 +15,8 @@ interface ReviewStepProps {
   onSubmit: () => void;
 }
 
-const formatCategory = (
-  category: string
-): string =>
-  category
+const toTitleCase = (value: string): string =>
+  value
     .split("-")
     .map(
       (word) =>
@@ -26,6 +24,21 @@ const formatCategory = (
         word.slice(1)
     )
     .join(" ");
+
+const submitButtonText = (
+  isEditing: boolean,
+  isSubmitting: boolean
+): string => {
+  if (isSubmitting) {
+    return isEditing
+      ? "Updating..."
+      : "Submitting...";
+  }
+
+  return isEditing
+    ? "Update Consultation"
+    : "Submit Consultation";
+};
 
 const ReviewStep = ({
   formData,
@@ -58,12 +71,18 @@ const ReviewStep = ({
 
           <ReviewItem
             label="Last Name"
-            value={formData.lastName}
+            value={
+              formData.lastName ||
+              "Not Provided"
+            }
           />
 
           <ReviewItem
             label="Phone"
-            value={formData.phone}
+            value={
+              formData.phone ||
+              "Not Provided"
+            }
           />
 
           <div className="border-b border-slate-800 pb-5">
@@ -81,7 +100,13 @@ const ReviewStep = ({
                           id
                         )
                       )
-                      .filter(Boolean);
+                      .filter(
+                        (
+                          topic
+                        ): topic is NonNullable<
+                          typeof topic
+                        > => topic !== undefined
+                      );
 
                   return (
                     <div
@@ -89,7 +114,7 @@ const ReviewStep = ({
                       className="rounded-xl border border-slate-700 bg-slate-800/40 p-4"
                     >
                       <Text className="text-base font-semibold text-cyan-300">
-                        {formatCategory(
+                        {toTitleCase(
                           service.category
                         )}
                       </Text>
@@ -97,7 +122,7 @@ const ReviewStep = ({
                       <ul className="mt-3 space-y-2">
                         {topics.map((topic) => (
                           <li
-                            key={topic!.id}
+                            key={topic.id}
                             className="flex items-start gap-2"
                           >
                             <span className="mt-1 text-cyan-400">
@@ -105,7 +130,7 @@ const ReviewStep = ({
                             </span>
 
                             <Text className="text-sm text-slate-300">
-                              {topic!.title}
+                              {topic.title}
                             </Text>
                           </li>
                         ))}
@@ -139,13 +164,10 @@ const ReviewStep = ({
           onClick={onSubmit}
           disabled={isSubmitting}
         >
-          {isSubmitting
-            ? isEditing
-              ? "Updating..."
-              : "Submitting..."
-            : isEditing
-            ? "Update Consultation"
-            : "Submit Consultation"}
+          {submitButtonText(
+            isEditing,
+            isSubmitting
+          )}
         </Button>
       </div>
     </div>

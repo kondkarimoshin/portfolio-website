@@ -26,14 +26,25 @@ const SuccessStep = ({
 
       setCopied(true);
 
-      setTimeout(
-        () => setCopied(false),
-        2000
-      );
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
     } catch {
       // Ignore clipboard errors
     }
   };
+
+  const title = isEditing
+    ? "Consultation Updated Successfully"
+    : "Consultation Submitted Successfully";
+
+  const description = isEditing
+    ? "Your consultation has been updated successfully."
+    : "Thank you for booking a consultation. Your request has been received and is now in our review queue.";
+
+  const finishButtonText = isEditing
+    ? "Finish"
+    : "Book Another Consultation";
 
   return (
     <div className="py-12 text-center">
@@ -42,15 +53,11 @@ const SuccessStep = ({
       </div>
 
       <Heading level={2}>
-        {isEditing
-          ? "Consultation Updated Successfully"
-          : "Consultation Submitted Successfully"}
+        {title}
       </Heading>
 
       <Text className="mt-4 text-slate-400">
-        {isEditing
-          ? "Your consultation has been updated successfully."
-          : "Thank you for booking a consultation. Your request has been received and is now in our review queue."}
+        {description}
       </Text>
 
       <div className="mx-auto mt-8 max-w-md rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-6">
@@ -80,7 +87,8 @@ const SuccessStep = ({
 
         <ul className="space-y-3 text-slate-300">
           <li>
-            ✓ Your consultation request has been securely recorded.
+            ✓ Your consultation request has been securely
+            recorded.
           </li>
 
           <li>
@@ -93,16 +101,15 @@ const SuccessStep = ({
           </li>
 
           <li>
-            ✓ Please keep your Consultation ID for future communication.
+            ✓ Please keep your Consultation ID for future
+            communication.
           </li>
         </ul>
       </div>
 
       <div className="mt-10 flex justify-center">
         <Button onClick={onFinish}>
-          {isEditing
-            ? "Finish"
-            : "Book Another Consultation"}
+          {finishButtonText}
         </Button>
       </div>
     </div>

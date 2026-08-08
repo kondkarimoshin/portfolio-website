@@ -2,13 +2,8 @@ spring:
   application:
     name: portfolio-backend
 
-info:
-  app:
-    version: @project.version@
-    description: Portfolio Consultation Backend API
-
   profiles:
-    active: debug
+    active: ${SPRING_PROFILES_ACTIVE:debug}
 
   jpa:
     open-in-view: false
@@ -18,6 +13,23 @@ info:
   flyway:
     enabled: true
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:mkondkari.portfolio@gmail.com}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+info:
+  app:
+    version: "@project.version@"
+    description: Portfolio Consultation Backend API
+
 server:
-  port: 8080
+  port: ${PORT:8080}
   shutdown: graceful
