@@ -1,8 +1,6 @@
 spring:
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/portfolio_db?options=-c%20timezone=Asia/Kolkata}
-    username: ${DB_USERNAME:portfolio_user}
-    password: ${DB_PASSWORD:portfolio_password} #QsOqqNfvamVtWFRKQZDfTQWksJHgPovk
+    url: jdbc:${DATABASE_URL}
     driver-class-name: org.postgresql.Driver
 
   jpa:
