@@ -1,0 +1,30 @@
+import Container from "../../components/ui/Container";
+import Heading from "../../components/ui/Heading";
+import Text from "../../components/ui/Text";
+
+import ConsultationForm from "./components/ConsultationForm";
+
+const description =
+  "Schedule a one-on-one consultation for career mentorship, automation guidance, interview preparation, or enterprise automation coaching.";
+
+const ConsultationPage = () => {
+  return (
+    <section className="bg-slate-950">
+      <Container className="max-w-5xl pt-8 pb-12">
+        <div className="mb-6">
+          <Heading level={1}>
+            Book a Consultation
+          </Heading>
+
+          <Text className="mt-3 max-w-4xl text-lg leading-8">
+            {description}
+          </Text>
+        </div>
+
+        <ConsultationForm />
+      </Container>
+    </section>
+  );
+};
+
+export default ConsultationPage;

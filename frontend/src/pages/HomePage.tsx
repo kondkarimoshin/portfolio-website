@@ -6,7 +6,7 @@ import Contact from "../features/contact/Contact";
 
 const HomePage = () => {
   return (
-    <main className="bg-slate-950 pt-20">
+    <main className="bg-slate-950">
       <Hero />
       <About />
       <Experience />

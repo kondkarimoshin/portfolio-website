@@ -7,7 +7,7 @@ import Container from "../components/ui/Container";
 import { navigationItems } from "../constants/navigation.config";
 import useActiveNavigation from "../hooks/useActiveNavigation";
 
-import logo from "../assets/branding/logo-dark.png";
+import logo from "../assets/branding/logo-dark.webp";
 
 import AvatarButton from "./components/AvatarButton";
 import AvatarModal from "./components/AvatarModal";

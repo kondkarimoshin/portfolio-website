@@ -1,6 +1,6 @@
-import Badge from "../../../components/ui/Badge";
 import { categoryIcons } from "../constants/category-icons.map";
 import { technologyIcons } from "../constants/technology-icons.map";
+import TechnologyChip from "./TechnologyChip";
 
 interface SkillCategoryProps {
     title: string;
@@ -12,49 +12,89 @@ const SkillCategory = ({
     skills,
 }: SkillCategoryProps) => {
 
-    const Icon = categoryIcons[title as keyof typeof categoryIcons];
+    const CategoryIcon =
+        categoryIcons[title as keyof typeof categoryIcons];
 
     return (
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-400/10">
-            <div className="mb-6 flex items-center gap-3">
+        <section
+            className="
+                group
+                rounded-2xl
+                border
+                border-slate-800/80
+                bg-slate-900/20
+                p-5
+                transition-all
+                duration-300
+                ease-out
+                hover:-translate-y-1
+                hover:border-cyan-400/50
+                hover:shadow-[0_10px_30px_rgba(34,211,238,0.08)]
+            "
+        >
 
-                <Icon
-                    aria-hidden="true"
-                    className="h-5 w-5 text-cyan-400" />
+            <div className="mb-4 flex items-center gap-4">
 
-                <h3 className="text-lg font-semibold text-white">
+                <div
+                    className="
+                        rounded-xl
+                        bg-cyan-400/10
+                        p-3
+                        transition-all
+                        duration-300
+                        group-hover:bg-cyan-400/15
+                    "
+                >
+                    <CategoryIcon
+                        className="
+                            h-6
+                            w-6
+                            text-cyan-400
+                            transition-transform
+                            duration-300
+                            group-hover:scale-110
+                        "
+                    />
+                </div>
+
+                <h3
+                    className="
+                        text-xl
+                        font-semibold
+                        text-white
+                        transition-colors
+                        duration-300
+                        group-hover:text-cyan-400
+                    "
+                >
                     {title}
                 </h3>
 
             </div>
 
-            <ul className="flex flex-wrap gap-3">
+            <div className="mb-5 border-t border-slate-800/80" />
+
+            <div className="flex flex-wrap gap-3">
 
                 {skills.map((skill) => {
+
                     const SkillIcon =
-                        technologyIcons[skill as keyof typeof technologyIcons];
+                        technologyIcons[
+                            skill as keyof typeof technologyIcons
+                        ];
 
                     return (
-                        <li key={skill}>
-                            <Badge className="text-white">
-                                <div className="flex items-center gap-2">
-                                    {SkillIcon && (
-                                        <SkillIcon
-                                            aria-hidden="true"
-                                            className="h-4 w-4 text-cyan-400"
-                                        />
-                                    )}
-
-                                    <span>{skill}</span>
-                                </div>
-                            </Badge>
-                        </li>
+                        <TechnologyChip
+                            key={skill}
+                            label={skill}
+                            icon={SkillIcon}
+                        />
                     );
                 })}
 
-            </ul>
+            </div>
 
-        </div>
+        </section>
     );
 };
 

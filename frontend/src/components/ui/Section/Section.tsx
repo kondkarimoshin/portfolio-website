@@ -2,36 +2,39 @@ import type { ReactNode } from "react";
 import clsx from "clsx";
 
 interface SectionProps {
-    id?: string;
-    children: ReactNode;
-    className?: string;
-    variant?: "hero" | "default" | "compact";
+  children: ReactNode;
+  id?: string;
+  className?: string;
+  variant?: "hero" | "default" | "compact";
 }
 
 const Section = ({
-    id,
-    children,
-    className,
-    variant = "default",
+  children,
+  id,
+  className,
+  variant = "default",
 }: SectionProps) => {
-    const spacing = {
-        hero: "py-4 lg:py-6",
-        default: "py-3 lg:py-4",
-        compact: "py-4 lg:py-4",
-    };
+  return (
+    <section
+      id={id}
+      className={clsx(
+        "scroll-mt-24 lg:scroll-mt-28 py-8 lg:py-10",
+        {
+          // Hero should stay close to the navbar
+          "py-4 lg:py-6": variant === "hero",
 
-    return (
-        <section
-            id={id}
-            className={clsx(
-                "scroll-mt-24 lg:scroll-mt-28",
-                spacing[variant],
-                className
-            )}
-        >
-            {children}
-        </section>
-    );
+          // Standard sections
+          "py-8 lg:py-10": variant === "default",
+
+          // Smaller sections
+          "py-6 lg:py-8": variant === "compact",
+        },
+        className
+      )}
+    >
+      {children}
+    </section>
+  );
 };
 
 export default Section;

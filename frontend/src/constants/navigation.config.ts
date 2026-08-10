@@ -13,7 +13,7 @@ export const navigationItems: NavigationItem[] = [
     type: "section",
   },
   {
-    label: "About",
+    label: "Beyond Resume",
     href: "/#about",
     type: "section",
   },

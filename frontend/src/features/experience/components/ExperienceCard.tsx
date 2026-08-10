@@ -17,11 +17,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
     const [expanded, setExpanded] = useState(true);
 
     return (
-        <div className="mt-12 rounded-2xl border border-slate-800 bg-slate-900/40 p-8 transition-all duration-300 hover:border-blue-500/40">
-
-            {/* ============================== */}
-            {/* Header */}
-            {/* ============================== */}
+        <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900/40 p-8 transition-all duration-300 hover:border-cyan-400/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.08)]">
 
             <button
                 type="button"
@@ -30,15 +26,14 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
                 aria-controls="current-experience-content"
                 className="flex w-full flex-col gap-6 text-left lg:flex-row lg:items-start lg:justify-between"
             >
-                {/* Company */}
 
                 <div>
 
-                    <h3 className="text-2xl font-bold text-white">
+                    <h3 className="text-3xl font-bold tracking-tight text-white">
                         {experience.company}
                     </h3>
 
-                    <p className="mt-2 text-lg font-medium text-cyan-400">
+                    <p className="mt-2 text-xl font-semibold text-cyan-400">
                         {experience.role}
                     </p>
 
@@ -48,11 +43,9 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
 
                 </div>
 
-                {/* Duration + Chevron */}
-
                 <div className="flex items-center gap-3">
 
-                    <div className="rounded-full border border-blue-500/30 bg-blue-500/10 px-5 py-2 text-sm font-semibold text-white">
+                    <div className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-5 py-2 text-sm font-semibold text-white">
                         {experience.duration}
                     </div>
 
@@ -70,38 +63,34 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
 
             </button>
 
-            {/* ============================== */}
-            {/* Expandable Content */}
-            {/* ============================== */}
-
             {expanded && (
                 <div id="current-experience-content">
 
-                    {/* Divider */}
-
-                    <div className="mt-4 mb-6 border-t border-slate-800" />
+                    <div className="mb-6 mt-5 border-t border-slate-800" />
 
                     {/* Domain */}
 
                     <div>
+
                         <h4 className="text-lg font-semibold text-cyan-400">
-                            Domain
+                            Domain Expertise
                         </h4>
 
                         <p className="mt-3 leading-8 text-slate-400">
                             {experience.domain.join(" • ")}
                         </p>
+
                     </div>
 
-                    {/* Professional Summary */}
+                    {/* Role Overview */}
 
                     <div className="mt-10">
 
                         <h4 className="text-lg font-semibold text-cyan-400">
-                            Professional Summary
+                            Role Overview
                         </h4>
 
-                        <Text className="mt-4 leading-8">
+                        <Text className="mt-4 leading-8 lg:text-justify">
                             {experience.summary}
                         </Text>
 
@@ -154,7 +143,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
                     <div className="mt-10">
 
                         <h4 className="text-lg font-semibold text-cyan-400">
-                            Technologies
+                            Technologies & Tools Used
                         </h4>
 
                         <TechnologyStack
@@ -166,7 +155,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
                 </div>
             )}
 
-        </div >
+        </div>
     );
 };
 

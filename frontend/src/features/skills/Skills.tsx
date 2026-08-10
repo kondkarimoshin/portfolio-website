@@ -5,7 +5,6 @@ import Text from "../../components/ui/Text";
 
 import SkillCategory from "./components/SkillCategory";
 import { SKILL_DATA } from "./constants/skills.data";
-import FadeIn from "../../components/animations/FadeIn";
 
 const Skills = () => {
     return (
@@ -15,43 +14,40 @@ const Skills = () => {
         >
             <Container>
 
-                <FadeIn delay={0}>
+                <div className="mx-auto max-w-6xl">
 
-                    <div className="mx-auto max-w-6xl">
+                    <Heading
+                        id="skills-heading"
+                        level={2}
+                        className="text-center"
+                    >
+                        Technical Expertise
+                    </Heading>
 
-                        <Heading
-                            id="skills-heading"
-                            level={2}
-                            className="text-center"
-                        >
-                            Technical Expertise
-                        </Heading>
+                    <Text className="mx-auto mt-4 max-w-4xl text-center">
+                        A comprehensive enterprise technology stack built across
+                        software engineering, automation, cloud platforms,
+                        AI-assisted development, and capital markets through
+                        15+ years of professional experience.
+                    </Text>
 
-                        <Text className="mx-auto mt-4 max-w-3xl text-center">
-                            Technologies, tools and platforms I've used to build
-                            scalable automation frameworks, enterprise applications
-                            and cloud-native solutions.
-                        </Text>
+                    <div className="mt-12 grid gap-5 lg:grid-cols-2">
 
-                        <div className="mt-12 grid gap-6 md:grid-cols-2">
+                        {SKILL_DATA.map((category) => (
 
-                            {SKILL_DATA.map((category) => (
+                            <SkillCategory
+                                key={category.title}
+                                title={category.title}
+                                skills={category.skills}
+                            />
 
-                                <SkillCategory
-                                    key={category.title}
-                                    title={category.title}
-                                    skills={category.skills}
-                                />
-
-                            ))}
-
-                        </div>
+                        ))}
 
                     </div>
-                </FadeIn>
+
+                </div>
 
             </Container>
-
         </Section>
     );
 };

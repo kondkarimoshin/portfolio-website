@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/portfolio_db?options=-c%20timezone=Asia/Kolkata}
+    username: ${DB_USERNAME:portfolio_user}
+    password: ${DB_PASSWORD:portfolio_password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: OFF
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true

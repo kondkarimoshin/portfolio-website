@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:${DATABASE_URL}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: false
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: OFF
+    org.hibernate.orm.jdbc.bind: OFF
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
