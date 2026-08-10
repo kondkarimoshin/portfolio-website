@@ -9,19 +9,21 @@ const ConsultationCTA = () => {
   return (
     <div
       className="
-        mx-auto
-        max-w-6xl
-        rounded-3xl
-        border
-        border-cyan-500/20
-        bg-gradient-to-r
-        from-slate-900
-        to-slate-800
-        px-8
-        pt-12
-        pb-6
-        text-center
-      "
+    mx-auto
+    mt-12
+    mb-12
+    max-w-6xl
+    rounded-3xl
+    border
+    border-cyan-500/20
+    bg-gradient-to-r
+    from-slate-900
+    to-slate-800
+    px-8
+    pt-12
+    pb-10
+    text-center
+  "
     >
       <h2 className="text-4xl font-bold text-white">
         Ready to
