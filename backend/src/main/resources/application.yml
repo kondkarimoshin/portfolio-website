@@ -27,3 +27,7 @@ info:
 server:
   port: ${PORT:8080}
   shutdown: graceful
+
+app:
+  cors:
+    allowed-origins: http://localhost:5173,https://*.vercel.app
