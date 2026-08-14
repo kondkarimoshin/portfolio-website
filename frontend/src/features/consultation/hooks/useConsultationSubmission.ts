@@ -3,6 +3,11 @@ import { useState } from "react";
 import { consultationApi } from "../../../services/api/consultationApi";
 import { toApiRequest } from "../../../services/api/mappers/consultationApiMapper";
 
+import { consultationConfig } from "../../../config/consultationConfig";
+
+import { consultationTopics } from "../constants/consultationTopics";
+import { sendConsultationEmail } from "../services/consultationEmailService";
+
 import { generateConsultationId } from "../utils/consultationId";
 import { mapToConsultationRequest } from "../utils/consultationMapper";
 import { validateConsultation } from "../utils/consultationValidation";
@@ -16,6 +21,88 @@ import type {
   SubmissionResult,
   SubmissionState,
 } from "../types/submission.types";
+
+const formatCategory = (category: string): string =>
+  category
+    .split("-")
+    .map(
+      (word) =>
+        word.charAt(0).toUpperCase() +
+        word.slice(1)
+    )
+    .join(" ");
+
+const buildConsultationAreas = (
+  formData: ConsultationFormData
+): string => {
+  return formData.consultationServices
+    .map((service) => {
+      const category = formatCategory(
+        service.category
+      );
+
+      const topics = service.topics
+        .map((topicId) => {
+          const topic =
+            consultationTopics.find(
+              (item) => item.id === topicId
+            );
+
+          return topic?.title ?? topicId;
+        })
+        .map(
+          (title) =>
+            `<div style="margin: 0 0 6px 18px;">• ${title}</div>`
+        )
+        .join("");
+
+      return `
+        <div style="margin-bottom: 18px;">
+          <div style="
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 8px;
+          ">
+            ${category}
+          </div>
+
+          ${topics}
+        </div>
+      `;
+    })
+    .join("");
+};
+
+const buildEmailData = (
+  consultationId: string,
+  formData: ConsultationFormData
+) => {
+  return {
+    consultationId,
+
+    firstName:
+      formData.firstName.trim(),
+
+    lastName:
+      formData.lastName.trim(),
+
+    email:
+      formData.email
+        .trim()
+        .toLowerCase(),
+
+    phone:
+      formData.phone.trim(),
+
+    consultationAreas:
+      buildConsultationAreas(
+        formData
+      ),
+
+    additionalDetails:
+      formData.additionalDetails.trim() || "NA",
+  };
+};
 
 const useConsultationSubmission = () => {
   const [
@@ -34,11 +121,9 @@ const useConsultationSubmission = () => {
     formData: ConsultationFormData,
     existingConsultation?: ConsultationRequest | null
   ): Promise<SubmissionResult> => {
-
     const fail = (
       message: string
     ): SubmissionResult => {
-
       setSubmissionState("error");
       setError(message);
 
@@ -57,31 +142,121 @@ const useConsultationSubmission = () => {
     if (!validation.valid) {
       return fail(
         validation.error ??
-          "Validation failed."
+        "Validation failed."
       );
     }
 
     /**
-     * Update existing consultation
+     * Safety check:
+     * At least one submission channel
+     * must be enabled.
      */
-    if (existingConsultation) {
-      try {
-        const updatedRequest: ConsultationRequest = {
-          ...existingConsultation,
-          email: formData.email,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          phone: formData.phone,
-          consultationServices:
-            formData.consultationServices,
-          additionalDetails:
-            formData.additionalDetails,
-        };
+    if (
+      !consultationConfig.emailEnabled &&
+      !consultationConfig.persistenceEnabled
+    ) {
+      return fail(
+        "Consultation submission is currently unavailable. Please try again later."
+      );
+    }
+
+    /**
+     * Preserve the existing consultation
+     * reference when available.
+     *
+     * Otherwise generate a new reference
+     * on the frontend.
+     */
+    const referenceNumber =
+      existingConsultation?.referenceNumber ??
+      generateConsultationId();
+
+    try {
+      /**
+       * EMAIL
+       *
+       * EmailJS is used when email
+       * submission is enabled.
+       */
+      if (consultationConfig.emailEnabled) {
+        await sendConsultationEmail(
+          buildEmailData(
+            referenceNumber,
+            formData
+          )
+        );
+      }
+
+      /**
+       * DATABASE PERSISTENCE
+       *
+       * Currently controlled through:
+       *
+       * VITE_CONSULTATION_PERSISTENCE_ENABLED
+       *
+       * When false, no Railway/backend
+       * request is made.
+       */
+      if (
+        consultationConfig.persistenceEnabled
+      ) {
+        /**
+         * Update existing consultation.
+         */
+        if (existingConsultation) {
+          const updatedRequest: ConsultationRequest = {
+            ...existingConsultation,
+
+            email:
+              formData.email,
+
+            firstName:
+              formData.firstName,
+
+            lastName:
+              formData.lastName,
+
+            phone:
+              formData.phone,
+
+            consultationServices:
+              formData.consultationServices,
+
+            additionalDetails:
+              formData.additionalDetails,
+          };
+
+          const response =
+            await consultationApi.update(
+              Number(existingConsultation.id),
+              toApiRequest(updatedRequest)
+            );
+
+          setConsultationId(
+            response.referenceNumber
+          );
+
+          setSubmissionState("success");
+
+          return {
+            success: true,
+            consultationId:
+              response.referenceNumber,
+          };
+        }
+
+        /**
+         * Create new consultation.
+         */
+        const request =
+          mapToConsultationRequest(
+            referenceNumber,
+            formData
+          );
 
         const response =
-          await consultationApi.update(
-            Number(existingConsultation.id),
-            toApiRequest(updatedRequest)
+          await consultationApi.create(
+            toApiRequest(request)
           );
 
         setConsultationId(
@@ -95,34 +270,15 @@ const useConsultationSubmission = () => {
           consultationId:
             response.referenceNumber,
         };
-
-      } catch (error) {
-
-        console.error(error);
-
-        return fail(
-          "Unable to update your consultation request. Please try again."
-        );
       }
-    }
 
-    /**
-     * Create new consultation
-     */
-    try {
-      const request =
-        mapToConsultationRequest(
-          generateConsultationId(),
-          formData
-        );
-
-      const response =
-        await consultationApi.create(
-          toApiRequest(request)
-        );
-
+      /**
+       * EMAIL-ONLY MODE
+       *
+       * No Railway/backend request is made.
+       */
       setConsultationId(
-        response.referenceNumber
+        referenceNumber
       );
 
       setSubmissionState("success");
@@ -130,12 +286,14 @@ const useConsultationSubmission = () => {
       return {
         success: true,
         consultationId:
-          response.referenceNumber,
+          referenceNumber,
       };
 
     } catch (error) {
-
-      console.error(error);
+      console.error(
+        "Consultation submission failed:",
+        error
+      );
 
       return fail(
         "Unable to submit your consultation request. Please try again."

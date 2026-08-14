@@ -4,6 +4,7 @@ import { consultationInitialValues } from "../constants/consultationInitialValue
 import { consultationSteps } from "../constants/consultationSteps";
 
 import { consultationApi } from "../../../services/api/consultationApi";
+import { consultationConfig } from "../../../config/consultationConfig";
 
 import type {
   ConsultationFormData,
@@ -55,12 +56,15 @@ const useConsultationForm = () => {
     setPersonalInformationErrors(
       (previous) => ({
         ...previous,
+
         ...(values.firstName !== undefined && {
           firstName: undefined,
         }),
+
         ...(values.lastName !== undefined && {
           lastName: undefined,
         }),
+
         ...(values.phone !== undefined && {
           phone: undefined,
         }),
@@ -86,7 +90,9 @@ const useConsultationForm = () => {
         lastName.trim();
 
       const trimmedPhone =
-        phone.trim().replace(/\s+/g, "");
+        phone
+          .trim()
+          .replace(/\s+/g, "");
 
       if (!trimmedFirstName) {
         errors.firstName =
@@ -142,7 +148,16 @@ const useConsultationForm = () => {
       return;
     }
 
+    /**
+     * Existing consultation lookup is only
+     * required when database persistence is
+     * enabled.
+     *
+     * In EmailJS-only mode, the form must
+     * always continue to the next step.
+     */
     if (
+      consultationConfig.persistenceEnabled &&
       currentStep === 1 &&
       !existingConsultation
     ) {
@@ -157,56 +172,91 @@ const useConsultationForm = () => {
             (service) => ({
               category:
                 service.category as ConsultationRequest["consultationServices"][number]["category"],
-              topics: service.topics,
+
+              topics:
+                service.topics,
             })
           );
 
         const existingRequest: ConsultationRequest =
-        {
-          id: consultation.id.toString(),
-          referenceNumber: consultation.referenceNumber,
-          email: consultation.email,
-          firstName:
-            consultation.firstName,
-          lastName:
-            consultation.lastName,
-          phone: consultation.phone,
-          consultationServices,
-          additionalDetails:
-            consultation.additionalDetails ??
-            "",
-          status:
-            consultation.status as ConsultationRequest["status"],
-          createdAt:
-            consultation.createdAt,
-          updatedAt:
-            consultation.updatedAt,
-        };
+          {
+            id: consultation.id.toString(),
+
+            referenceNumber:
+              consultation.referenceNumber,
+
+            email:
+              consultation.email,
+
+            firstName:
+              consultation.firstName,
+
+            lastName:
+              consultation.lastName,
+
+            phone:
+              consultation.phone,
+
+            consultationServices,
+
+            additionalDetails:
+              consultation.additionalDetails ??
+              "",
+
+            status:
+              consultation.status as ConsultationRequest["status"],
+
+            createdAt:
+              consultation.createdAt,
+
+            updatedAt:
+              consultation.updatedAt,
+          };
 
         setExistingConsultation(
           existingRequest
         );
 
         setFormData({
-          email: consultation.email,
+          email:
+            consultation.email,
+
           firstName:
             consultation.firstName,
+
           lastName:
             consultation.lastName,
-          phone: consultation.phone,
+
+          phone:
+            consultation.phone,
+
           consultationServices,
+
           additionalDetails:
             consultation.additionalDetails ??
             "",
         });
 
-        return;
+        /**
+         * Important:
+         *
+         * Even when an existing consultation
+         * is found, continue to Personal
+         * Information instead of stopping
+         * on the Email step.
+         */
       } catch {
-        // No existing consultation found.
-        // Continue with new consultation.
+        /**
+         * No existing consultation found.
+         *
+         * Continue with a new consultation.
+         */
       }
     }
 
+    /**
+     * Always move to the next step.
+     */
     setCurrentStep((previous) =>
       Math.min(
         previous + 1,
@@ -217,7 +267,10 @@ const useConsultationForm = () => {
 
   const previousStep = () => {
     setCurrentStep((previous) =>
-      Math.max(previous - 1, 1)
+      Math.max(
+        previous - 1,
+        1
+      )
     );
   };
 
@@ -234,17 +287,25 @@ const useConsultationForm = () => {
 
   const cancelEditing = () => {
     setCurrentStep(1);
-    setFormData(consultationInitialValues);
+
+    setFormData(
+      consultationInitialValues
+    );
+
     setPersonalInformationErrors({});
+
     setExistingConsultation(null);
   };
 
   const resetForm = () => {
     setCurrentStep(1);
+
     setFormData(
       consultationInitialValues
     );
+
     setPersonalInformationErrors({});
+
     setExistingConsultation(null);
   };
 
