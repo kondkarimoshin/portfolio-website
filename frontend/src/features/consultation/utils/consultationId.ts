@@ -1,29 +1,26 @@
-let sequence = 1;
-
 const pad = (
   value: number,
   length: number
 ): string =>
   value.toString().padStart(length, "0");
 
-const getCurrentDate = (): string => {
-  const now = new Date();
+const getCurrentDate = (
+  timestamp: number
+): string => {
+  const date = new Date(timestamp);
 
   return (
-    now.getFullYear().toString() +
-    pad(now.getMonth() + 1, 2) +
-    pad(now.getDate(), 2)
+    date.getFullYear().toString() +
+    pad(date.getMonth() + 1, 2) +
+    pad(date.getDate(), 2)
   );
 };
 
 export const generateConsultationId =
   (): string => {
-    const id = `CONS-${getCurrentDate()}-${pad(
-      sequence,
-      6
-    )}`;
+    const timestamp = Date.now();
 
-    sequence += 1;
-
-    return id;
+    return `CONS-${getCurrentDate(
+      timestamp
+    )}-${timestamp}`;
   };
